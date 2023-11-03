@@ -19,7 +19,7 @@ static int	ft_strlen1(char const *str)
 	i = 0;
 	while (str[i])
 		i++;
-	return(i);
+	return (i);
 }
 
 char	*ft_strtrim(char const *s1, char const *set)
@@ -34,5 +34,5 @@ char	*ft_strtrim(char const *s1, char const *set)
 	while (ft_strrchr(set, s1[j]))
 		j--;
 	j = j - i + 1;
-	return(ft_substr(s1, i, j));
+	return (ft_substr(s1, i, j));
 }
