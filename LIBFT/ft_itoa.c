@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-
+/*
 static int	ft_strlen1(char *str)
 {
 	int	i;
@@ -40,10 +40,9 @@ static char	*reverse(char *str)
 		i++;
 		len--;
 	}
-	
 	return (str);
 }
-
+*/
 static int	ft_intlen(int *n, int *sg)
 {
 	int	i;
@@ -51,6 +50,8 @@ static int	ft_intlen(int *n, int *sg)
 
 	i = 0;
 	temp = *n;
+	if (*n == 0)
+		return (1);
 	if (*n < 0)
 	{
 		*n *= -1;
@@ -73,9 +74,10 @@ char	*ft_itoa(int n)
 	int		len;
 	int		sg;
 
-	i = 0;
+	sg = 0;
 	len = ft_intlen(&n, &sg);
-	tab = ft_calloc(sizeof(char), (len + 1));
+	i = len;
+	tab = ft_calloc(sizeof(char), (i-- + 1));
 	if (tab == 0)
 		return (0);
 	if (n == -2147483648)
@@ -85,11 +87,11 @@ char	*ft_itoa(int n)
 	}
 	while (n > 9)
 	{
-		tab[i--] = n % 10 + '0';
+		tab[i--] = (n % 10) + '0';
 		n /= 10;
 	}
-	tab[i - 1] = n + '0';
+	tab[i] = n + '0';
 	if (sg == 1)
 		tab[0] = '-';
-	return (reverse(tab));
+	return (tab);
 }
