@@ -40,6 +40,7 @@ static char	*reverse(char *str)
 		i++;
 		len--;
 	}
+	
 	return (str);
 }
 
@@ -65,27 +66,29 @@ char	*ft_itoa(int n)
 {
 	char	*tab;
 	int		i;
-	int		len;
 
 	i = 0;
-	len = ft_intlen(n);
 	if (n < 0)
-		tab = malloc(sizeof(char) * (len + 2));
+		tab = ft_calloc(sizeof(char), (ft_intlen(n) + 2));
 	else
-		tab = malloc(sizeof(char) * (len + 1));
+		tab = ft_calloc(sizeof(char), (ft_intlen(n) + 1));
 	if (tab == 0)
 		return (0);
+	if (n == -2147483648)
+	{
+		tab = ft_strdup("-2147483648");
+		return (tab);
+	}
 	if (n < 0)
 	{
 		tab[i] = '-';
 		n *= -1;
 		i++;
 	}
-	while (i <= len)
+	while (i <= ft_intlen(n))
 	{
-		tab[i] = n % 10 + '0';
+		tab[i++] = n % 10 + '0';
 		n /= 10;
-		i++;
 	}
 	return (reverse(tab));
 }
