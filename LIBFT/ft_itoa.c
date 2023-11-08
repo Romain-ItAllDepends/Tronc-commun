@@ -44,20 +44,24 @@ static char	*reverse(char *str)
 	return (str);
 }
 
-static int	ft_intlen(int n)
+static int	ft_intlen(int *n, int *sg)
 {
 	int	i;
+	int	temp;
 
-	i = -1;
-	if (n < 0)
+	i = 0;
+	temp = *n;
+	if (*n < 0)
 	{
-		n *= -1;
+		*n *= -1;
+		*sg = 1;
+		temp *= -1;
 		i++;
 	}
-	while (n > 0)
+	while (temp > 0)
 	{
 		i++;
-		n /= 10;
+		temp /= 10;
 	}
 	return (i);
 }
@@ -66,12 +70,12 @@ char	*ft_itoa(int n)
 {
 	char	*tab;
 	int		i;
+	int		len;
+	int		sg;
 
 	i = 0;
-	if (n < 0)
-		tab = ft_calloc(sizeof(char), (ft_intlen(n) + 2));
-	else
-		tab = ft_calloc(sizeof(char), (ft_intlen(n) + 1));
+	len = ft_intlen(&n, &sg);
+	tab = ft_calloc(sizeof(char), (len + 1));
 	if (tab == 0)
 		return (0);
 	if (n == -2147483648)
@@ -79,16 +83,13 @@ char	*ft_itoa(int n)
 		tab = ft_strdup("-2147483648");
 		return (tab);
 	}
-	if (n < 0)
+	while (n > 9)
 	{
-		tab[i] = '-';
-		n *= -1;
-		i++;
-	}
-	while (i <= ft_intlen(n))
-	{
-		tab[i++] = n % 10 + '0';
+		tab[i--] = n % 10 + '0';
 		n /= 10;
 	}
+	tab[i - 1] = n + '0';
+	if (sg == 1)
+		tab[0] = '-';
 	return (reverse(tab));
 }
