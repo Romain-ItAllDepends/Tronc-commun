@@ -12,59 +12,75 @@
 
 #include "libft.h"
 
-static int	ft_strlen1(char const *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
 static int	ft_charcount(char const *str, char c)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	j = 0;
+	j = 1;
+	if (!str)
+		return (0);
+	if (str[i] == c)
+	{
+		j = 0;
+		i++;
+	}
 	while (str[i])
 	{
-		if (str[i] == c && str[i + 1] != c && i != 0)
+		if (str[i] == c && str[i - 1] != c)
 			j++;
 		i++;
 	}
-	if (str[0] != c)
-		j++;
 	return (j);
+}
+
+static int	ft_gap(char const *s, char c)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] && s[i] != c)
+		i++;
+	return (i);
+}
+
+char	*ft_substr1(char const *s, char c)
+{
+	int			len;
+	unsigned int		i;
+	char				*tab;
+
+	len = ft_gap(s, c);
+	i = 0;
+	tab = ft_calloc((1 + len), sizeof(char));
+	if (tab == 0)
+		return (0);
+	while (s[i] && s[i] == c)
+	{
+		tab[i] = s[i];
+		i++;
+	}
+	return (tab);
 }
 
 char	**ft_split(char const *s, char c)
 {
 	int		i;
-	int		j;
 	int		x;
 	char	**tab;
 
 	i = 0;
-	j = 0;
-	tab = malloc((ft_charcount(s, c) + ft_strlen1(s)) * sizeof(char));
+	x = 0;
+	tab = malloc ((ft_charcount(s, c) + 1) * sizeof(char *));
 	if (tab == 0)
 		return (0);
 	while (s[i])
 	{
-		if (i == 0 && s[i++] == c)
-			j = i;
-		if (s[i] == c && s[i + 1] != c)
-		{
-			tab[x] = ft_substr(s, j, i - j);
-			j = i + 1;
-			x++;
-		}
+		if (s[i] != c)
+			tab[x++] = ft_substr1(&s[i], c);
 		i++;
 	}
-	if (s[i - 1] != c)
-		tab[x] = ft_substr(s, j, i - j);
+	tab[x] = 0;
 	return (tab);
 }
