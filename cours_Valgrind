@@ -1,0 +1,27 @@
+Cours Valgrind :
+
+ - compilier avec "-g"
+ - lancer avec "valgrind ./"nom du programme"
+ 
+ Option De Compilation :
+ (valgrind "-option" ./)
+ 
+ - "--track-origine=yes" --> permet de voir les source non initialiser
+ - "--track-fds=yes" --> indiaue les fd (read, open) encore utiliser
+ - "--leak-check=full" --> donne dea detail sur les leaks de memoires
+ - "--show-leak-kinds=all" --> donne plus d'info si les leak
+ 
+ Type D'Erreur :
+ 
+ - segfault --> utilisation d'une memoire non autorise --> boucle infinie, deferencement d'un pointeur 															   null
+ - invalide read size --> depasse la taille d'un malloc (printf ...) --> oublie de '\0'
+ 
+ - invalide write size -->malloc pas assez remplie ou trop remplie --> taille du malloc mal initialiser
+ 
+ - conditional jump --> utilisation d'une d'une variable non initialiser
+ 
+ - definitely lost --> variable ecraser avant FREE ou oublie de FREE (atention 1block = 1FREE)
+ 
+ - indirectely lost --> FREE d'une liste de pointeur sans FREE les pointeur
+ 
+ - still reachable --> utilisation d'une structure trop complexe
