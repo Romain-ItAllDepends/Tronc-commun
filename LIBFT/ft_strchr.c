@@ -1,42 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rgobet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/02 15:59:36 by rgobet            #+#    #+#             */
-/*   Updated: 2023/11/02 16:35:31 by rgobet           ###   ########.fr       */
+/*   Created: 2023/10/31 15:42:05 by rgobet            #+#    #+#             */
+/*   Updated: 2023/10/31 17:02:07 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_strchr(const char *s, int c)
 {
-	unsigned int		i;
-	char				*tab;
+	int	i;
 
-	i = start;
-	if (!s)
-		return (0);
-	if (start >= ft_strlen(s))
+	i = 0;
+	while (s[i])
 	{
-		tab = ft_calloc(1, sizeof(char));
-		if (tab == 0)
-			return (0);
-		return (tab);
+		if (s[i] == c)
+			return ((char *)(s + i));
+		i++;
 	}
-	else
-	{
-		tab = ft_calloc((1 + len), sizeof(char));
-		if (tab == 0)
-			return (0);
-		while (s[i] && len > (i - start))
-		{
-			tab[i - start] = s[i];
-			i++;
-		}
-	}
-	return (tab);
+	if (c == '\0')
+		return ((char *)(s + i));
+	return (0);
 }

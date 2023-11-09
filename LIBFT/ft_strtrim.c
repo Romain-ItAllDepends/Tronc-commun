@@ -27,6 +27,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 	int		i;
 	int		j;
 
+	if (!s1)
+		return (0);
 	i = 0;
 	j = ft_strlen1(s1);
 	while (ft_strchr(set, s1[i]))

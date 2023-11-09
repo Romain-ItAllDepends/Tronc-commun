@@ -1,42 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   bzero.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rgobet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/02 15:59:36 by rgobet            #+#    #+#             */
-/*   Updated: 2023/11/02 16:35:31 by rgobet           ###   ########.fr       */
+/*   Created: 2023/10/31 10:42:53 by rgobet            #+#    #+#             */
+/*   Updated: 2023/10/31 10:50:37 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+void	ft_bzero(void *s, size_t n)
 {
-	unsigned int		i;
-	char				*tab;
+	char	*tab;
+	size_t	i;
 
-	i = start;
-	if (!s)
-		return (0);
-	if (start >= ft_strlen(s))
+	i = 0;
+	tab = s;
+	while (i < n)
 	{
-		tab = ft_calloc(1, sizeof(char));
-		if (tab == 0)
-			return (0);
-		return (tab);
+		tab[i] = '\0';
+		i++;
 	}
-	else
-	{
-		tab = ft_calloc((1 + len), sizeof(char));
-		if (tab == 0)
-			return (0);
-		while (s[i] && len > (i - start))
-		{
-			tab[i - start] = s[i];
-			i++;
-		}
-	}
-	return (tab);
 }

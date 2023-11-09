@@ -1,42 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rgobet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/02 15:59:36 by rgobet            #+#    #+#             */
-/*   Updated: 2023/11/02 16:35:31 by rgobet           ###   ########.fr       */
+/*   Created: 2023/11/02 15:21:58 by rgobet            #+#    #+#             */
+/*   Updated: 2023/11/02 15:38:10 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+int	ft_strlen1(const char *str)
 {
-	unsigned int		i;
-	char				*tab;
+	int	i;
 
-	i = start;
-	if (!s)
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
+char	*ft_strdup(const char *s)
+{
+	int		i;
+	char	*tab;
+
+	i = 0;
+	tab = malloc(ft_strlen1(s) * sizeof(char) + 1);
+	if (tab == 0)
 		return (0);
-	if (start >= ft_strlen(s))
+	while (s[i])
 	{
-		tab = ft_calloc(1, sizeof(char));
-		if (tab == 0)
-			return (0);
-		return (tab);
+		tab[i] = s[i];
+		i++;
 	}
-	else
-	{
-		tab = ft_calloc((1 + len), sizeof(char));
-		if (tab == 0)
-			return (0);
-		while (s[i] && len > (i - start))
-		{
-			tab[i - start] = s[i];
-			i++;
-		}
-	}
+	tab[i] = '\0';
 	return (tab);
 }

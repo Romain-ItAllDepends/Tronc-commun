@@ -28,7 +28,9 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	int		i;
 	int		j;
 
-	tab = malloc((1 + ft_strlen1(s1) + ft_strlen1(s2)) * sizeof(char));
+	if (!s1 || !s2)
+		return (0);
+	tab = ft_calloc((1 + ft_strlen1(s1) + ft_strlen1(s2)), sizeof(char));
 	i = 0;
 	j = 0;
 	if (tab == 0)

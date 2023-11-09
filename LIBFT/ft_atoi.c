@@ -1,42 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rgobet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/02 15:59:36 by rgobet            #+#    #+#             */
-/*   Updated: 2023/11/02 16:35:31 by rgobet           ###   ########.fr       */
+/*   Created: 2023/11/02 11:23:29 by rgobet            #+#    #+#             */
+/*   Updated: 2023/11/02 12:28:48 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+int	ft_atoi(const char *str)
 {
-	unsigned int		i;
-	char				*tab;
+	int	i;
+	int	mult;
+	int	result;
 
-	i = start;
-	if (!s)
-		return (0);
-	if (start >= ft_strlen(s))
+	i = 0;
+	mult = 1;
+	result = 0;
+	while (str[i] == ' ' || (str[i] >= '\t' && str[i] <= '\r'))
+		i++;
+	if (str[i] == '-')
 	{
-		tab = ft_calloc(1, sizeof(char));
-		if (tab == 0)
-			return (0);
-		return (tab);
+		mult = -1;
+		i++;
 	}
-	else
+	else if (str[i] == '+' && mult == 1)
+		i++;
+	while (str[i] >= '0' && str[i] <= '9')
 	{
-		tab = ft_calloc((1 + len), sizeof(char));
-		if (tab == 0)
-			return (0);
-		while (s[i] && len > (i - start))
-		{
-			tab[i - start] = s[i];
-			i++;
-		}
+		result = result * 10 + (str[i] - '0');
+		i++;
 	}
-	return (tab);
+	return (result * mult);
 }

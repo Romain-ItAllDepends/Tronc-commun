@@ -1,42 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rgobet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/02 15:59:36 by rgobet            #+#    #+#             */
-/*   Updated: 2023/11/02 16:35:31 by rgobet           ###   ########.fr       */
+/*   Created: 2023/10/31 12:17:50 by rgobet            #+#    #+#             */
+/*   Updated: 2023/10/31 15:07:44 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+static size_t	ft_strlen1(const char *str)
 {
-	unsigned int		i;
-	char				*tab;
+	size_t	i;
 
-	i = start;
-	if (!s)
-		return (0);
-	if (start >= ft_strlen(s))
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
+size_t	ft_strlcpy(char *dest, const char *src, size_t n)
+{
+	size_t	i;
+	size_t	length;
+
+	i = 0;
+	length = ft_strlen1(src);
+	if (n == 0)
+		return (length);
+	while (i < n - 1 && src[i])
 	{
-		tab = ft_calloc(1, sizeof(char));
-		if (tab == 0)
-			return (0);
-		return (tab);
+		dest[i] = src[i];
+		i++;
 	}
-	else
-	{
-		tab = ft_calloc((1 + len), sizeof(char));
-		if (tab == 0)
-			return (0);
-		while (s[i] && len > (i - start))
-		{
-			tab[i - start] = s[i];
-			i++;
-		}
-	}
-	return (tab);
+	dest[i] = '\0';
+	return (length);
 }

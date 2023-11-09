@@ -1,42 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rgobet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/02 15:59:36 by rgobet            #+#    #+#             */
-/*   Updated: 2023/11/02 16:35:31 by rgobet           ###   ########.fr       */
+/*   Created: 2023/10/31 14:35:29 by rgobet            #+#    #+#             */
+/*   Updated: 2023/10/31 15:06:05 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+size_t	ft_strlcat(char *dest, const char *src, size_t n)
 {
-	unsigned int		i;
-	char				*tab;
+	size_t	i;
+	size_t	res;
+	size_t	length_d;
+	size_t	length_s;
 
-	i = start;
-	if (!s)
-		return (0);
-	if (start >= ft_strlen(s))
+	length_s = ft_strlen(src);
+	res = length_s + n;
+	if (n != 0)
 	{
-		tab = ft_calloc(1, sizeof(char));
-		if (tab == 0)
-			return (0);
-		return (tab);
-	}
-	else
-	{
-		tab = ft_calloc((1 + len), sizeof(char));
-		if (tab == 0)
-			return (0);
-		while (s[i] && len > (i - start))
+		length_d = ft_strlen(dest);
+		i = 0;
+		if (res >= length_s + length_d)
+			res = (res - n) + length_d;
+		while (length_d + i < (n - 1))
 		{
-			tab[i - start] = s[i];
+			dest[length_d + i] = src [i];
 			i++;
 		}
+		if (n > length_d)
+			dest[length_d + i] = '\0';
 	}
-	return (tab);
+	return (res);
 }
