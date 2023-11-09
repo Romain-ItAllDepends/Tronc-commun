@@ -28,6 +28,8 @@ char	*ft_strrchr(const char *s, int c)
 	int	length;
 
 	i = 0;
+	if (c > 255)
+		c -= 256;
 	length = ft_strlen1(s);
 	if (c == '\0')
 		return ((char *)(s + length));

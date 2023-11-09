@@ -21,7 +21,9 @@ char	*ft_memchr(const void *s, int c, size_t n)
 	i = 0;
 	src = s;
 	len = ft_strlen(src);
-	while (i <= len && i < n)
+	if (c > 255)
+		c -= 256;
+	while (i < n)
 	{
 		if (src[i] == c)
 			return ((char *)(s + i));
