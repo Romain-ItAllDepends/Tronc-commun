@@ -18,11 +18,11 @@ char	*ft_memchr(const void *s, int c, size_t n)
 	size_t		i;
 	const char	*src;
 
+	if (c > 255)
+		c = c % 256;
 	i = 0;
 	src = s;
 	len = ft_strlen(src);
-	if (c > 255)
-		c -= 256;
 	while (i < n)
 	{
 		if (src[i] == c)
