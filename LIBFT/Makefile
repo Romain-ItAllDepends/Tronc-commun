@@ -20,11 +20,9 @@ all: $(NAME)
 
 $(NAME) : $(MY_OBJECTS)
 	$(ARRC) $(NAME) $(MY_OBJECTS)
-	
+
 %.o: %.c
 	$(CC) $(FLAGS) -c $< -o $@
-
-my_rule: $(shell pwd)
 
 clean: 
 	$(RM) $(MY_OBJECTS)
@@ -33,3 +31,5 @@ fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
+
+.PHONY: all clean fclean re

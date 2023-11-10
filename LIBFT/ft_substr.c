@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-size_t	ft_toomuch(const char *s, size_t len)
+size_t	ft_min(const char *s, size_t len)
 {
 	if (len > ft_strlen(s))
 		return (ft_strlen(s));
@@ -25,7 +25,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	char			*tab;
 
 	i = start;
-	len = ft_toomuch(s, len);
 	if (!s)
 		return (0);
 	if (start >= ft_strlen(s))
@@ -36,6 +35,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	else
 	{
+		len = ft_min(&s[start], len);
 		tab = ft_calloc((1 + len), sizeof(char));
 		if (tab == 0)
 			return (0);
