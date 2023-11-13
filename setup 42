@@ -1,0 +1,13 @@
+cmd
+wsl --update
+windows store ubuntu dwl
+error -> active l'hyper vitualisation (hyperv) -> recherche google
+sudo apt install gcc / gdb / valgrind
+Header sur github 42Paris/42header
+Norminette github 42school/norminette
+Apres code
+
+--OPTIONNEL--
+
+apt install libbsd-dev
+apt install libncurses-dev
