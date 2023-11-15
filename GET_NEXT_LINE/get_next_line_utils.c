@@ -6,13 +6,33 @@
 /*   By: rgobet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 13:32:52 by rgobet            #+#    #+#             */
-/*   Updated: 2023/11/14 13:33:10 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/11/15 12:05:12 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static int	ft_strlen(char const *str)
+int	ft_moveptr(char *stash)
+{
+	int	i;
+
+	i = 0;
+	while (stash[i] && stash[i] != '\n')
+		i++;
+	return (i);
+}
+
+int	ft_strlen(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
+
+static int	ft_strlen_mod(char const *str)
 {
 	int	i;
 
@@ -22,29 +42,39 @@ static int	ft_strlen(char const *str)
 	return (i + 1);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
-{
-	char	*tab;
-	int		i;
-	int		j;
 
-	if (!s1 || !s2)
+static size_t	ft_min(const char *s, size_t len)
+{
+	if (len > ft_strlen(s))
+		return (ft_strlen(s));
+	return (len);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	unsigned int	i;
+	char			*tab;
+
+	i = start;
+	if (!s)
 		return (0);
-	tab = malloc(((1 + ft_strlen(s1) + ft_strlen(s2))) * sizeof(char));
-	i = 0;
-	j = 0;
-	if (tab == 0)
-		return (0);
-	while (s1[i])
+	if (start >= ft_strlen(s))
 	{
-		tab[i] = s1[i];
-		i++;
+		tab = malloc(1 * sizeof(char));
+		if (tab == 0)
+			return (0);
 	}
-	while (s2[j])
+	else
 	{
-		tab[i] = s2[j];
-		j++;
-		i++;
+		len = ft_min(&s[start], len);
+		tab = malloc((1 + len) * sizeof(char));
+		if (tab == 0)
+			return (0);
+		while (s[i] && len > (i - start))
+		{
+			tab[i - start] = s[i];
+			i++;
+		}
 	}
 	return (tab);
 }
