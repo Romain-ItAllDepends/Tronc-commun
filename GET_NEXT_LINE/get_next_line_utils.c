@@ -6,23 +6,13 @@
 /*   By: rgobet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 13:32:52 by rgobet            #+#    #+#             */
-/*   Updated: 2023/11/15 12:05:12 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/11/15 14:58:13 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_moveptr(char *stash)
-{
-	int	i;
-
-	i = 0;
-	while (stash[i] && stash[i] != '\n')
-		i++;
-	return (i);
-}
-
-int	ft_strlen(char *s)
+int	ft_strlen(const char *s)
 {
 	int	i;
 
@@ -32,7 +22,7 @@ int	ft_strlen(char *s)
 	return (i);
 }
 
-static int	ft_strlen_mod(char const *str)
+int	ft_strlen_mod(char const *str)
 {
 	int	i;
 
@@ -42,10 +32,9 @@ static int	ft_strlen_mod(char const *str)
 	return (i + 1);
 }
 
-
 static size_t	ft_min(const char *s, size_t len)
 {
-	if (len > ft_strlen(s))
+	if ((int)len > ft_strlen(s))
 		return (ft_strlen(s));
 	return (len);
 }
@@ -58,7 +47,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	i = start;
 	if (!s)
 		return (0);
-	if (start >= ft_strlen(s))
+	if ((int)start >= ft_strlen(s))
 	{
 		tab = malloc(1 * sizeof(char));
 		if (tab == 0)
