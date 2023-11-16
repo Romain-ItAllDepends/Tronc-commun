@@ -6,7 +6,7 @@
 /*   By: rgobet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 13:32:11 by rgobet            #+#    #+#             */
-/*   Updated: 2023/11/15 14:58:11 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/11/16 13:44:06 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_bn(char *s)
 	return (0);
 }
 
-char	*ft_swap(char *buffer, char *stash)
+void	ft_swap(char *buffer, char *stash)
 {
 	static int	i;
 	int			j;
@@ -38,32 +38,38 @@ char	*ft_swap(char *buffer, char *stash)
 		i++;
 		j++;
 	}
-	return (stash);
 }
 
-int	ft_read(int fd, char *buffer)
+int	ft_read(int fd, char *buffer, int buff)
 {
-	if (read (fd, buffer, BUFFER_SIZE) < 0)
+	if (read (fd, buffer, buff) < 0)
 		return (1);
 	return (0);
 }
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	*ft_calloc(char	*buffer, char *stash)
 {
-	static char		*ptr;
+	char			save[ft_strlen(stash)];
 	char			*tab;
 	long int		size_m;
 
-	tab = ptr;
-	ptr = &tab[0];
-	if (size == 0)
-		size = BUFFER_SIZE;
-	size_m = nmemb * size + 2;
-	if ((int)size_m < 0 || ((int)size < 0 && (int)nmemb < 0))
+	if (stash)
+	{
+		ft_join(stash, save);
+		stash[0] = '\0';
+		free(stash);
+	}
+	if (!stash)
+		size_m = ft_strlen(buffer) + 1;
+	else
+		size_m = ft_strlen(buffer) + ft_strlen(stash) + 1;
+	if ((int)size_m <= 0)
 		return (NULL);
 	tab = malloc(size_m);
 	if (tab == 0)
 		return (0);
+	if (save)
+		ft_join(save, tab);
 	tab[size_m - 1] = '\0';
 	return (tab);
 }
@@ -74,25 +80,24 @@ char	*get_next_line(int fd)
 	int			buff;
 	char		*line;
 	char		buffer[BUFFER_SIZE];
-	char	*stash;
+	static char	*stash;
 
 	i = 0;
 	buff = BUFFER_SIZE;
-	if (ft_read(fd, buffer))
+	if (ft_read(fd, buffer, buff))
 		return (0);
 	while (i == 0 || stash[i] != '\n')
 	{
-		if (i == 0 || (buff / i) == 0)
+		if (stash[i] == '\0' || stash[i] == '\n')
+			break ;
+		if (i == 0 || (i % buffer) == 0)
 		{
-			stash = ft_calloc(sizeof(char), i);
+			stash = ft_calloc(buffer, stash);
 			ft_swap(buffer, stash);
-			if (!ft_bn(stash))
-				free(stash);
 		}
 		i++;
 	}
 	line = ft_substr(stash, 0, ft_strlen_mod(stash));
-	free(stash);
 	return (line);
 }
 
