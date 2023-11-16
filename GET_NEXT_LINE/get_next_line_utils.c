@@ -6,7 +6,7 @@
 /*   By: rgobet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 13:32:52 by rgobet            #+#    #+#             */
-/*   Updated: 2023/11/15 14:58:13 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/11/16 13:44:09 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,18 @@ int	ft_strlen_mod(char const *str)
 	while (str[i] && str[i] != '\n')
 		i++;
 	return (i + 1);
+}
+
+void	ft_join(char *buffer, char *stash)
+{
+	int	i;
+
+	i = 0;
+	while (buffer[i])
+	{
+		stash[i] = buffer[i];
+		i++;
+	}
 }
 
 static size_t	ft_min(const char *s, size_t len)
