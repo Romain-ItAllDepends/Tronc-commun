@@ -1,0 +1,72 @@
+COMMANDE GDB :
+
+- compilation avec "-g"
+
+- lance avec "gdb --tui"
+
+- "file" avec le nom du fichier (a.out)
+
+- "shell" + la commande n shell  pour executer les commande dans GDB
+
+- pour afficher les changement du aux commandes :
+	- directory
+	- file a.out
+	- start
+
+une fois que gdb est lance :
+
+- "start" pour lancer un programme ligne par ligne
+- "run" (ou r) pour lancer un programe en entier
+
+une fois le programme lancer :
+
+- "show arg" pour voir les chaine de char passer en parametre (argv[1] ...)
+
+- "set arg" permet de changer les arg
+
+- "quit" (ou q) permet de fermer la fenetre de GDB
+
+- "kill" permet de metre fin a un programe et le reprendre depuit le debut 
+
+- "focus" permet de changer le focus de fleche (cmd ou src)
+
+- "help" c'estle man de GDB
+
+- "refresh" (ou ctrl + L) permet de reinitialiser l'affichage
+
+- "next" (ou n) permet de passer a la prochaine ligne sans aller dans les fonction, peut etre suvie d'un nombre pour passer un certain nmb de ligne
+
+- "step" (ou s) passe a la ligne suivant en entrant dans les fonction 
+
+- "finish" permet de metre fin a un fonction
+
+- "backtrace" permet de voir la position dans un programme
+
+- "print" (ou p) permet de print la valeur d'une variable
+	- "print main::nomdevarible" permet de print une variable d'une autre fonction (main peut etre remplacer per le nom de la fonction voulue)
+	- "print nmdevariable @nmb" print un certain nombre de char ou int demander
+	- "print *nmdevarible" permet d'afficher le contenue de la variable (utile pour les char *)
+
+- "set" permet de changer la valeur d'une variable (peut aussi etre utiliser avec des malloc)
+
+- "whatch" montre la valeur d'une variable et sa valeur precedente a chaque pqssqge de ligne (n ou s)
+
+- "display" affiche la valeur d'une variable a chaque passage a la ligne (n ou s)
+
+- "info"(ou inf ou i) permet de voir les whatch point et les display
+
+- "break" (+nmb de ligne) permet de mettre des chackpoint dans le code au numero de ligne demander
+
+- "continue" permet de passer d'un break a un autre
+
+- "tbreak" permet de cree un break temporaire
+
+- "until" (+ nmb de la ligne) permet d'aller a une ligne precise
+
+- "clear" delete le break/display/watch de la ligne selectioner
+
+- "delete" (+ numero de break) suprime le break/display/watch
+
+- "delete"(ou del ou d) suprime tout les break/display/watch
+
+- "call" (+ nom de fonction) appelle une fonction et affiche le retour (si il y en a un)
