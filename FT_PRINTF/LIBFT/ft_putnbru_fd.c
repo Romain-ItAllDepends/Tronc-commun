@@ -1,37 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_putnbru_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rgobet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/04 10:41:56 by rgobet            #+#    #+#             */
-/*   Updated: 2023/11/17 13:03:39 by rgobet           ###   ########.fr       */
+/*   Created: 2023/11/17 11:41:20 by rgobet            #+#    #+#             */
+/*   Updated: 2023/11/17 13:09:28 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_putnbr_fd(int n, int fd)
+int	ft_putnbru_fd(unsigned int n, int fd)
 {
-	int	x;
-
-	x = 0;
-	if (n == -2147483648)
-	{
-		write (fd, "-2147483648", 11);
-		return (11);
-	}
-	if (n < 0)
-	{
-		x += ft_putchar_fd('-', fd);
-		n *= -1;
-	}
+	int	result;
+	
+	result = 0;
 	if (n >= 10)
 	{
-		x += ft_putnbr_fd(n / 10, fd);
+		result += ft_putnbr_fd(n / 10, fd);
 		n = n % 10;
 	}
-	x += ft_putchar_fd(n + '0', fd);
-	return (x);
+	result += ft_putchar_fd(n + '0', fd);
+	return (result);
 }
