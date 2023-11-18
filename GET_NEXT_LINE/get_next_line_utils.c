@@ -6,7 +6,7 @@
 /*   By: rgobet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 13:32:52 by rgobet            #+#    #+#             */
-/*   Updated: 2023/11/18 14:54:33 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/11/18 16:46:44 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,29 +37,33 @@ int	ft_strlen_mod(char const *str)
 void	ft_join(char *buffer, char *stash, int opt, char *v)
 {
 	int	i;
-	static int	n;
+	int	n;
+	int	x;
 	static int	p;
 
 	i = 0;
+	n = 0;
 	if (opt == 1)
 	{
-		p = ft_bn(v, 0) + 1;
-		while (stash[n] == v[p])
+		p += ft_bn(&v[p], 0);
+		x = p;
+		while (stash[n] == v[x])
 		{
-			if (v[p] == 0 || stash[n] == 0)
+			if (v[x] == 0 || stash[n] == 0)
 				break ;
 			n++;
+			x++;
 		}
 	}
 	while (buffer[i])
 	{
 		if (n > 0)
-			stash[i + n] = buffer[i + n - 1];
+			stash[i + n] = buffer[i];
 		else
 			stash[i] = buffer[i];
 		i++;
 	}
-	stash[i] = '\0';
+	stash[i + n] = '\0';
 	if (opt == 1)
 		buffer = &buffer[i + n - 1]; 
 }
