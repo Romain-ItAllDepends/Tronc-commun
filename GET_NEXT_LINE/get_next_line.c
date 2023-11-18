@@ -6,37 +6,61 @@
 /*   By: rgobet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 13:32:11 by rgobet            #+#    #+#             */
-/*   Updated: 2023/11/16 13:44:06 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/11/18 14:57:47 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_bn(char *s)
+int	ft_bn(char *s, int opt)
 {
 	int	i;
+	int	j;
 
 	i = 0;
+	j = 0;
 	while(s[i])
 	{
 		if (s[i] == '\n')
-			return (1);
+		{
+			j++;
+			if (opt > 0)
+			{
+				if (opt == j)
+					return (i);
+			}
+			else
+				return (i);
+		}
 		i++;
 	}
 	return (0);
 }
 
-void	ft_swap(char *buffer, char *stash)
+void	ft_swap(char *buffer, char *stash, int opt)
 {
 	static int	i;
 	int			j;
+	int			n;
 
 	j = 0;
-	while (buffer[j])
+	if (opt == 1)
 	{
-		stash[i] = buffer[j];
-		i++;
-		j++;
+		n = 0;
+		while (stash[n])
+		{
+			stash[n] = '\0';
+			n++;
+		}
+	}
+	else
+	{
+		while (buffer[j])
+		{
+			stash[i] = buffer[j];
+			i++;
+			j++;
+		}
 	}
 }
 
@@ -52,10 +76,11 @@ void	*ft_calloc(char	*buffer, char *stash)
 	char			save[ft_strlen(stash)];
 	char			*tab;
 	long int		size_m;
+	static int		x;
 
 	if (stash)
 	{
-		ft_join(stash, save);
+		ft_join(stash, save, 0, save);
 		stash[0] = '\0';
 		free(stash);
 	}
@@ -68,9 +93,9 @@ void	*ft_calloc(char	*buffer, char *stash)
 	tab = malloc(size_m);
 	if (tab == 0)
 		return (0);
-	if (save)
-		ft_join(save, tab);
-	tab[size_m - 1] = '\0';
+	ft_swap(save, tab, 1);
+	ft_join(&save[ft_bn(save, x++) + 1], tab, 0, save);
+	ft_join(buffer, tab, 1, save);
 	return (tab);
 }
 
@@ -86,14 +111,12 @@ char	*get_next_line(int fd)
 	buff = BUFFER_SIZE;
 	if (ft_read(fd, buffer, buff))
 		return (0);
-	while (i == 0 || stash[i] != '\n')
+	while ((!stash || stash[i] != '\n') && i < ft_strlen(stash) + 1)
 	{
-		if (stash[i] == '\0' || stash[i] == '\n')
-			break ;
-		if (i == 0 || (i % buffer) == 0)
+		if (i == 0 || (i % buff) == 0)
 		{
 			stash = ft_calloc(buffer, stash);
-			ft_swap(buffer, stash);
+			ft_swap(buffer, stash, 0);
 		}
 		i++;
 	}
