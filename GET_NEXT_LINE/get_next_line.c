@@ -6,7 +6,7 @@
 /*   By: rgobet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 13:32:11 by rgobet            #+#    #+#             */
-/*   Updated: 2023/11/18 14:57:47 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/11/18 16:46:42 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,16 @@ int	ft_bn(char *s, int opt)
 	j = 0;
 	while(s[i])
 	{
-		if (s[i] == '\n')
+		if (s[i] == '\n' && i != 0)
 		{
 			j++;
 			if (opt > 0)
 			{
 				if (opt == j)
-					return (i);
+					return (i + 1);
 			}
 			else
-				return (i);
+				return (i + 1);
 		}
 		i++;
 	}
@@ -94,7 +94,7 @@ void	*ft_calloc(char	*buffer, char *stash)
 	if (tab == 0)
 		return (0);
 	ft_swap(save, tab, 1);
-	ft_join(&save[ft_bn(save, x++) + 1], tab, 0, save);
+	ft_join(&save[ft_bn(save, x++)], tab, 0, save);
 	ft_join(buffer, tab, 1, save);
 	return (tab);
 }
@@ -118,6 +118,8 @@ char	*get_next_line(int fd)
 			stash = ft_calloc(buffer, stash);
 			ft_swap(buffer, stash, 0);
 		}
+		if (stash && ft_bn(stash, 0))
+			break ;
 		i++;
 	}
 	line = ft_substr(stash, 0, ft_strlen_mod(stash));
@@ -134,7 +136,7 @@ int    main(void)
 
     i = 0;
     fd = open("files/empty", O_RDONLY);
-    while (i < 3)
+    while (i < 6)
     {
         rsl = get_next_line(fd);
         printf("%s", rsl);
