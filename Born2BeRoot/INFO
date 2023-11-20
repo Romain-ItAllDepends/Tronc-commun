@@ -1,0 +1,18 @@
+Login root :
+rgobet42
+Born2BeRoot
+
+Login user :
+rgobet
+1LoveKinderBueno
+
+VM dans /sgoinfre/goinfre/Perso/rgobet/VM
+
+Mettre en place les services, groupes, ssh ...
+
+Creation des script et execution toutes les dix minutes.
+
+On doit pouvoir se connecter a la VM depuis le PC HOST avec le port 4242. (no root)
+
+Avant de push faire au moins une snapshot et une fois en correction faire un clone de la vm devant le correcteur
+pour pas changer la signature de la VM.
