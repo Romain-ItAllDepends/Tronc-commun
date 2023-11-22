@@ -1,0 +1,53 @@
+BTB 
+
+Id + mdp VM
+
+Décryptage : maxence est un bg
+Id : derey42
+Mdp : Admin42test
+
+Ligne de commande importante
+Afficher dans le terminal les partitions : “lsblk”
+Accès Root “su” + sortir du Root “exit”
+Accès + modification au fichier ssh “nano /etc/ssh/sshd_config”
+Reload/Restart ssh “systemctl (reload ou restart) ssh”
+Vérifier les port de ssh “ss -tlpn| grep ssh”
+Activer(apres dll) ufw “sudo ufw enable”
+Ajouter un port ufw “sudo ufw allow 4242”
+Vérifier le statut des ports de ufw “sudo ufw status”
+A
+ccès  + modification au fichier pour modifier la sécurité du mdp : 
+“sudo nano /etc/pam.d/common-password” 
+Accès + modification au fichier pour modifier la date du mdp :
+“nano /etc/login.defs”
+Accès + modification au fichier pour modifier le Hostname :
+“nano /etc/hostname”
+lsCréer un dossier sudo “mkdir /var/log/sudo”
+Créer un fichier log “touch /var/log/sudo.log”
+Ajouter/configurer les droit sudo a une personne : “nano /etc/sudoers”
+Créer un user “sudo useradd nom_utilisateur”
+Créer un groupe “sudo groupadd user42”
+Ajouter une personne dans un groupe “sudo usermod -aG user42 derey42”
+	usermod -aG = peut etre rempllacer par adduser
+User42 = le groupe
+derey42 = user
+Modifier les mdp “password derey42”
+Modifier le fichier qui appellera le script “sudo crontab -u root -e”
+
+Commande pour avoir la signature(ATTENTION sa prend du temp)
+Aller dans le dossier ou se trouve votre VM et faite “shasum derey42.vdi”
+
+Explication 
+
+VM
+Il y a plusieurs intérêts à utiliser une machine virtuelle : 
+Tester un nouveau système d'exploitation sans avoir besoin de partitionner son disque dur
+Tester son programme sur d’autre système d’exploitation 
+Faire des test sans compromettre les matériel physique de l'ordinateur ou de l’OS
+
+
+APPAfaire sur son pc de basermor
+Un module de sécurité dans le noyau Linux qui permet à l'administrateur système de restreindre les capacités d'un programme.
+LVM 
+C'est un gestionnaire de volumes logique. Il fournit une méthode d'allocation d'espace sur les périphériques de stockage de masse, qui est plus flexible que les schémas de partitionnement conventionnels pour le stockage de volumes.
+
