@@ -17,7 +17,7 @@ On doit pouvoir se connecter a la VM depuis le PC HOST avec le port 4242. (no ro
 Avant de push faire au moins une snapshot et une fois en correction faire un clone de la vm devant le correcteur
 pour pas changer la signature de la VM.
 
-
+Debian : https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/
 
 
 
