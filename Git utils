@@ -1,0 +1,38 @@
+Garder plusieurs versions de son code.
+Mettre en sécurité son code sur un serveur.
+Travailler en groupe.
+
+git init - 
+git status - Voir l'état de son projet git.
+git add - Ajouté un fichier a suivre par git.
+git rm -f --cached - Supprimer un fichier qui est suivi par git.
+git commit -m "Message" - 
+git log - Log des commit
+git restore file - Pour récupérer un fichier qui a été modifié à son état d'origine.
+/\ ATTENTION /\
+git reset id_commit - Reviens au commit dont l'id est renseigné en supprimant tout les commits supérieur à celui-ci.
+git reset --hard - Reviens au premier commit
+/\ ATTENTION /\
+GIT RESET EST DEFINITIF !
+
+git remote - Voir à quelle serveur notre git est lier.
+git remote add NAME LINK - Ajout d'un serveur.
+git remote rm NAME - Suppression d'un serveur.
+
+git push 
+OU
+git push NAME master - Permet d'envoyer les changements sur le serveur.
+git push -u NAME master - Raccourci si utilisation de git pull
+git pull NAME master(branch) - Raccourci de git push NAME master
+
+Création du fichier : .gitignore
+Il suffit d'écrire le nom des fichiers a ignoré dedans.
+
+La moulinette considère.gitignore comme un fichier de configuration il donc autorisé.
+
+SSH :
+
+Github -> Setting -> SSH
+
+cd .ssh
+rsa_pub
