@@ -6,7 +6,7 @@
 /*   By: rgobet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 12:36:05 by rgobet            #+#    #+#             */
-/*   Updated: 2023/11/23 16:46:44 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/11/24 16:04:26 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 #ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 5
+#  define BUFFER_SIZE 10000
 #endif
 
 char	*get_next_line(int fd);
