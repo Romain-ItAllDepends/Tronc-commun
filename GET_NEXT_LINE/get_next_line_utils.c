@@ -6,7 +6,7 @@
 /*   By: rgobet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 12:37:14 by rgobet            #+#    #+#             */
-/*   Updated: 2023/11/23 16:46:49 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/11/24 16:08:19 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,44 @@ int	ft_back(char *s)
 {
 	int	i;
 
-	i = 0;
-	while (s[i])
+	if (s)
 	{
-		if (s[i] == '\n')
-			return (i);
-		i++;
+		i = 0;
+		while (s[i])
+		{
+			if (s[i] == '\n')
+			{
+				if (i == 0)
+					return (1);
+				return (i + 1);
+			}
+			i++;
+		}
 	}
 	return (0);
+}
+
+static char	*ft_fill(char *line, char *buffer, char *tab)
+{
+	int	i;
+
+	i = 0;
+	if (line)
+	{
+		while (line[i])
+		{
+			tab[i] = line[i];
+			i++;
+		}
+		i = 0;
+	}
+	while (buffer[i])
+	{
+		tab[i + ft_strlen(line)] = buffer[i];
+		i++;
+	}
+	tab[i + ft_strlen(line)] = '\0';
+	return (tab);
 }
 
 char	*ft_split(char *line, char *buffer, int count)
@@ -59,23 +89,11 @@ char	*ft_split(char *line, char *buffer, int count)
 	char	*tab;
 	int	i;
 
-	i = ft_strlen(line) + ft_back(buffer) + 1;
+	i = (ft_strlen(line) + ft_strlen(buffer)) + 2;
 	tab = malloc (i * sizeof(char));
 	if (tab == 0)
 		return (0);
-	i = 0;
-	while (tab[i])
-	{
-		tab[i] = line[i];
-		i++;
-	}
-	i = 0;
-	while (tab[i + ft_strlen(line)])
-	{
-		tab[i + ft_strlen(line)] = buffer[i];
-		i++;
-	}
-	tab[i + ft_strlen(line)] = '\0';
+	tab = ft_fill(line, buffer, tab);
 	if (count > 0)
 		free(line);
 	return (tab);
@@ -83,15 +101,20 @@ char	*ft_split(char *line, char *buffer, int count)
 
 int	ft_read(int fd, char *s)
 {
-	if(read(fd, s, BUFFER_SIZE) < 0)
-		return (0);
-	return (1);
+	int	n;
+
+	n = read(fd, s, BUFFER_SIZE);
+	if (n < 0)
+		return (-1);
+	s[BUFFER_SIZE] = 0;
+	return (n);
 }
 
 int	ft_strlen(char const *s)
 {
 	int	i;
-
+	if (!s)
+		return (0);
 	i = 0;
 	while (s[i])
 		i++;
