@@ -1,0 +1,48 @@
+void	rotone(char *s);
+Utilise write
+Incrementer chaque lettre de un, le Z devient A et le z devient a.
+Dans tout les cas il doit y avoir un \n.
+void	last_word(char *s);
+Utilise write
+Afficher le dernier mot delimiter par ' ' et/ou '\t'. Ou par le debut et la fin de la chaine de caracteres.
+char	*ft_range(int start, int end);
+Utilise malloc
+Affiche une suite de nombre/chiffre commencant par start et finissant par end (compris).
+
+Ex :
+
+0, 3	0, 1, 2, 3.
+3, 0	3, 2, 1, 0.
+-1 3	-1, 0, 1, 2, 3.
+3 -1	3, 2, 1, 0, -1.
+-1 -4	-1, -2, -3, -4.
+-4 -1	-4, -3, -2, -1.
+
+
+Plus opti :
+Si start < 0
+	Si start < end
+		...	i++;
+	else
+		...	i--;
+Sinon si start >= 0
+	Si start < end
+		...	i++;
+	else
+		...	i--;
+else
+	tab[i] = start + i;
+i++;
+
+
+0 3 v
+
+3 0 v
+
+-1 3 x (-1, -2, -3, -4, 0,)
+
+3 -1 x (3, 2 ,1, 0, 0, 0) Gap
+-1 -4 x (-1, -2, -3, -4, -5) Gap
+-4 -1 x (-4, -3.0.0.)
+
+0 0 v
