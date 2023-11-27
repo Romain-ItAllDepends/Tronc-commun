@@ -6,13 +6,13 @@
 /*   By: rgobet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 12:37:14 by rgobet            #+#    #+#             */
-/*   Updated: 2023/11/24 16:08:19 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/11/25 10:39:44 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char *s2)
 {
 	char	*tab;
 	int		i;
@@ -20,7 +20,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	if (!s1 || !s2)
 		return (0);
-	tab = malloc((1 + ft_strlen(s1) + ft_strlen(s2)) * sizeof(char));
+	tab = malloc((1 + ft_strlen(s1) + ft_back(s2)) * sizeof(char));
 	i = 0;
 	j = 0;
 	if (tab == 0)
@@ -33,6 +33,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (s2[j])
 	{
 		tab[i] = s2[j];
+		s2[j] = '\0';
 		j++;
 		i++;
 	}
@@ -89,8 +90,8 @@ char	*ft_split(char *line, char *buffer, int count)
 	char	*tab;
 	int	i;
 
-	i = (ft_strlen(line) + ft_strlen(buffer)) + 2;
-	tab = malloc (i * sizeof(char));
+	i = (ft_strlen(line) + ft_back(buffer)) + 1;
+	tab = malloc(i * sizeof(char));
 	if (tab == 0)
 		return (0);
 	tab = ft_fill(line, buffer, tab);
