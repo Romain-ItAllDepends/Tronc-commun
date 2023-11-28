@@ -6,7 +6,7 @@
 /*   By: rgobet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 14:26:51 by rgobet            #+#    #+#             */
-/*   Updated: 2023/11/27 14:28:40 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/11/28 13:58:40 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,11 @@
 #endif
 
 char	*get_next_line(int fd);
+char	*ft_split(char *stash, char *buffer, int count);
+char	*ft_fill(char *line, char *buffer, char *tab);
+void	ft_clear(char *s, char *buffer);
+int	ft_strlen(char *s);
+int	ft_back(char *s);
+
 
 #endif
