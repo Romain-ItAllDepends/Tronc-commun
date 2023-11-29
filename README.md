@@ -7,5 +7,6 @@ GET_NEXT_LINE :negative_squared_cross_mark:
 BORN2BEROOT :negative_squared_cross_mark:
 
 
-:checkered_flag:
-:crossed_flags:
+:checkered_flag: x
+:crossed_flags: x
+:ballot_box_with_check:
