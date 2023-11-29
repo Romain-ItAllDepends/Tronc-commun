@@ -8,3 +8,5 @@ Le tronc commun est la partie durant laquelle on apprend les bases de la program
 ## Mes compétences :
 - C
   - ![30%](https://progress-bar.dev/30)
+- Shell
+  - ![10%](https://progress-bar.dev/10)
