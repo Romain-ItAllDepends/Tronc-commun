@@ -14,5 +14,5 @@ BORN2BEROOT :negative_squared_cross_mark:
 
 
 
-<code style="color : greenyellow">:white_check_mark:</code>
+<code style="color : greenyellow">Try</code>
 
