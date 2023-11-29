@@ -9,4 +9,5 @@ BORN2BEROOT :negative_squared_cross_mark:
 
 :checkered_flag: x
 :crossed_flags: x
-:ballot_box_with_check:
+:ballot_box_with_check: v
+:green_book:
