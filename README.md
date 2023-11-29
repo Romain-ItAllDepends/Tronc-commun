@@ -13,7 +13,7 @@ BORN2BEROOT :negative_squared_cross_mark:
 :red_x:
 
 
-$${\color{lightgreen}Light \space Green}$$
+$${\color{lightgreen}:white_check_mark:}$$
 
 <code style="color : greenyellow">Try</code>
 
