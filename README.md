@@ -13,6 +13,6 @@ BORN2BEROOT :negative_squared_cross_mark:
 :red_x:
 
 
-```html
+
 <code style="color : greenyellow">:white_check_mark:</code>
-```
+
