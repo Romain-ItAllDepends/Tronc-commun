@@ -11,8 +11,8 @@ BORN2BEROOT :negative_squared_cross_mark:
 :crossed_flags: x
 :ballot_box_with_check: v
 :red_x:
-:white_check_mark:
+
 
 ```html
-(&#x1F34F;)
+:white_check_mark:(&#x1F34F;)
 ```
