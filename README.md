@@ -1,5 +1,5 @@
 # Tronc commun 42
-> Mes projets :
+## Mes projets :
 
   -LIBFT ${\color{lightgreen}{:white_check_mark:}}$
   -FT_PRINTF ${\color{lightgreen}{:white_check_mark:}}$
