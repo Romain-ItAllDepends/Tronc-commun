@@ -35,5 +35,5 @@ SSH :
 Github -> Setting -> SSH
 
 SSH keygen
-cd .ssh
-rsa_pub
+cd ~/.ssh
+id_rsa.pub
