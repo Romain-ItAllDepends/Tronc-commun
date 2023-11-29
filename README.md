@@ -6,14 +6,3 @@ FT_PRINTF :heavy_check_mark:
 GET_NEXT_LINE :negative_squared_cross_mark:
 BORN2BEROOT :negative_squared_cross_mark:
 
-
-:checkered_flag: x
-:crossed_flags: x
-:ballot_box_with_check: v
-:red_x:
-
-ee
-
-
-<code style="color : greenyellow">Try</code>
-
