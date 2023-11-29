@@ -6,4 +6,4 @@ Le tronc commun est la partie durant laquelle on apprend les bases de la program
 - GET_NEXT_LINE ${\color{red}{:negative_squared_cross_mark:}}$
 - BORN2BEROOT ${\color{red}{:negative_squared_cross_mark:}}$
 ## Mes compétences :
-- C![20%](https://progress-bar.dev/50)
+- C![20%](https://progress-bar.dev/20)
