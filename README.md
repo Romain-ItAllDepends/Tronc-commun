@@ -11,4 +11,5 @@ Le tronc commun est la partie durant laquelle on apprend les bases de la program
 - Shell
   - ![10%](https://progress-bar.dev/10)
 ## Maitise digitale : Édition, Virtualisation, Développement
-- VIM ${\color{lightgreen}{:stars:}}$
+- VIM ${\color{lightgreen}{⭐}}$
+⭐
