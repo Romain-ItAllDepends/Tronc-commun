@@ -1,4 +1,4 @@
-# Tronc commun 42
+# **Tronc commun 42**
 Le tronc commun est la partie durant laquelle on apprend les bases de la programmation !
 ## Mes projets :
 - LIBFT ${\color{lightgreen}{:white_check_mark:}}$
