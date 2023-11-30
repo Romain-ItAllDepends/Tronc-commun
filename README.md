@@ -15,6 +15,8 @@ Le tronc commun est la partie durant laquelle on apprend les bases de la program
 - VirtualBox         ⭐⭐⭐
 - VSCode        ⭐⭐
 
+> [!NOTE]
+> Les dossiers TrainExamxx sont les dossiers contenant des exercices d'entraînement fait en vue de cet examen.
 <!----
 ${\color{lightgreen}{Text}}
 ${\color{red}{:negative_squared_cross_mark:}}$
