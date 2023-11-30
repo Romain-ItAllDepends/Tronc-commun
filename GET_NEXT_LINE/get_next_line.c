@@ -6,7 +6,7 @@
 /*   By: rgobet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 14:25:49 by rgobet            #+#    #+#             */
-/*   Updated: 2023/11/28 15:09:48 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/11/28 16:55:32 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,31 +43,10 @@ static char	*ft_join(char *s, char *b, int count)
 	return (tab);
 }
 
-char *get_next_line(int fd)
+static char *next_line(int fd, char *buffer, char *stash)
 {
-	static char	*stash;
-	char	*new_line;
-	char	buffer[BUFFER_SIZE + 1];
-	static int	count;
-	int	n;
-
-
-	if (fd == 0)
-		return (NULL);
-	new_line = NULL;
-	if (count > 0)
-	{
-		stash = NULL;
-		stash = ft_split(buffer, stash, count);
-	}
 	while (1)
 	{
-		if (count == 0 || count % BUFFER_SIZE == 0)
-		{
-			n = read(fd, buffer, BUFFER_SIZE);
-			if (n == 0)
-				return(NULL);
-		}
 		if (ft_back(buffer) > 0 || buffer[0] == '\n')
 		{
 			ft_clear(stash, buffer);
@@ -82,7 +61,38 @@ char *get_next_line(int fd)
 		{
 			new_line = ft_join(new_line, buffer, count);
 		}
-		count++;
+	}
+}
+
+char *get_next_line(int fd)
+{
+	static char	*stash;
+	char	*new_line;
+	char	buffer[BUFFER_SIZE + 1];
+
+	if (fd == 0)
+		return (NULL);
+	new_line = NULL;
+	if (count > 0)
+	{
+		stash = NULL;
+		stash = ft_split(buffer, stash, count);
+	}
+	if (stash == NULL)
+	{
+		n = read(fd, buffer, BUFFER_SIZE);
+		buffer[n] = '\0';
+		if (n == 0)
+			return(NULL);
+	}
+	else
+	{
+		if (stash)
+			stash = ft_split(&stash[ft_back(buffer) + 1], buffer, count);
+		else
+			stash = ft_split(stash, buffer, count);
+		//stash -> rempli 
+		//stash -> rempli delimitation \n
 	}
 }
 
