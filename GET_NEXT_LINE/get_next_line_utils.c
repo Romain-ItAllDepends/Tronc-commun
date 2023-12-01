@@ -1,17 +1,17 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgobet <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 14:28:48 by rgobet            #+#    #+#             */
-/*   Updated: 2023/11/28 16:55:34 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/01 17:38:54 by rgobet           ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "get_next_line.h"
-
+// Add une verif /n en option
 int	ft_strlen(char *s)
 {
 	int	i;
@@ -23,7 +23,7 @@ int	ft_strlen(char *s)
 		i++;
 	return (i);
 }
-
+// Supp
 int	ft_back(char *s)
 {
 	int	i;
@@ -39,7 +39,7 @@ int	ft_back(char *s)
 	}
 	return (0);
 }
-
+// Supp
 void	ft_clear(char *s, char *buffer)
 {
 	int	i;
@@ -80,17 +80,17 @@ char	*ft_fill(char *line, char *buffer, char *tab)
 	return (tab);
 }
 
-char	*ft_split(char *stash, char *buffer, int count)
+char	*ft_split(char *stash, char *buffer)
 {
 	char	*tab;
-	int	i;
+	int		i;
 
 	i = (ft_strlen(stash) + ft_back(buffer)) + 1;
 	tab = malloc(i * sizeof(char));
 	if (tab == 0)
 		return (0);
 	tab = ft_fill(stash, buffer, tab);
-	if (count > 0)
+	if (stash != 0)
 		free(stash);
 	return (tab);
 }
