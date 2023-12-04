@@ -5,93 +5,68 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/27 14:25:49 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/01 18:07:38 by rgobet           ###   ########.fr       */
+/*   Created: 2023/12/02 10:56:32 by rgobet            #+#    #+#             */
+/*   Updated: 2023/12/04 16:00:23 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "get_next_line.h"
 
-static char	*ft_join(char *s, char *b, int count)
-{
-	int		i;
-	int		j;
-	char	*tab;
-
-	i = 0;
-	j = 0;
-	tab = malloc ((ft_strlen(s) + ft_strlen(b)) * sizeof(char));
-	if (tab == 0)
-		return (NULL);
-	if (s)
-	{
-		while (s[i])
-		{
-			tab[i] = s[i];
-			i++;
-		}
-	}
-	while (b[j])
-		tab[i++] = b[j++];
-	tab[i] = 0;
-	if (count > 0)
-		free(s);
-	return (tab);
-}
-
-static char	*next_line(int fd, char *buffer, char *stash)
+char	*ft_core(int fd, char *stash, char *buffer, char *new_line, int n)
 {
 	while (1)
 	{
-		if (ft_back(buffer) > 0 || buffer[0] == '\n')
+		if (new_line)
+			free(new_line);
+		if (ft_strlen(stash, 1) == 0)
+			n = ft_read(fd, buffer, stash);
+		if (n == -8)
 		{
-			ft_clear(stash, buffer);
-			new_line = ft_join(new_line, buffer, count);
-			if (stash)
-				stash = ft_split(&stash[ft_back(buffer) + 1], buffer, count);
-			else
-				stash = ft_split(stash, buffer, count);
+			new_line = ft_split(stash, buffer);
 			return (new_line);
 		}
-		if (ft_back(buffer) == 0)
+		else if (n == 0)
+			return (NULL);
+		stash = ft_join(stash, buffer);
+		if (ft_strlen(stash, 1) > 0)
 		{
-			new_line = ft_join(new_line, buffer, count);
+			new_line = ft_split(stash, buffer);
+			stash = NULL;
+			stash = ft_join(stash, &buffer[ft_strlen(buffer, 1) + 1]);
+			return (new_line);
 		}
+		else if (ft_strlen(stash, 1) == 0)
+			stash = ft_join(stash, buffer);
 	}
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*stash;
+	static char	*stash = NULL;
 	char		*new_line;
 	char		buffer[BUFFER_SIZE + 1];
+	int			n;
 
-	if (fd == 0)
-		return (NULL);
-	n = read(fd, buffer, BUFFER_SIZE);
-	buffer[n] = '\0';
-	if (n == 0 && (stash[0] == '\0' || !stash))
-		return (NULL);
-	else if (n == 0)
+	n = ft_read(fd, buffer, stash);
+	if (n == -8)
 	{
-		new_line = ft_split(line, buffer);
-		stash = NULL;
+		new_line = ft_split(stash, buffer);
 		return (new_line);
 	}
-	else
+	else if (n == 0)
+		return (NULL);
+	stash = NULL;
+	stash = ft_join(stash, buffer);
+	new_line = NULL;
+	if (ft_strlen(stash, 1) > 0)
 	{
-		if (stash)
-			stash = ft_split(&stash[ft_back(buffer) + 1], buffer, count);
-		else
-		{
-			stash = ft_split(stash, buffer, count);
-			if (stash[0] == '\n' || ft_back(stash) > 0)
-				return (new_line = next_line(fd, buffer, stash));
-		}
+		new_line = ft_split(stash, buffer);
+		stash = ft_join(&stash[ft_strlen(stash, 1) + 1], &buffer[ft_strlen(buffer, 1) + 1]);
 	}
+	else
+		new_line = ft_core(fd, stash, buffer, new_line, n);
+	return (new_line);
 }
-
-//Je rempli buffer, je le met dans stash, je verif le \n si il y ai pas on re read puis split jusqu'au \n 
 
 #include <stdio.h>
 
@@ -103,7 +78,7 @@ int	main(void)
 
 	i = 0;
 	fd = open("files/empty", O_RDWR);
-	while (i < 6)
+	while (i < 4)
 	{
 		tab = get_next_line(fd);
 		if (tab)
