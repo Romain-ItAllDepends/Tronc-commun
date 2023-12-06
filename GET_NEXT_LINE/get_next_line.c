@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 10:56:32 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/04 16:00:23 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/06 13:49:49 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -31,7 +31,6 @@ char	*ft_core(int fd, char *stash, char *buffer, char *new_line, int n)
 		if (ft_strlen(stash, 1) > 0)
 		{
 			new_line = ft_split(stash, buffer);
-			stash = NULL;
 			stash = ft_join(stash, &buffer[ft_strlen(buffer, 1) + 1]);
 			return (new_line);
 		}
@@ -46,7 +45,7 @@ char	*get_next_line(int fd)
 	char		*new_line;
 	char		buffer[BUFFER_SIZE + 1];
 	int			n;
-
+/*
 	n = ft_read(fd, buffer, stash);
 	if (n == -8)
 	{
@@ -61,10 +60,13 @@ char	*get_next_line(int fd)
 	if (ft_strlen(stash, 1) > 0)
 	{
 		new_line = ft_split(stash, buffer);
-		stash = ft_join(&stash[ft_strlen(stash, 1) + 1], &buffer[ft_strlen(buffer, 1) + 1]);
+		free(stash);
+		stash = ft_join(NULL, &buffer[ft_strlen(buffer, 1) + 1]);
 	}
-	else
-		new_line = ft_core(fd, stash, buffer, new_line, n);
+	else*/
+	new_line = NULL;
+	n = 0;
+	new_line = ft_core(fd, stash, buffer, new_line, n);
 	return (new_line);
 }
 
@@ -78,7 +80,7 @@ int	main(void)
 
 	i = 0;
 	fd = open("files/empty", O_RDWR);
-	while (i < 4)
+	while (i < 15)
 	{
 		tab = get_next_line(fd);
 		if (tab)
