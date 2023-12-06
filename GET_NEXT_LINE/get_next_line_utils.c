@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 10:57:18 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/06 15:03:58 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/06 15:11:39 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -38,10 +38,10 @@ char	*ft_split(char *stash, char *buffer)
 	if (tab == 0)
 		return (0);
 	i = 0;
-	if (stash)
+	while (stash && stash[i])
 	{
-		while (stash[i++])
-			tab[i - 1] = stash[i - 1];
+		tab[i] = stash[i];
+		i++;
 	}
 	while (buffer[ft_strlen(buffer, 2) - i])
 	{
