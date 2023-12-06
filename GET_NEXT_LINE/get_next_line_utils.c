@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 10:57:18 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/04 16:01:41 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/06 15:03:58 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -16,10 +16,10 @@ int	ft_strlen(char *s, int opt)
 {
 	int	i;
 
-	if (!s || s[0] == '\0')
+	if (!s || s == NULL)
 		return (0);
 	i = 0;
-	while (s[i])
+	while (s && s[i])
 	{
 		if (opt == 1 && s[i] == '\n')
 			return (i);
@@ -43,14 +43,13 @@ char	*ft_split(char *stash, char *buffer)
 		while (stash[i++])
 			tab[i - 1] = stash[i - 1];
 	}
-	i--;
-	while (buffer[i - ft_strlen(buffer, 2)])
+	while (buffer[ft_strlen(buffer, 2) - i])
 	{
 		tab[i] = buffer[i - ft_strlen(stash, 0)];
 		i++;
 	}
 	tab[i] = '\0';
-	if ((stash || buffer[0] == '\0') && ft_strlen(stash, 1) == 0)
+	if (stash && ft_strlen(stash, 1) == 0)
 		free(stash);
 	if (stash && ft_strlen(stash, 1) == 0)
 		stash = NULL;
@@ -65,16 +64,13 @@ char	*ft_join(char *s, char *b)
 
 	i = 0;
 	j = 0;
-	if (s)
-		tab = malloc ((ft_strlen(s, 0) + ft_strlen(b, 0)) * sizeof(char) + 2);
-	else
-		tab = malloc ((ft_strlen(b, 0)) * sizeof(char) + 1);
+	tab = malloc ((ft_strlen(s, 0) + BUFFER_SIZE) + 2);
 	if (tab == 0)
 		return (NULL);
-	if (s)
+	while (s && s[i])
 	{
-		while (s[i++])
-			tab[i] = s[i];
+		tab[i] = s[i];
+		i++;
 	}
 	while (b[j])
 	{
@@ -82,9 +78,9 @@ char	*ft_join(char *s, char *b)
 		b[j++] = 0;
 	}
 	tab[i] = 0;
-	if (s || b[0] == '\0')
+	if (s || (s && s[0] == '\0'))
 		free(s);
-	if (s)
+	if (s || (s && s[0] == '\0'))
 		s = NULL;
 	return (tab);
 }
@@ -95,7 +91,7 @@ int	ft_read(int fd, char *buffer, char *stash)
 
 	n = read(fd, buffer, BUFFER_SIZE);
 	buffer[BUFFER_SIZE] = 0;
-	if (n == -1 || (n == 0 && stash[0] == '\0'))
+	if (n == -1 || (n == 0 && (stash && stash[0] == '\0')))
 		return (0);
 	else if (n == 0)
 	{
