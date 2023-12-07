@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 10:56:32 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/07 16:14:47 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/07 16:41:55 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -34,7 +34,7 @@ char	*ft_core(int fd, char *stash, char *buffer, char *new_line)
 		free(buffer);
 		buffer = NULL;
 		new_line = ft_split(buffer, stash);
-		stash = ft_join(buffer, &stash[ft_strchr(stash, '\n')]);
+		stash = ft_join_d(buffer, &stash[ft_strchr(stash, '\n')]);
 	}
 	else
 	{
