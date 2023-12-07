@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 10:57:18 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/07 16:20:16 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/07 16:55:10 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -99,6 +99,35 @@ char	*ft_join(char *s, char *b)
 		free(s);
 	if (s || (s && s[0] == '\0'))
 		s = NULL;
+	return (tab);
+}
+
+char	*ft_join_d(char *s, char *b)
+{
+	int		i;
+	int		j;
+	char	*tab;
+
+	i = 0;
+	j = 0;
+	tab = malloc ((ft_strlen(s) + BUFFER_SIZE) + 1);
+	if (tab == 0)
+		return (NULL);
+	while (s && s[i])
+	{
+		tab[i] = s[i];
+		i++;
+	}
+	while (b[j])
+	{
+		tab[i++] = b[j];
+		b[j++] = 0;
+	}
+	tab[i] = 0;
+	if (b || (b && b[0] == '\0'))
+		free(b);
+	if (b || (b && b[0] == '\0'))
+		b = NULL;
 	return (tab);
 }
 
