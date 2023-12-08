@@ -6,11 +6,17 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 10:57:18 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/08 16:28:15 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/08 16:59:33 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "get_next_line.h"
+
+void	ft_free(char *s)
+{
+	free(s);
+	s = NULL;
+}
 
 int	ft_strlen(char *s)
 {
@@ -69,9 +75,7 @@ char	*ft_split(char *stash, char *buffer)
 	}
 	tab[i] = '\0';
 	if (stash && ft_strchr(stash, '\n') == 0)
-		free(stash);
-	if (stash && ft_strchr(stash, '\n') == 0)
-		stash = NULL;
+		ft_free(stash);
 	return (tab);
 }
 
@@ -98,9 +102,7 @@ char	*ft_join(char *s, char *b)
 	}
 	tab[i] = 0;
 	if (s || (s && s[0] == '\0'))
-		free(s);
-	if (s || (s && s[0] == '\0'))
-		s = NULL;
+		ft_free(s);
 	return (tab);
 }
 
@@ -127,9 +129,7 @@ char	*ft_join_d(char *s, char *b)
 	}
 	tab[i] = 0;
 	if (b || (b && b[0] == '\0'))
-		free(b);
-	if (b || (b && b[0] == '\0'))
-		b = NULL;
+		ft_free(b);
 	return (tab);
 }
 
@@ -142,16 +142,14 @@ int	ft_read(int fd, char *buffer, char *stash)
 		buffer[n] = 0;
 	if (n == -1 || (n == 0 && (!stash || stash[0] == '\0')))
 	{
+		if ((stash && stash[0] == '\0'))
+			ft_free(stash);
+		// Maybe fo free l'buffer
 		free(buffer);
 		return (0);
 	}
 	else if (n == 0)
-	{
-		if (stash || (stash && stash[0] != '\0'))
-			free(stash);
-		stash = NULL;
 		return (-8);
-	}
 	return (n);
 }
 
