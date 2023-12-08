@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 10:57:02 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/07 16:34:14 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/08 12:28:40 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -19,8 +19,9 @@
 #  define BUFFER_SIZE 4
 # endif
 
+char	*ft_strdup(char *s);
 char	*get_next_line(int fd);
-char	*ft_core(int fd, char *stash, char *buffer, char *new_line);
+char	*ft_core(int fd, char **stash, char *buffer, char *new_line);
 char	*ft_join(char *s, char *b);
 char	*ft_join_d(char *s, char *b);
 char	*ft_split(char *stash, char *buffer);
