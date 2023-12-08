@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 10:56:32 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/08 12:38:51 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/08 16:32:03 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -20,7 +20,11 @@ char	*ft_strdup(char *s)
 
 	i = 0;
 	j = 0;
-	tab = malloc ((ft_strlen(s) + 1) * sizeof(char));
+	if (ft_strlen(s) == 1 && s[0] == '\n')
+		tab = malloc (1);
+	else
+		tab = malloc ((ft_strlen(s) + 1) * sizeof(char));
+	// Probleme si "\n" le malloc fait 2
 	if (tab == 0)
 		return (0);
 	while (s[i] != '\n')
@@ -69,7 +73,11 @@ char	*ft_core(int fd, char **stash, char *buffer, char *new_line)
 	}
 	if (buffer)
 		free(buffer);
-	//free(*stash);
+	if (*stash[0] == '\0')
+	{
+		free(*stash);
+		*stash = NULL;
+	}
 	return (new_line);
 }
 
@@ -81,7 +89,11 @@ char	*get_next_line(int fd)
 
 	buffer = malloc ((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buffer)
+	{
+		free(buffer);
 		return (NULL);
+	}
+	buffer[0] = 0;
 	new_line = NULL;
 	new_line = ft_core(fd, &stash, buffer, new_line);
 	return (new_line);
@@ -96,14 +108,14 @@ int	main(void)
 	int		i;
 
 	i = 0;
-	fd = open("files/full_nl", O_RDWR);
-	while (i <= 6)
+	fd = open("files/41_no_nl", O_RDWR);
+	while (i <= 0)
 	{
 		tab = get_next_line(fd);
-		if (tab)
-			printf("%s", tab);
+		printf("%s", tab);
 		i++;
-		free(tab);
+		if (tab)
+			free(tab);
 	}
 	close(fd);
 	return (0);
