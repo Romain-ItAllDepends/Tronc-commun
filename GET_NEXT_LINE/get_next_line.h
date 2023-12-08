@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 10:57:02 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/08 12:28:40 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/08 15:25:48 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -26,7 +26,7 @@ char	*ft_join(char *s, char *b);
 char	*ft_join_d(char *s, char *b);
 char	*ft_split(char *stash, char *buffer);
 int		ft_read(int fd, char *buffer, char *stash);
-int		ft_strchr(const char *s, int c);
+int		ft_strchr(char *s, int c);
 int		ft_strlen(char *s);
 
 #endif
