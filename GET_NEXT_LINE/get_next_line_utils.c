@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 10:57:18 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/08 12:43:46 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/08 16:28:15 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -19,14 +19,14 @@ int	ft_strlen(char *s)
 	if (!s || s == NULL)
 		return (0);
 	i = 0;
-	while (s[i])
+	while (s && s[i])
 	{
 		i++;
 	}
 	return (i);
 }
 
-int	ft_strchr(const char *s, int c)
+int	ft_strchr(char *s, int c)
 {
 	int	i;
 
@@ -51,7 +51,7 @@ char	*ft_split(char *stash, char *buffer)
 	char	*tab;
 	int		i;
 
-	i = (ft_strlen(stash) + ft_strchr(buffer, '\n')) + 1;
+	i = (ft_strlen(stash) + ft_strchr(buffer, '\n')) + 2;
 	tab = malloc(i * sizeof(char));
 	if (tab == 0)
 		return (0);
@@ -61,9 +61,8 @@ char	*ft_split(char *stash, char *buffer)
 		tab[i] = stash[i];
 		i++;
 	}
-	while ((i - ft_strlen(stash)) < buffer[ft_strchr(buffer, '\n')]
+	while ((i - ft_strlen(stash)) < ft_strchr(buffer, '\n')
 		&& (buffer[i - ft_strlen(stash)] != '\n' || i - ft_strlen(stash) == 0))
-		//Condition de merde
 	{
 		tab[i] = buffer[i - ft_strlen(stash)];
 		i++;
@@ -139,15 +138,16 @@ int	ft_read(int fd, char *buffer, char *stash)
 	int	n;
 
 	n = read(fd, buffer, BUFFER_SIZE);
-	buffer[BUFFER_SIZE] = 0;
-	if (n == -1 || (n == 0 && (stash && stash[0] == '\0')))
+	if (n > 0)
+		buffer[n] = 0;
+	if (n == -1 || (n == 0 && (!stash || stash[0] == '\0')))
 	{
 		free(buffer);
 		return (0);
 	}
 	else if (n == 0)
 	{
-		if (stash || (stash && stash[0] == '\0'))
+		if (stash || (stash && stash[0] != '\0'))
 			free(stash);
 		stash = NULL;
 		return (-8);
