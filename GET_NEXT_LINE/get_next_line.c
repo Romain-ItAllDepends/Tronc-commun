@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 10:56:32 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/08 16:32:03 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/08 16:58:01 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -61,8 +61,7 @@ char	*ft_core(int fd, char **stash, char *buffer, char *new_line)
 	}
 	if (ft_strchr(*stash, '\n') > 0)
 	{
-		free(buffer);
-		buffer = NULL;
+		ft_free(buffer);
 		new_line = ft_split(buffer, *stash);
 		*stash = ft_join_d(buffer, ft_strdup(*stash));
 	}
@@ -74,10 +73,7 @@ char	*ft_core(int fd, char **stash, char *buffer, char *new_line)
 	if (buffer)
 		free(buffer);
 	if (*stash[0] == '\0')
-	{
-		free(*stash);
-		*stash = NULL;
-	}
+		ft_free(*stash);
 	return (new_line);
 }
 
@@ -109,7 +105,7 @@ int	main(void)
 
 	i = 0;
 	fd = open("files/41_no_nl", O_RDWR);
-	while (i <= 0)
+	while (i <= 10)
 	{
 		tab = get_next_line(fd);
 		printf("%s", tab);
