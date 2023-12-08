@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 10:57:18 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/07 16:55:10 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/08 12:43:46 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -41,6 +41,8 @@ int	ft_strchr(const char *s, int c)
 			return (i + 1);
 		i++;
 	}
+	if (s[0] == '\0')
+		return (-1);
 	return (0);
 }
 
@@ -61,6 +63,7 @@ char	*ft_split(char *stash, char *buffer)
 	}
 	while ((i - ft_strlen(stash)) < buffer[ft_strchr(buffer, '\n')]
 		&& (buffer[i - ft_strlen(stash)] != '\n' || i - ft_strlen(stash) == 0))
+		//Condition de merde
 	{
 		tab[i] = buffer[i - ft_strlen(stash)];
 		i++;
@@ -118,10 +121,10 @@ char	*ft_join_d(char *s, char *b)
 		tab[i] = s[i];
 		i++;
 	}
-	while (b[j])
+	while (b && b[j])
 	{
 		tab[i++] = b[j];
-		b[j++] = 0;
+		j++;
 	}
 	tab[i] = 0;
 	if (b || (b && b[0] == '\0'))
