@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 10:56:32 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/09 16:50:19 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/11 10:57:54 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -27,7 +27,7 @@ char	*get_next_line(int fd)
 		if (ft_strchr(stash, '\n') == 0)
 		{
 			n = read(fd, buffer, BUFFER_SIZE);
-			buffer[BUFFER_SIZE] = 0;
+			buffer[n] = 0;
 			if (n < 0)
 				return (NULL);
 			stash = ft_strjoin(buffer, stash, count++);
@@ -49,8 +49,8 @@ int	main(void)
 	int		i;
 
 	i = 0;
-	fd = open("files/41_no_nl", O_RDWR);
-	while (i <= 2)
+	fd = open("files/nl", O_RDWR);
+	while (i <= 3)
 	{
 		tab = get_next_line(fd);
 		printf("%s", tab);
