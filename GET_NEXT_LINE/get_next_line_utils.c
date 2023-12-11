@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 10:57:18 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/09 16:27:31 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/11 10:43:28 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -109,9 +109,11 @@ char	*cut(char *s, char *b)
 	int		j;
 	char	*tab;
 
-	while (s[i] != '\n' || s[i])
+	i = 0;
+	j = 0;
+	while (s[i] != '\n' || s[i] == 0)
 		i++;
-	if (s[i] == '\n' || s[i])
+	if (s[i] == '\n' || s[i] == 0)
 		i++;
 	tab = malloc (i + 1);
 	while (j < i)
