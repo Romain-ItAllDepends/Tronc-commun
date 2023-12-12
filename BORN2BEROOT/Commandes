@@ -67,7 +67,7 @@ Tester son programme sur d’autre système d’exploitation.
 Faire des test sans compromettre les matériel physique de l'ordinateur ou de compromettre des donnees.
 
 UFW :
-Uncomplicated fire wall, en francais pare feu pas compliquer. Qui est le pare feu le plus basique.
+Uncomplicated FireWall, en francais pare feu pas compliquer. Qui est le pare feu le plus basique.
 Protege les acces reseau en accordant des acces via les ports ou en les interdisants.
 
 apt :
