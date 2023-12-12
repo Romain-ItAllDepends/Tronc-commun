@@ -13,3 +13,7 @@ sudo vim /etc/ssh/sshd_config
 Change hostname :
 
 sudo vim /etc/hostname
+
+Sudo log :
+
+sudo vim /var/log/sudo/sudo.log
