@@ -1,14 +1,23 @@
 Ligne de commande importante
 Afficher dans le terminal les partitions : “lsblk”
 Accès Root “su” + sortir du Root “exit”
+
+############################################################################################
+
+## SSH / Port
+
 Accès + modification au fichier ssh “nano /etc/ssh/sshd_config”
 Reload/Restart ssh “systemctl (reload ou restart) ssh”
 Vérifier les port de ssh “ss -tun1p| grep ssh”
 Activer(apres dll) ufw “sudo ufw enable”
 Ajouter un port ufw “sudo ufw allow 4242”
 Vérifier le statut des ports de ufw “sudo ufw status”
-A
-ccès  + modification au fichier pour modifier la sécurité du mdp : 
+
+############################################################################################
+
+## Password policy
+
+Accès  + modification au fichier pour modifier la sécurité du mdp : 
 “sudo nano /etc/pam.d/common-password” 
 Accès + modification au fichier pour modifier la date du mdp :
 “nano /etc/login.defs”
@@ -17,15 +26,30 @@ Accès + modification au fichier pour modifier le Hostname :
 lsCréer un dossier sudo “mkdir /var/log/sudo”
 Créer un fichier log “touch /var/log/sudo.log”
 Ajouter/configurer les droit sudo a une personne : “nano /etc/sudoers”
+
+############################################################################################
+
+## User / Group
+
 Créer un user “sudo useradd nom_utilisateur”
 Créer un groupe “sudo groupadd user42”
 Ajouter une personne dans un groupe “sudo usermod -aG group user”
 	usermod -aG = peut etre rempllacer par adduser
 
+############################################################################################
+
+## Script
+
 Modifier le fichier qui appellera le script “sudo crontab -u root -e”
+
+############################################################################################
+
+## Sign
 
 Commande pour avoir la signature(ATTENTION sa prend du temp)
 Aller dans le dossier ou se trouve votre VM et faite “shasum VM_NAME.vdi”
+
+############################################################################################
 
 Explication :
 
