@@ -29,6 +29,8 @@ lsCréer un dossier sudo “mkdir /var/log/sudo”
 Créer un fichier log “touch /var/log/sudo.log”
 Ajouter/configurer les droit sudo a une personne : “nano /etc/sudoers”
 
+Pour verifier l'expiration et regles : "chage -l [user]"
+
 ############################################################################################
 
 ## User / Group
