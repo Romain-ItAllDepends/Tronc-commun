@@ -1,0 +1,12 @@
+Password policy path :
+
+sudo vim /etc/pam.d/common-password
+
+Password delay path :
+
+sudo vim /etc/login.defs
+
+SSH port path :
+
+sudo vim /etc/ssh/sshd_config
+
