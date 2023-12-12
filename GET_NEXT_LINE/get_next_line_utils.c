@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rgobet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/02 10:57:18 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/11 10:43:28 by rgobet           ###   ########.fr       */
+/*   Created: 2023/12/11 17:01:55 by rgobet            #+#    #+#             */
+/*   Updated: 2023/12/11 17:02:09 by rgobet           ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "get_next_line.h"
 
@@ -41,10 +41,6 @@ int	ft_strchr(char *s, int c)
 			return (i + 1);
 		i++;
 	}
-	/*
-	if (s[0] == '\0')
-		return (-1);
-	*/
 	return (0);
 }
 
@@ -76,22 +72,12 @@ char	*ft_strjoin(char *b, char *s, int count)
 	return (tab);
 }
 
-char	*finish(char *s)
-{
-	if (s[0] == 0)
-	{
-		free(s);
-		s = NULL;
-	}
-	return (s);
-}
-
-void	save(char *s, char *b, int i)
+void	ft_save(char *s, char *b)
 {
 	int	j;
 
 	j = 0;
-	while (j < i)
+	while (s[j])
 	{
 		b[j] = s[j];
 		j++;
@@ -103,7 +89,7 @@ void	save(char *s, char *b, int i)
 	}
 }
 
-char	*cut(char *s, char *b)
+char	*ft_cut(char *s, char *b)
 {
 	int		i;
 	int		j;
@@ -125,10 +111,9 @@ char	*cut(char *s, char *b)
 	i = 0;
 	while (s[j])
 	{
-		i++;
 		j++;
 	}
-	save(&s[j - i], b, i);
+	ft_save(&s[ft_strchr(s, '\n')], b);
 	free(s);
 	return (tab);
 }
