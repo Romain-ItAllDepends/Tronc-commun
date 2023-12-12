@@ -19,7 +19,7 @@ Créer un fichier log “touch /var/log/sudo.log”
 Ajouter/configurer les droit sudo a une personne : “nano /etc/sudoers”
 Créer un user “sudo useradd nom_utilisateur”
 Créer un groupe “sudo groupadd user42”
-Ajouter une personne dans un groupe “sudo usermod -aG user42 derey42”
+Ajouter une personne dans un groupe “sudo usermod -aG group user”
 	usermod -aG = peut etre rempllacer par adduser
 
 Modifier le fichier qui appellera le script “sudo crontab -u root -e”
