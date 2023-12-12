@@ -1,17 +1,9 @@
-BTB 
-
-Id + mdp VM
-
-Décryptage : maxence est un bg
-Id : derey42
-Mdp : Admin42test
-
 Ligne de commande importante
 Afficher dans le terminal les partitions : “lsblk”
 Accès Root “su” + sortir du Root “exit”
 Accès + modification au fichier ssh “nano /etc/ssh/sshd_config”
 Reload/Restart ssh “systemctl (reload ou restart) ssh”
-Vérifier les port de ssh “ss -tlpn| grep ssh”
+Vérifier les port de ssh “ss -tun1p| grep ssh”
 Activer(apres dll) ufw “sudo ufw enable”
 Ajouter un port ufw “sudo ufw allow 4242”
 Vérifier le statut des ports de ufw “sudo ufw status”
