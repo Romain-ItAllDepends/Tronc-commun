@@ -17,3 +17,7 @@ sudo vim /etc/hostname
 Sudo log :
 
 sudo vim /var/log/sudo/sudo.log
+
+Config sudo :
+
+sudo vim /etc/sudoers
