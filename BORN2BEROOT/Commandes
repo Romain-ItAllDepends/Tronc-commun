@@ -21,24 +21,29 @@ Créer un user “sudo useradd nom_utilisateur”
 Créer un groupe “sudo groupadd user42”
 Ajouter une personne dans un groupe “sudo usermod -aG user42 derey42”
 	usermod -aG = peut etre rempllacer par adduser
-User42 = le groupe
-derey42 = user
-Modifier les mdp “password derey42”
+
 Modifier le fichier qui appellera le script “sudo crontab -u root -e”
 
 Commande pour avoir la signature(ATTENTION sa prend du temp)
-Aller dans le dossier ou se trouve votre VM et faite “shasum derey42.vdi”
+Aller dans le dossier ou se trouve votre VM et faite “shasum VM_NAME.vdi”
 
-Explication 
+Explication :
 
-VM
+VM :
+
 Il y a plusieurs intérêts à utiliser une machine virtuelle : 
-Tester un nouveau système d'exploitation sans avoir besoin de partitionner son disque dur
-Tester son programme sur d’autre système d’exploitation 
-Faire des test sans compromettre les matériel physique de l'ordinateur ou de l’OS
+Tester un nouveau système d'exploitation sans avoir besoin de partitionner son disque dur.
+Tester son programme sur d’autre système d’exploitation.
+Faire des test sans compromettre les matériel physique de l'ordinateur ou de compromettre des donnees.
 
 
-APPAfaire sur son pc de basermor
+apt :
+Gestionnaire de paquet, sans interface graphique. Ne gere pas les dependances.
+
+aptitude :
+Gestionnaire de paquet, avec interface graphique. Gere les dependances.
+
+APPArmor faire sur son pc de basermor
 Un module de sécurité dans le noyau Linux qui permet à l'administrateur système de restreindre les capacités d'un programme.
 LVM 
 C'est un gestionnaire de volumes logique. Il fournit une méthode d'allocation d'espace sur les périphériques de stockage de masse, qui est plus flexible que les schémas de partitionnement conventionnels pour le stockage de volumes.
