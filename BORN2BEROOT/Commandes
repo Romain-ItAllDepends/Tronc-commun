@@ -53,7 +53,7 @@ Modifier le fichier qui appellera le script “sudo crontab -u root -e”
 ## Sign
 
 Commande pour avoir la signature(ATTENTION sa prend du temp)
-Aller dans le dossier ou se trouve votre VM et faite “shasum VM_NAME.vdi”
+Aller dans le dossier ou se trouve votre VM et faite “sha1sum VM_NAME.vdi”
 
 ############################################################################################
 
