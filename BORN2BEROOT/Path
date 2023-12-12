@@ -21,3 +21,11 @@ sudo vim /var/log/sudo/sudo.log
 Config sudo :
 
 sudo vim /etc/sudoers
+
+Config header bash :
+
+sudo vim /usr/local/bin/monitoring.sh
+
+Crontab config :
+
+sudo crontab -u root -e
