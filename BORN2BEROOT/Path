@@ -1,3 +1,7 @@
+Tout les users :
+
+sudo vim /etc/passwd
+
 Password policy path :
 
 sudo vim /etc/pam.d/common-password
