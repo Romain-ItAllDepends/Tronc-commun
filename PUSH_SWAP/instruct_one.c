@@ -1,18 +1,18 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   instruct_one.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:35:51 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/18 14:44:51 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/19 13:34:58 by rgobet           ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "../push_swap.h"
 
-// Permet de swap les deux premiers nombre de la pile a ou b selon c et la liste en param
+// Permet de swap les deux premiers nombre de la pile a ou b selon c et la liste en param.
 int	*ft_swap(int *tab, char c)
 {
 	int	b;
