@@ -1,6 +1,7 @@
 NAME=push_swap
 
 MY_SOURCES=	push_swap.c \
+		push_swap_utils.c \
 		instruct_one.c \
 		instruct_two.c \
 		parsing.c \
