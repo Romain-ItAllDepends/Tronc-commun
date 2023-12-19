@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:07:53 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/19 13:32:58 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/19 14:18:35 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -41,6 +41,17 @@ int	*sort(int *pa, int length)
 	{
 		
 	}
+}
+
+int	*core(int *pa, int length)
+{
+	char	*pb;
+
+	pb = malloc(1 * sizeof(int));
+	if (!pb)
+		return (NULL);
+	pb[0] = 0;
+	
 }
 
 int	main(int ac, char **av)
