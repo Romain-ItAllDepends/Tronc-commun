@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:35:51 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/19 13:34:58 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/19 15:00:24 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -20,7 +20,7 @@ int	*ft_swap(int *tab, char c)
 	b = tab[1];
 	tab[1] = tab[0];
 	tab[0] = b;
-	if (!c == 'x')
+	if (c != 'x')
 		ft_printf("s%c", c);
 	return (tab);
 }
@@ -34,28 +34,34 @@ void	ss(int **pa, int **pb, int la, int lb)
 	return ;
 }
 
-int	*ft_push(int *tab, int x, int length, char c)
+void	ft_push(int **pa, int **pb, int *length, char c)
 {
 	// Prend le premier élément au sommet de b et le met sur a. Et vice versa selon les params.
 	//Ne fait rien si b est vide.
 	int	i;
-	int	*a;
+	int	*p;
 
 	i = 0;
-	a = malloc((length + 1) * sizeof(int));
-	if (!a)
+	if (c == 'x')
+		length -= 2;
+	p = malloc((length + 1) * sizeof(int));
+	if (!p)
 		return (NULL);
-	while (length >= i)
+	while (length > i)
 	{
-		if (i == 0)
-			a[i] = x;
+		if (i == 0 && c == 'x')
+			p[i] = *pb[0];
 		if (i > 0)
-			a[i] = tab[i + 1];
+			p[i] = *pb[i + 1];
 		i++;
 	}
-	ft_printf("p%c", c);
-	free(tab);
-	return (tab);
+	if (c != 'x')
+		ft_printf("p%c", c);
+	if (c == 'x')
+		free(pa);
+	if (c != 'x')
+		*pa = ft_push(pb, pa, length, 'x');
+	return ;
 }
 
 int	*ft_rotate(int *tab, int length, char c)
@@ -63,11 +69,17 @@ int	*ft_rotate(int *tab, int length, char c)
 	//Décale d’une position vers le haut tous les élements de la pile a ou b.
 	//Le premier élément devient le dernier.
 	int	temp;
+	int	i;
 
-	temp = tab[0];
-	tab[0] = tab[length - 1];
-	tab[length - 1] = temp;
-	if (!c == 'x')
+	i = 0;
+	while (i < length)
+	{
+		temp = tab[i];
+		tab[i] = tab[length - i - 1];
+		tab[length - i - 1] = temp;
+		i++;
+	}
+	if (c != 'x')
 		ft_printf("r%c", c);
 	return (tab);
 }
