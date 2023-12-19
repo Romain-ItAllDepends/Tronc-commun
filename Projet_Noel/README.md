@@ -5,5 +5,5 @@ https://github.com/Romain-ItAllDepends/Tronc-commun/assets/140979120/90b5e150-7c
 
 # Credits
 > Romain-ItAllDepends / rgobet
-> 
+
 > R0R0N0A49 / trebours
