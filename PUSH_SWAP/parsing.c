@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 15:06:15 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/19 13:04:14 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/20 10:50:50 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -109,7 +109,7 @@ int	*conversion_char_to_int_array(char const *s, char c, int *length)
 	return (tab);
 }
 
-static char	*ft_strjoin(char **s, int nbList)
+char	*ft_strjoin(char **s, int nbList)
 {
 	char	*tab;
 	int		i;
