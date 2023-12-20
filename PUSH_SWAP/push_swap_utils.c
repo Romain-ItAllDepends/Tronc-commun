@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:19:40 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/19 14:57:16 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/20 11:05:46 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -22,11 +22,11 @@ int	*ft_split_init(int **pa, int *length, char c)
 		return (NULL);
 	*length -= *length / 2;
 	i = 0;
-	while (i < length + 1)
+	while (i < *length + 1)
 	{
-		ft_push(pa, &p, length, c);
+		ft_push(pa, &pb, length, c);
 		i++;
 	}
-	*pa = ft_split(pa, length, 1);
-	return (pb);
+	*pa = ft_split_init(pa, length, 1);
+	return ((int *)pb);
 }
