@@ -6,11 +6,11 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:35:51 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/19 15:00:24 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/20 11:01:46 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
-#include "../push_swap.h"
+#include "push_swap.h"
 
 // Permet de swap les deux premiers nombre de la pile a ou b selon c et la liste en param.
 int	*ft_swap(int *tab, char c)
@@ -25,10 +25,8 @@ int	*ft_swap(int *tab, char c)
 	return (tab);
 }
 
-void	ss(int **pa, int **pb, int la, int lb)
+void	ss(int **pa, int **pb)
 {
-	int	temp;
-
 	*pa = ft_swap(*pa, 's');
 	*pb = ft_swap(*pb, 'x');
 	return ;
@@ -44,10 +42,10 @@ void	ft_push(int **pa, int **pb, int *length, char c)
 	i = 0;
 	if (c == 'x')
 		length -= 2;
-	p = malloc((length + 1) * sizeof(int));
+	p = malloc((*length + 1) * sizeof(int));
 	if (!p)
-		return (NULL);
-	while (length > i)
+		return ;
+	while (*length > i)
 	{
 		if (i == 0 && c == 'x')
 			p[i] = *pb[0];
@@ -60,7 +58,7 @@ void	ft_push(int **pa, int **pb, int *length, char c)
 	if (c == 'x')
 		free(pa);
 	if (c != 'x')
-		*pa = ft_push(pb, pa, length, 'x');
+		ft_push(pb, pa, length, 'x');
 	return ;
 }
 
@@ -86,8 +84,6 @@ int	*ft_rotate(int *tab, int length, char c)
 
 void	rr(int **pa, int **pb, int la, int lb)
 {
-	int	temp;
-
 	*pa = ft_rotate(*pa, la, 'r');
 	*pb = ft_rotate(*pb, lb, 'x');
 	return ;
