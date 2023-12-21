@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:08:56 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/20 13:41:26 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/21 13:46:19 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -25,7 +25,8 @@ void	rr(int **pa, int **pb, int la, int lb);
 int		*ft_reverse_rotate(int *tab, int length, char c);
 void	rrr(int **pa, int **pb, int la, int lb);
 int		*conversion_char_to_int_array(char const *s, char c, int *length);
-int		*ft_split_init(int **pa, int *lengtha, int *lengthb);
+int		*ft_split_initb(int **pa, int **pb, int *lengtha, int *lengthb);
+int		*ft_split_inita(int **pb, int **pa, int *lengtha, int *lengthb);
 char	*ft_strjoin(char **s, int nbList);
 
 #endif
