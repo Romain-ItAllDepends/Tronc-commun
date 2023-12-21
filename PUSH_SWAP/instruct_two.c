@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 14:14:09 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/20 11:02:57 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/20 13:36:53 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -32,7 +32,7 @@ int	*ft_reverse_rotate(int *tab, int length, char c)
 	if (c != 'x')
 		ft_printf("rr%c", c);
 	free(tab);
-	return (tab);
+	return (rr);
 }
 
 void	rrr(int **pa, int **pb, int la, int lb)
@@ -40,4 +40,23 @@ void	rrr(int **pa, int **pb, int la, int lb)
 	*pa = ft_reverse_rotate(*pa, la, 'r');
 	*pb = ft_reverse_rotate(*pb, lb, 'x');
 	return ;
+}
+
+int	*ft_push_balance(int *p, int *length)
+{
+	int	i;
+	int	*pn;
+
+	*length -= 1;
+	pn = malloc(*length * sizeof(int));
+	if (!pn)
+		return (NULL);
+	i = 0;
+	while (*length > i)
+	{
+		pn[i] = p[i + 1];
+		i++;
+	}
+	free(p);
+	return (pn);
 }
