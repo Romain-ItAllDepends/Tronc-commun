@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:35:51 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/20 11:01:46 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/20 13:32:19 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -32,34 +32,29 @@ void	ss(int **pa, int **pb)
 	return ;
 }
 
-void	ft_push(int **pa, int **pb, int *length, char c)
+int	*ft_push(int *p, int *length, int n, char c)
 {
 	// Prend le premier élément au sommet de b et le met sur a. Et vice versa selon les params.
 	//Ne fait rien si b est vide.
 	int	i;
-	int	*p;
+	int	*pn;
 
 	i = 0;
-	if (c == 'x')
-		length -= 2;
-	p = malloc((*length + 1) * sizeof(int));
-	if (!p)
-		return ;
+	*length += 1;
+	pn = malloc(*length * sizeof(int));
+	if (!pn)
+		return (NULL);
 	while (*length > i)
 	{
-		if (i == 0 && c == 'x')
-			p[i] = *pb[0];
-		if (i > 0)
-			p[i] = *pb[i + 1];
+		if (i == 0)
+			pn[i] = n;
+		else
+			pn[i] = p[i];
 		i++;
 	}
-	if (c != 'x')
-		ft_printf("p%c", c);
-	if (c == 'x')
-		free(pa);
-	if (c != 'x')
-		ft_push(pb, pa, length, 'x');
-	return ;
+	ft_printf("p%c", c);
+	free(p);
+	return (pn);
 }
 
 int	*ft_rotate(int *tab, int length, char c)
