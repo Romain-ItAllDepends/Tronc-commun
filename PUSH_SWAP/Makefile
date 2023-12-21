@@ -36,18 +36,21 @@ RM=rm -f
 
 CC=cc
 ARRC=ar -rcs
-FLAGS=-Wall -Werror -Wextra
+FLAGS=-Wall -Werror -Wextra -g
 
 all: $(NAME)
 
+%.o: %.c
+	@$(CC) $(FLAGS) -c $< -o $(<:.c=.o)
 $(NAME) : $(MY_OBJECTS)
-	@$(CC) $(FLAGS) $(NAME) $(MY_OBJECTS)
+	@clear
+	@$(CC) $(FLAGS) $(MY_OBJECTS) -o $(NAME)
 	@echo $(light_cyan)"\t   »»-————　Make　————-««\n"
 
-%.o: %.c
-	@$(CC) $(FLAGS) -c $< -o $@
+
 	
 clean: 
+	@clear
 	@$(RM) $(MY_OBJECTS)
 	@echo $(light_green)"\t  »»-————　Clean　————-««\n"
 
@@ -56,6 +59,8 @@ fclean: clean
 	@echo $(white)"\t»»-————　Full clean　————-««\n"
 
 re: fclean all
+	@echo $(light_green)"\t  »»-————　Clean　————-««\n"
+	@echo $(white)"\t»»-————　Full clean　————-««\n"
 	@echo $(green_c)"\t   »»-————　Done　————-««"
 	
 noel:
