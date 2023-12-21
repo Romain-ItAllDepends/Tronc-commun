@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:07:53 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/20 10:51:16 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/20 13:53:50 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -15,7 +15,6 @@
 int ft_min(int *p, int length)
 {
 	int	min;
-	int	index;
 	int	i;
 
 	i = 0;
@@ -23,13 +22,10 @@ int ft_min(int *p, int length)
 	while (i < length)
 	{
 		if (min > p[i])
-		{
 			min = p[i];
-			index = i;
-		}
 		i++;
 	}
-	return (index);
+	return (min);
 }
 
 int	*sort(int *pa, int length)
@@ -39,7 +35,7 @@ int	*sort(int *pa, int length)
 
 	min = ft_min(pa, length);
 	i = 0;
-	while (min != 0)
+	while (i < length)
 	{
 		if (pa[i] < min)
 		{
@@ -52,13 +48,16 @@ int	*sort(int *pa, int length)
 	return (pa);
 }
 
-int	*core(int *pa, int length)
+int	*core(int *pa, int *lengtha)
 {
 	int	*pb;
+	int	lengthb;
 
-	pb = ft_split_init(&pa, &length, 'b');
-	pa = sort(pa, length);
-	pb = sort(pb, length);
+	lengthb = 0;
+	pb = ft_split_init(&pa, lengtha, &lengthb);
+	pa = sort(pa, *lengtha);
+	pb = sort(pb, lengthb);
+	free(pb);
 	return (pa);
 }
 
@@ -73,10 +72,10 @@ int	main(int ac, char **av)
 	i = 0;
 	full_char = ft_strjoin(av, ac);
 	tab = conversion_char_to_int_array(full_char, ' ', &length);
-	result = core(tab, length);
+	result = core(tab, &length);
 	while (i < length)
 	{
-		ft_printf("%d\n", tab[i]);
+		ft_printf("%d %d\n", tab[i], i);
 		i++;
 	}
 	ft_printf("%d", length);
