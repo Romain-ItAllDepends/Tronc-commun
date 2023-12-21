@@ -6,27 +6,24 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:19:40 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/20 11:05:46 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/20 13:44:18 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "push_swap.h"
 
-int	*ft_split_init(int **pa, int *length, char c)
+int	*ft_split_init(int **pa, int *lengtha, int *lengthb)
 {
 	int	*pb;
 	int	i;
 
-	pb = malloc((*length / 2) * sizeof(int));
-	if (!pa)
-		return (NULL);
-	*length -= *length / 2;
 	i = 0;
-	while (i < *length + 1)
+	pb = NULL;
+	while (i < (*lengtha / 2))
 	{
-		ft_push(pa, &pb, length, c);
+		pb = ft_push(pb, lengthb, *pa[0], 'b');
+		*pa = ft_push_balance(*pa, lengtha);
 		i++;
 	}
-	*pa = ft_split_init(pa, length, 1);
 	return ((int *)pb);
 }
