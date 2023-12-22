@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/12/15 13:29:22 by rgobet            #+#    #+#              #
-#    Updated: 2023/12/15 13:34:54 by rgobet           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME=push_swap
 
 MY_SOURCES=	push_swap.c \
@@ -48,18 +36,21 @@ RM=rm -f
 
 CC=cc
 ARRC=ar -rcs
-FLAGS=-Wall -Werror -Wextra
+FLAGS=-Wall -Werror -Wextra -g
 
 all: $(NAME)
 
+%.o: %.c
+	@$(CC) $(FLAGS) -c $< -o $(<:.c=.o)
 $(NAME) : $(MY_OBJECTS)
-	@$(CC) $(FLAGS) $(NAME) $(MY_OBJECTS)
+	@clear
+	@$(CC) $(FLAGS) $(MY_OBJECTS) -o $(NAME)
 	@echo $(light_cyan)"\t   »»-————　Make　————-««\n"
 
-%.o: %.c
-	@$(CC) $(FLAGS) -c $< -o $@
+
 	
 clean: 
+	@clear
 	@$(RM) $(MY_OBJECTS)
 	@echo $(light_green)"\t  »»-————　Clean　————-««\n"
 
@@ -68,11 +59,13 @@ fclean: clean
 	@echo $(white)"\t»»-————　Full clean　————-««\n"
 
 re: fclean all
+	@echo $(light_green)"\t  »»-————　Clean　————-««\n"
+	@echo $(white)"\t»»-————　Full clean　————-««\n"
 	@echo $(green_c)"\t   »»-————　Done　————-««"
 	
 noel:
 	@echo "		 __  __					      _          _     _                       "
-	@echo "		|  \/  | ____ _ __ _ __ _  _		     | |        (_)   | |                      "
+	@echo "		|  \/  | ____ _ __ _ __ _   _		     | |        (_)   | |                      "
 	@echo "		| |\/| |/ __ \ '__| '__| | | | 		  ___| |__  _ __ _ ___| |_ _ __ ___   __ _ ___ "
 	@echo "		| |  | |  ___/ |  | |  | |_| |		 / __| '_ \| '__| / __| __| '_ \` _ \ / _\` / __|"
 	@echo "		|_|  |_|\____|_|  |_|  \___, |		| (__| | | | |  | \__ \ |_| | | | | | (_| \__ \\"
