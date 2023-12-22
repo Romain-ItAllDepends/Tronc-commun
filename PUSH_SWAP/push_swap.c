@@ -6,12 +6,13 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:07:53 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/21 13:46:02 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/22 14:57:47 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "push_swap.h"
 
+/*
 int	*sort(int *pa, int length)
 {
 	int	i;
@@ -29,6 +30,7 @@ int	*sort(int *pa, int length)
 	}
 	return (pa);
 }
+*/
 
 int	*core(int *pa, int lengtha)
 {
@@ -36,12 +38,12 @@ int	*core(int *pa, int lengtha)
 	int	lengthb;
 
 	lengthb = 0;
-	while (ft_strlen(pa) != 2)
-		ft_split_init(&pa, &pb, lengtha, &lengthb);
-	while (ft_strlen(pb) != 2)
+	while (!(ft_strlen((char *)pa) == 2))
+		ft_split_initb(&pa, &pb, &lengtha, &lengthb);
+	while (!(ft_strlen((char *)pb) == 2))
 		ft_split_inita(&pb, &pa, &lengtha, &lengthb);
-	pa = sort(pa, *lengtha);
-	pb = sort(pb, lengthb);
+	//pa = sort(pa, *lengtha);
+	//pb = sort(pb, lengthb);
 	free(pb);
 	return (pa);
 }
