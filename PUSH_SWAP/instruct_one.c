@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:35:51 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/20 13:32:19 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/22 15:12:03 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -21,7 +21,7 @@ int	*ft_swap(int *tab, char c)
 	tab[1] = tab[0];
 	tab[0] = b;
 	if (c != 'x')
-		ft_printf("s%c", c);
+		ft_printf("s%c\n", c);
 	return (tab);
 }
 
@@ -52,7 +52,7 @@ int	*ft_push(int *p, int *length, int n, char c)
 			pn[i] = p[i];
 		i++;
 	}
-	ft_printf("p%c", c);
+	ft_printf("p%c\n", c);
 	free(p);
 	return (pn);
 }
@@ -73,7 +73,7 @@ int	*ft_rotate(int *tab, int length, char c)
 		i++;
 	}
 	if (c != 'x')
-		ft_printf("r%c", c);
+		ft_printf("r%c\n", c);
 	return (tab);
 }
 
