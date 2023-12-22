@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:19:40 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/21 14:24:00 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/22 14:54:26 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -15,19 +15,20 @@
 int	*ft_split_initb(int **pa, int **pb, int *lengtha, int *lengthb)
 {
 	int	*pb;
+	int	midpoint;
 	int	i;
 
 	i = 0;
-	pb = NULL;
+	midpoint = sort_bubble(*pa, *lengtha);
 	while (i < (*lengtha / 2))
 	{
-		if (*pa[i] > *pa[*lengtha / 2])
+		if (*pa[i] > midpoint)
 		{
-			pb = ft_push(pb, lengthb, *pa[0], 'b');
+			*pb = ft_push(*pb, lengthb, *pa[0], 'b');
 			*pa = ft_push_balance(*pa, lengtha);
 		}
 		else
-			*pa = ft_rotate(pa, lengtha, 'a');
+			*pa = ft_rotate(*pa, *lengtha, 'a');
 		i++;
 	}
 	return ((int *)pb);
@@ -36,25 +37,30 @@ int	*ft_split_initb(int **pa, int **pb, int *lengtha, int *lengthb)
 int	*ft_split_inita(int **pb, int **pa, int *lengtha, int *lengthb)
 {
 	int	i;
+	int	midpoint;
 
 	i = 0;
+	midpoint = sort_bubble(*pa, *lengtha);
 	while (i < (*lengthb / 2))
 	{
-		if (*pb[i] < *pb[*lengthb / 2])
+		if (*pb[i] < midpoint)
 		{
-			*pa = ft_push(pb, lengthb, *pa[0], 'b');
+			*pa = ft_push(*pb, lengthb, *pa[0], 'b');
 			*pb = ft_push_balance(*pa, lengtha);
 		}
 		else
-			*pb = ft_rotate(pb, lengthb, 'b');
+			*pb = ft_rotate(*pb, *lengthb, 'b');
 		i++;
 	}
 	return ((int *)pa);
 }
 
-int	*sort_bubble(int *tab, length)
+//Useless V
+
+int	sort_bubble(int *tab, int length)
 {
 	int	temp;
+	int	mid;
 	int	i;
 	int	j;
 	int	l;
@@ -68,14 +74,30 @@ int	*sort_bubble(int *tab, length)
 		{
 			if (tab[j] > tab[j + 1])
 			{
-				temp = tab[j];
-				tab[j] = tab[j + 1];
-				tab[j + 1] = temp;
+				temp = tab[j + 1];
+				tab[j + 1] = tab[j];
+				tab[j++] = temp;
 			}
-			j++;
 		}
 		l--;
 		i++;
 	}
-	return (tab);
+	mid = ft_midpoint(tab, length);
+	return (mid);
+}
+
+int	ft_midpoint(int *tab, int length)
+{
+	int	mid;
+	int	i;
+
+	i = 0;
+	mid = 0;
+	while (i < length)
+	{
+		mid += tab[i];
+		i++;
+	}
+	mid /= length;
+	return (mid);
 }
