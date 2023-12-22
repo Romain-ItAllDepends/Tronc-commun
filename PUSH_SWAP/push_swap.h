@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:08:56 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/21 13:46:19 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/22 14:19:55 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -28,5 +28,7 @@ int		*conversion_char_to_int_array(char const *s, char c, int *length);
 int		*ft_split_initb(int **pa, int **pb, int *lengtha, int *lengthb);
 int		*ft_split_inita(int **pb, int **pa, int *lengtha, int *lengthb);
 char	*ft_strjoin(char **s, int nbList);
+int		sort_bubble(int *tab, int length);
+int		ft_midpoint(int *tab, int length);
 
 #endif
