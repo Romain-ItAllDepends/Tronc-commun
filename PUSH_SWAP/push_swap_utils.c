@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:19:40 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/22 14:54:26 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/22 15:35:48 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -14,16 +14,17 @@
 
 int	*ft_split_initb(int **pa, int **pb, int *lengtha, int *lengthb)
 {
-	int	*pb;
 	int	midpoint;
 	int	i;
 
 	i = 0;
-	midpoint = sort_bubble(*pa, *lengtha);
+	midpoint = ft_midpoint(*pa, *lengtha);
 	while (i < (*lengtha / 2))
 	{
 		if (*pa[i] > midpoint)
 		{
+			ft_printf("kinder bueno");
+			return (0);
 			*pb = ft_push(*pb, lengthb, *pa[0], 'b');
 			*pa = ft_push_balance(*pa, lengtha);
 		}
@@ -40,7 +41,7 @@ int	*ft_split_inita(int **pb, int **pa, int *lengtha, int *lengthb)
 	int	midpoint;
 
 	i = 0;
-	midpoint = sort_bubble(*pa, *lengtha);
+	midpoint = ft_midpoint(*pb, *lengthb);
 	while (i < (*lengthb / 2))
 	{
 		if (*pb[i] < midpoint)
