@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 14:14:09 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/20 13:36:53 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/22 15:12:15 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -30,7 +30,7 @@ int	*ft_reverse_rotate(int *tab, int length, char c)
 	}
 	rr[0] = tab[length - 1];
 	if (c != 'x')
-		ft_printf("rr%c", c);
+		ft_printf("rr%c\n", c);
 	free(tab);
 	return (rr);
 }
