@@ -13,5 +13,5 @@ Si l'élément qui remplace celui qui était supérieur au midpoint y est infér
 [^9]: Si c'est le dernier chunk on peut utiliser directement rb (y a une histoire d'utiliser rrb pour une raison inconnue)
 [^10]: Si la liste est déjà trier (ordre décroissant) dans le chunk peu importe le nombre d'éléments pa.
 
-> ![NOTE]
+> [!IMPORTANT]
 > Source : https://www.youtube.com/watch?v=7KW59UO55TQ&ab_channel=JOHNPARK
