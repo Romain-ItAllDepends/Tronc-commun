@@ -1,5 +1,7 @@
 ### Algorithme push swap
 
+
+
 1. Trier.
 2. Trouver le midpoint en divisant par deux la length et prendre la liste triée est récupérer le nombre à cet index dans midpoint.
    
