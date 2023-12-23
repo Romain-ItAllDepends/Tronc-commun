@@ -3,7 +3,7 @@
 1. Trier.
 2. Trouver le midpoint en divisant par deux la length et prendre la liste triée est récupérer le nombre à cet index dans midpoint.
    
-3. Maintenant, on divise par deux la length et on cherche tous les nombres inférieurs au midpoint jusqu'à pas. [length / 2]
+3. Maintenant, on divise par deux la length et on cherche tous les nombres inférieurs au midpoint jusqu'à pa[length / 2]
    
 4. Si c'est inférieur au midpoint pb (Push le premier, nombre de la pile a sur la pile b donc au-dessus.), si c'est supérieur ou égale au midpoint ra (Décale d’une position vers le haut tous les éléments de la pile a. Le premier élément devient le dernier.)
 Si l'élément qui remplace celui qui était supérieur au midpoint y est inférieur alors pb sinon ra.
