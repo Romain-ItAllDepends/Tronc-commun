@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:19:40 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/23 14:25:28 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/25 15:25:30 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -26,8 +26,6 @@ int	*ft_split_initb(int **pa, int **pb, int *lengtha, int *lengthb)
 	{
 		if (*pa[i] > midpoint)
 		{
-			/*ft_printf("kinder bueno");
-			return (0);*/
 			*pb = ft_push(*pb, lengthb, *pa[0], 'b');
 			*pa = ft_push_balance(*pa, lengtha);
 		}
