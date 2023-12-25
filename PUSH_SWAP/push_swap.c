@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:07:53 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/22 15:39:04 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/25 15:22:29 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -37,7 +37,9 @@ int	*core(int *pa, int lengtha)
 	int	*pb;
 	int	lengthb;
 
-	lengthb = 0;
+	lengthb = 1;
+	pb = malloc(sizeof(int));
+	pb[0] = 0;
 	while (lengtha > 2)
 	//Boucle infini ici 
 		ft_split_initb(&pa, &pb, &lengtha, &lengthb);
@@ -60,14 +62,15 @@ int	main(int ac, char **av)
 	i = 0;
 	full_char = ft_strjoin(av, ac);
 	tab = conversion_char_to_int_array(full_char, ' ', &length);
+	free(full_char);
 	result = core(tab, length);
+	free(tab);
 	while (i < length)
 	{
-		ft_printf("%d %d\n", tab[i], i);
+		ft_printf("%d %d\n", result[i], i);
 		i++;
 	}
 	ft_printf("%d", length);
-	free(tab);
-	free(full_char);
+	free(result);
 	return (0);
 }
