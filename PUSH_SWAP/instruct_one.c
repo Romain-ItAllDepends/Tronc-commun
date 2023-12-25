@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:35:51 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/22 15:12:03 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/25 15:24:38 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -37,23 +37,27 @@ int	*ft_push(int *p, int *length, int n, char c)
 	// Prend le premier élément au sommet de b et le met sur a. Et vice versa selon les params.
 	//Ne fait rien si b est vide.
 	int	i;
+	int	v;
 	int	*pn;
 
-	i = 0;
+	i = -1;
+	v = 0;
+	if (*length > 0)
+		v++;
 	*length += 1;
 	pn = malloc(*length * sizeof(int));
 	if (!pn)
 		return (NULL);
-	while (*length > i)
+	while (*length > i++ && *length > 0)
 	{
 		if (i == 0)
 			pn[i] = n;
 		else
 			pn[i] = p[i];
-		i++;
 	}
 	ft_printf("p%c\n", c);
-	free(p);
+	if (v > 0)
+		free(p);
 	return (pn);
 }
 
