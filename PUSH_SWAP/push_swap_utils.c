@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:19:40 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/25 15:25:30 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/26 11:34:06 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -31,7 +31,8 @@ int	*ft_split_initb(int **pa, int **pb, int *lengtha, int *lengthb)
 		}
 		else
 			*pa = ft_rotate(*pa, *lengtha, 'a');
-		i++;
+		if (!(*pa[i] > midpoint))
+			i++;
 	}
 	return ((int *)pb);
 }
@@ -47,12 +48,13 @@ int	*ft_split_inita(int **pb, int **pa, int *lengtha, int *lengthb)
 	{
 		if (*pb[i] < midpoint)
 		{
-			*pa = ft_push(*pb, lengthb, *pa[0], 'b');
-			*pb = ft_push_balance(*pa, lengtha);
+			*pa = ft_push(*pa, lengtha, *pb[0], 'b');
+			*pb = ft_push_balance(*pb, lengthb);
 		}
 		else
 			*pb = ft_rotate(*pb, *lengthb, 'b');
-		i++;
+		if (!(*pb[i] > midpoint))
+			i++;
 	}
 	return ((int *)pa);
 }
