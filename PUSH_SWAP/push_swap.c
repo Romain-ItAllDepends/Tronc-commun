@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:07:53 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/26 10:29:07 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/26 14:38:05 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -41,10 +41,10 @@ int	*core(int *pa, int *lengtha)
 	i = 0;
 	lengthb = 0;
 	pb = NULL;
-	while (*lengtha > 2)
-	//Boucle infini ici 
+	while (*lengtha > 2 || decreasing(pa, *lengtha) == 1)
+	//Boucle infini ici condition a revoir
 		ft_split_initb(&pa, &pb, lengtha, &lengthb);
-	while (lengthb > 2)
+	while (lengthb > 2 || decreasing(pb, lengthb) == 1)
 		ft_split_inita(&pb, &pa, lengtha, &lengthb);
 	//pa = sort(pa, *lengtha);
 	//pb = sort(pb, lengthb);
