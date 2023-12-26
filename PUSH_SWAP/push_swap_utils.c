@@ -6,14 +6,14 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:19:40 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/26 11:34:06 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/26 14:39:23 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "push_swap.h"
 
-static int	*ft_fill(int *tab, int length);
-static int	*ft_switch(int *sort, int j);
+int	*ft_fill(int *tab, int length);
+int	*ft_switch(int *sort, int j);
 
 int	*ft_split_initb(int **pa, int **pb, int *lengtha, int *lengthb)
 {
@@ -88,7 +88,7 @@ int	sort_bubble(int *tab, int length)
 	return (mid);
 }
 
-static int	*ft_switch(int *sort, int j)
+int	*ft_switch(int *sort, int j)
 {
 	int	temp;
 
@@ -98,7 +98,7 @@ static int	*ft_switch(int *sort, int j)
 	return (sort);
 }
 
-static int	*ft_fill(int *tab, int length)
+int	*ft_fill(int *tab, int length)
 {
 	int	i;
 	int	*res;
