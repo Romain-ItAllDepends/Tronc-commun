@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:35:51 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/25 16:51:13 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/26 11:31:28 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -44,7 +44,7 @@ int	*ft_push(int *p, int *length, int n, char c)
 	pn = malloc(*length * sizeof(int));
 	if (!pn)
 		return (NULL);
-	while (*length > i++ && *length > 0)
+	while (*length - 1 > i++ && *length > 0)
 	{
 		if (i == 0)
 			pn[i] = n;
@@ -61,20 +61,26 @@ int	*ft_rotate(int *tab, int length, char c)
 {
 	//Décale d’une position vers le haut tous les élements de la pile a ou b.
 	//Le premier élément devient le dernier.
-	int	temp;
+	//Exemple 6, 5, 8 -> 5, 8, 6
+	int	*res;
 	int	i;
 
 	i = 0;
-	while (i < length)
+	//ft_printf("\n\n\n\n\n\n\nl %d\n\n\n\n\n\n", length);
+	res = malloc (length * sizeof(int));
+	if (!res)
+		return (NULL);
+	while ((i + 1) < length)
 	{
-		temp = tab[i];
-		tab[i] = tab[length - i - 1];
-		tab[length - i - 1] = temp;
+		res[i] = tab[i + 1];
 		i++;
 	}
+	//ft_printf("\n\n\n\n\n\n\ni %d\n\n\n\n\n\n", i);
+	res[i] = tab[0];
 	if (c != 'x')
 		ft_printf("r%c\n", c);
-	return (tab);
+	free(tab);
+	return (res);
 }
 
 void	rr(int **pa, int **pb, int la, int lb)
