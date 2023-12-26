@@ -2,6 +2,7 @@ NAME=push_swap
 
 MY_SOURCES=	push_swap.c \
 		push_swap_utils.c \
+		order_functions.c \
 		instruct_one.c \
 		instruct_two.c \
 		parsing.c \
@@ -64,8 +65,9 @@ re: fclean all
 	@echo $(green_c)"\t   »»-————　Done　————-««"
 	
 noel:
+	@clear
 	@echo "		 __  __					      _          _     _                       "
-	@echo "		|  \/  | ____ _ __ _ __ _  _		     | |        (_)   | |                      "
+	@echo "		|  \/  | ____ _ __ _ __ _   _		     | |        (_)   | |                      "
 	@echo "		| |\/| |/ __ \ '__| '__| | | | 		  ___| |__  _ __ _ ___| |_ _ __ ___   __ _ ___ "
 	@echo "		| |  | |  ___/ |  | |  | |_| |		 / __| '_ \| '__| / __| __| '_ \` _ \ / _\` / __|"
 	@echo "		|_|  |_|\____|_|  |_|  \___, |		| (__| | | | |  | \__ \ |_| | | | | | (_| \__ \\"
