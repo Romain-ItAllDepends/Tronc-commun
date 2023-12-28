@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 10:34:27 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/28 12:58:40 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/28 13:13:04 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -35,6 +35,7 @@ int	error_duplication(int *pa, int length)
 		{
 			if (value == pa[j] && j != i)
 			{
+				write (2, "Error\n", 6);
 				exit(1);
 			}
 			j++;
@@ -61,10 +62,13 @@ int	error_no_number(char **av, int ac)
 		i = 0;
 		while (av[j][i])
 		{
-			if (av[j][i] != ' ' || !(av[j][i] >= '0' && av[j][i] <= '9')
-				|| av[j][i] != '+' || av[j][i] != '-')
+			if (av[j][i] != ' ' || av[j][i] != '+' || av[j][i] != '-')
 			{
-				exit(1);
+				if (av[j][i] < '0' || av[j][i] > '9')
+				{
+					write (2, "Error\n", 6);
+					exit(1);
+				}
 			}
 			i++;
 		}
@@ -90,6 +94,7 @@ int	error_isnt_int(char *s)
 			i++;
 		if (ft_atol(&s[i]) == 1)
 		{
+			write (2, "Error\n", 6);
 			exit(1);
 		}
 		else
@@ -113,7 +118,7 @@ static long	ft_atol(char *s)
 		num = num * 10 + (s[i] - '0');
 		i++;
 	}
-	if (num > -2147483647 && 2147483647 > num)
+	if (num > -2147483648 && 2147483648 > num)
 		return (0);
 	else
 		return (1);
