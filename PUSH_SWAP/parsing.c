@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 15:06:15 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/28 12:52:01 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/28 13:24:39 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -64,14 +64,14 @@ static int	ft_strlendb(char **s, int length)
 	return (i + sp);
 }
 
-static int	ft_substr(char const *s, char c)
+static int	ft_substr(char const *s, char c, int *tabl, char *str)
 {
 	unsigned int	i;
 	int				tab;
 
 	i = 0;
 	tab = 0;
-	error_isnt_int((char *)s);
+	error_isnt_int((char *)s, tabl, str);
 	while (s[i] && s[i] != c)
 	{
 		if (s[i] == '-' || s[i] == '+')
@@ -103,7 +103,7 @@ int	*conversion_char_to_int_array(char const *s, char c, int *length)
 		if (s[i] && s[i] == c)
 			i++;
 		if (s[i] && s[i] != c)
-			tab[x++] = ft_substr(&s[i], c);
+			tab[x++] = ft_substr(&s[i], c, tab, (char *)s);
 		while (s[i] && s[i] != c)
 			i++;
 	}
