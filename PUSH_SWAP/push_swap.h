@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:08:56 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/28 11:10:16 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/28 13:22:53 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -37,6 +37,6 @@ int		*ft_fill(int *tab, int length);
 int		*chunk_init(int	*chunk, int newmidpoint);
 int		error_duplication(int *pa, int length);
 int		error_no_number(char **av, int ac);
-int		error_isnt_int(char *s);
+int		error_isnt_int(char *s, int *tab, char *str);
 
 #endif
