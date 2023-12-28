@@ -3,6 +3,8 @@ NAME=push_swap
 MY_SOURCES=	push_swap.c \
 		push_swap_utils.c \
 		order_functions.c \
+		chunk_functions.c \
+		error_manager.c \
 		instruct_one.c \
 		instruct_two.c \
 		parsing.c \
