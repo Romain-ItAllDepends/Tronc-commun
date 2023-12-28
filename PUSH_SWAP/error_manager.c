@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 10:34:27 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/28 13:13:04 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/28 13:25:40 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -35,6 +35,7 @@ int	error_duplication(int *pa, int length)
 		{
 			if (value == pa[j] && j != i)
 			{
+				free(pa);
 				write (2, "Error\n", 6);
 				exit(1);
 			}
@@ -83,7 +84,7 @@ int	error_no_number(char **av, int ac)
 * The numbers can't be above the size of a integer or below.
 */
 
-int	error_isnt_int(char *s)
+int	error_isnt_int(char *s, int *tab, char *str)
 {
 	int	i;
 
@@ -94,6 +95,8 @@ int	error_isnt_int(char *s)
 			i++;
 		if (ft_atol(&s[i]) == 1)
 		{
+			free(tab);
+			free(str);
 			write (2, "Error\n", 6);
 			exit(1);
 		}
