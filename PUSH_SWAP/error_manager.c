@@ -6,11 +6,13 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 10:34:27 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/28 11:06:10 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/28 11:09:41 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "push_swap.h"
+
+static long	atol(char **s);
 
 int	error_duplication(int *pa, int length)
 {
@@ -80,8 +82,8 @@ int	error_isnt_int(char *s)
 
 static long	atol(char **s)
 {
-	long num;
-	int	i;
+	long	num;
+	int		i;
 
 	while (*s[i] && *s[i] != ' ')
 	{
