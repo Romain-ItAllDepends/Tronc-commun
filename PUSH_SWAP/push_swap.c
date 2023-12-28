@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:07:53 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/28 10:40:58 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/28 12:57:43 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -46,7 +46,7 @@ int	*core(int *pa, int *lengtha)
 	while (*lengtha > 2 || decreasing(pa, *lengtha) == 1)
 	{
 	//Boucle infini ici condition a revoir
-		chunk = chunk_init(chunk, sort_bubble(pa, lengtha));
+		chunk = chunk_init(chunk, sort_bubble(pa, *lengtha));
 		ft_split_initb(&pa, &pb, lengtha, &lengthb);
 		i++;
 	}
@@ -85,6 +85,7 @@ int	main(int ac, char **av)
 	full_char = ft_strjoin(av, ac);
 	tab = conversion_char_to_int_array(full_char, ' ', &length);
 	free(full_char);
+	error_duplication(tab, length);
 	result = core(tab, &length);
 	while (i < length)
 	{
