@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 15:06:15 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/20 10:50:50 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/28 11:01:20 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -71,6 +71,7 @@ static int	ft_substr(char const *s, char c)
 
 	i = 0;
 	tab = 0;
+	error_isnt_int(s);
 	while (s[i] && s[i] != c)
 	{
 		if (s[i] == '-' || s[i] == '+')
