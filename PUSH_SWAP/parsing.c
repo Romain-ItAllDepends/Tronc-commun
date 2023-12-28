@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 15:06:15 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/28 11:01:20 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/28 12:52:01 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -71,7 +71,7 @@ static int	ft_substr(char const *s, char c)
 
 	i = 0;
 	tab = 0;
-	error_isnt_int(s);
+	error_isnt_int((char *)s);
 	while (s[i] && s[i] != c)
 	{
 		if (s[i] == '-' || s[i] == '+')
@@ -117,6 +117,7 @@ char	*ft_strjoin(char **s, int nbList)
 	int		j;
 	int		x;
 
+	error_no_number(s, nbList);
 	tab = malloc((ft_strlendb(s, nbList) + 1) * sizeof(char));
 	i = 0;
 	j = 1;
