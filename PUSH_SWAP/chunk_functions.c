@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 10:26:28 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/29 11:12:35 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/29 13:48:11 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -97,8 +97,6 @@ static int	*mid_and_range(int *list, int length, int newmidpoint)
 /*
 * A chunk is an area in which the midpoint and the range of index of your chunk.
 * We need the chunk to send the integer in the stack b in the stack a.
-* For the moment we need to find a solution to store the chunk the more 
-* efficiently possible.
 */
 
 int	**chunk_init(int newmidpoint, int *p, int **chunk)
@@ -113,13 +111,18 @@ int	**chunk_init(int newmidpoint, int *p, int **chunk)
 		newchunk = malloc (sizeof(int *));
 	if (!newchunk)
 		return (NULL);
-	i = 0;
+	newchunk[0] = malloc (sizeof(int));
+	if (!newchunk[0])
+		return (NULL);
+	i = 1;
 	while (i < length)
 	{
 		newchunk[i] = mid_and_range(p, length, newmidpoint);
 		i++;
 	}
 	length++;
-	free(chunk);
+	newchunk[0][0] = length;
+	if (length > 1)
+		ft_free(chunk, length / 2);
 	return (newchunk);
 }
