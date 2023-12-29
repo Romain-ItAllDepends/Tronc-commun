@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:08:56 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/28 13:22:53 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/29 11:09:51 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -34,9 +34,10 @@ int		ft_midpoint(int *tab, int length);
 int		decreasing(int *pb, int lengthb);
 int		*ft_switch(int *sort, int j);
 int		*ft_fill(int *tab, int length);
-int		*chunk_init(int	*chunk, int newmidpoint);
+int		**chunk_init(int newmidpoint, int *p, int **chunk);
 int		error_duplication(int *pa, int length);
 int		error_no_number(char **av, int ac);
 int		error_isnt_int(char *s, int *tab, char *str);
+void	ft_free(int	**list, int length);
 
 #endif
