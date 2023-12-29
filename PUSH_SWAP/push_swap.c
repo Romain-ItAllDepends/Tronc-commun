@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:07:53 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/29 11:12:00 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/29 12:54:34 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -37,27 +37,24 @@ int	*core(int *pa, int *lengtha)
 	int	*pb;
 	int	**chunk;
 	int	lengthb;
-	int	lengthc;
 	int	i;
 
 	i = 0;
 	lengthb = 0;
-	lengthc = 0;
 	pb = NULL;
 	chunk = NULL;
 	while (*lengtha > 2 || decreasing(pa, *lengtha) == 1)
 	{
-		lengthc++;
 		chunk = chunk_init(sort_bubble(pa, *lengtha), pa, chunk);
 		if (!chunk)
 			exit(1);
 		ft_split_initb(&pa, &pb, lengtha, &lengthb);
 		i++;
 	}
-	while (lengthb != 0 || decreasing(pb, lengthb) == 1)
-		ft_split_inita(&pb, &pa, lengtha, &lengthb);
+	// while (lengthb != 0 || decreasing(pb, lengthb) == 1)
+	// 	ft_split_inita(&pb, &pa, lengtha, &lengthb);
 	free(pb);
-	ft_free(chunk, lengthc);
+	ft_free(chunk, chunk[0][0] / 2);
 	return (pa);
 }
 
