@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:19:40 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/26 14:39:23 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/28 14:18:42 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -44,6 +44,8 @@ int	*ft_split_inita(int **pb, int **pa, int *lengtha, int *lengthb)
 
 	i = 0;
 	midpoint = sort_bubble(*pb, *lengthb);
+	if (midpoint == 0)
+		return ((int *)pa);
 	while (i < (*lengthb / 2))
 	{
 		if (*pb[i] < midpoint)
@@ -70,6 +72,8 @@ int	sort_bubble(int *tab, int length)
 	int	l;
 
 	i = 0;
+	if (length == 0)
+		return (0);
 	l = length;
 	sort = ft_fill(tab, length);
 	while (i < length)
