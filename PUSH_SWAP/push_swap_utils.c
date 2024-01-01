@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:19:40 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/28 14:18:42 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/01 16:32:55 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -15,50 +15,55 @@
 int	*ft_fill(int *tab, int length);
 int	*ft_switch(int *sort, int j);
 
-int	*ft_split_initb(int **pa, int **pb, int *lengtha, int *lengthb)
+int	*ft_split_initb(t_vars *vars)
 {
 	int	midpoint;
 	int	i;
 
 	i = 0;
-	midpoint = sort_bubble(*pa, *lengtha);
-	while (i < (*lengtha / 2))
+	midpoint = sort_bubble(vars->pa, vars->len_a);
+	while (i < (vars->len_a / 2))
 	{
-		if (*pa[i] > midpoint)
+		if (vars->pa[i] > midpoint)
 		{
-			*pb = ft_push(*pb, lengthb, *pa[0], 'b');
-			*pa = ft_push_balance(*pa, lengtha);
+			vars->pb = ft_push(vars->pb, vars->len_b, vars->pa[0], 'b');
+			vars->pa = ft_push_balance(vars->pa, vars->len_a);
 		}
 		else
-			*pa = ft_rotate(*pa, *lengtha, 'a');
-		if (!(*pa[i] > midpoint))
+			vars->pa = ft_rotate(vars->pa, vars->len_a, 'a');
+		if (!(vars->pa[i] > midpoint))
 			i++;
 	}
-	return ((int *)pb);
+	return ((int *)vars->pb);
 }
 
-int	*ft_split_inita(int **pb, int **pa, int *lengtha, int *lengthb)
+int	*ft_split_inita(t_vars *vars)
 {
 	int	i;
 	int	midpoint;
 
 	i = 0;
-	midpoint = sort_bubble(*pb, *lengthb);
+	midpoint = sort_bubble(vars->pb, vars->len_b);
 	if (midpoint == 0)
-		return ((int *)pa);
-	while (i < (*lengthb / 2))
+		return ((int *)vars->pa);
+	while (i < vars->len_b)
 	{
-		if (*pb[i] < midpoint)
+		if (vars->pb[i] < midpoint)
 		{
-			*pa = ft_push(*pa, lengtha, *pb[0], 'b');
-			*pb = ft_push_balance(*pb, lengthb);
+			vars->pa = ft_push(vars->pa, vars->len_a, vars->pb[0], 'b');
+			vars->pb = ft_push_balance(vars->pb, vars->len_b);
 		}
+		else if ((i + 1) < vars->len_b)
+			vars->pb = ft_rotate(vars->pb, vars->len_b, 'b');
 		else
-			*pb = ft_rotate(*pb, *lengthb, 'b');
-		if (!(*pb[i] > midpoint))
+		{
+			vars->pa = ft_push(vars->pa, vars->len_a, vars->pb[0], 'b');
+			vars->pb = ft_push_balance(vars->pb, vars->len_b);
+		}
+		if (!(vars->pb[i] > midpoint))
 			i++;
 	}
-	return ((int *)pa);
+	return ((int *)vars->pa);
 }
 
 //Trieur et midpoint maker
