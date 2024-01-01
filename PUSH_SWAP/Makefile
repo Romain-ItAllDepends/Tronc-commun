@@ -12,6 +12,7 @@ MY_SOURCES=	push_swap.c \
 		instruct_two.c \
 		parsing.c \
 		free_functions.c \
+		ft_calloc.c \
 		FT_PRINTF/ft_printf.c \
 		FT_PRINTF/LIBFT/ft_strlen.c \
 		FT_PRINTF/LIBFT/ft_putstr_fd.c \
