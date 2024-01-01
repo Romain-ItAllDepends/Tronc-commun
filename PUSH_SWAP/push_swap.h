@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:08:56 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/29 14:59:19 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/01 13:53:34 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -16,6 +16,16 @@
 # include <unistd.h>
 # include "FT_PRINTF/ft_printf.h"
 # include "FT_PRINTF/LIBFT/libft.h"
+
+typedef struct s_vars{
+	int	len_a;
+	int	len_b;
+	int	len_c;
+	int	nb_chunk;
+	int	*midpoint;
+	int	*pa;
+	int	*pb;
+}	t_vars;
 
 /*
 * Instructions of Push Swap
@@ -57,9 +67,10 @@ int		error_no_number(char **av, int ac);
 int		error_isnt_int(char *s, int *tab, char *str);
 
 /*
-* Free
+* Free / allocs
 */
 void	ft_free(int	**list, int length);
+void	*ft_calloc(size_t nmemb, size_t size);
 
 
 #endif
