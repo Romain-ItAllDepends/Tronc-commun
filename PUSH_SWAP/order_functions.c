@@ -6,13 +6,15 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 14:31:52 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/26 14:40:47 by rgobet           ###   ########.fr       */
+/*   Updated: 2023/12/28 14:14:23 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "push_swap.h"
 
-int		decreasing(int *pb, int lengthb)
+static int	ft_compare(int *pb, int *sort, int length);
+
+int	decreasing(int *pb, int lengthb)
 {
 	int	*sort;
 	int	i;
@@ -32,13 +34,21 @@ int		decreasing(int *pb, int lengthb)
 		}
 		l--;
 	}
+	i = ft_compare(pb, sort, lengthb);
+	free(sort);
+	return (i);
+}
+
+static int	ft_compare(int *pb, int *sort, int length)
+{
+	int	i;
+
 	i = 0;
-	while (i < lengthb)
+	while (i < length)
 	{
 		if (pb[i] != sort[i])
 			return (1);
 		i++;
 	}
-	free(sort);
 	return (0);
 }
