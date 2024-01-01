@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:07:53 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/29 12:54:34 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/01 16:11:44 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -31,57 +31,55 @@ int	*sort(int *pa, int length)
 	return (pa);
 }
 */
-
-int	*core(int *pa, int *lengtha)
+// while (lengthb != 0 || decreasing(pb, lengthb) == 1)
+// 	ft_split_inita(&pb, &pa, lengtha, &lengthb);
+t_vars	*core(t_vars *vars)
 {
-	int	*pb;
-	int	**chunk;
-	int	lengthb;
 	int	i;
+	int	**chunk;
 
 	i = 0;
-	lengthb = 0;
-	pb = NULL;
-	chunk = NULL;
-	while (*lengtha > 2 || decreasing(pa, *lengtha) == 1)
+	vars->len_b = 0;
+	vars->pb = NULL;
+	vars->chunk = NULL;
+	while (vars->len_a > 2 || decreasing(vars->pa, vars->len_a) == 1)
 	{
-		chunk = chunk_init(sort_bubble(pa, *lengtha), pa, chunk);
+		chunk = chunk_init(sort_bubble(vars->pa, vars->len_a), vars);
 		if (!chunk)
 			exit(1);
-		ft_split_initb(&pa, &pb, lengtha, &lengthb);
+		ft_split_initb(vars);
 		i++;
 	}
-	// while (lengthb != 0 || decreasing(pb, lengthb) == 1)
-	// 	ft_split_inita(&pb, &pa, lengtha, &lengthb);
-	free(pb);
-	ft_free(chunk, chunk[0][0] / 2);
-	return (pa);
+	free(vars->pb);
+	ft_free(vars->chunk, vars->len_c / 2);
+	return (vars);
 }
 
 //Gestion d'erreur pas de doublon peut recup le midpoint avant le split init
 
 int	main(int ac, char **av)
 {
+	t_vars	*vars;
 	char	*full_char;
-	int		*tab;
-	int		*result;
-	int		length;
 	int		i;
 
 	i = 0;
 	if (ac == 1)
 		exit(0);
+	vars = ft_calloc(sizeof(t_vars), 1);
+	if (!vars)
+		return (NULL);
 	full_char = ft_strjoin(av, ac);
-	tab = conversion_char_to_int_array(full_char, ' ', &length);
+	vars->pa = conversion_char_to_int_array(full_char, ' ', &vars->len_a);
 	free(full_char);
-	error_duplication(tab, length);
-	result = core(tab, &length);
-	while (i < length)
+	error_duplication(vars->pa, vars->len_a);
+	vars->pa = core(vars);
+	while (i < vars->len_a)
 	{
-		ft_printf("%d\n", result[i]);
+		ft_printf("%d\n", vars->pa[i]);
 		i++;
 	}
-	ft_printf("%d", length);
-	free(result);
+	ft_printf("%d", vars->len_a);
+	free(vars->pa);
 	return (0);
 }
