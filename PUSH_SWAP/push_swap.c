@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:07:53 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/01 16:11:44 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/02 11:13:51 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -36,7 +36,6 @@ int	*sort(int *pa, int length)
 t_vars	*core(t_vars *vars)
 {
 	int	i;
-	int	**chunk;
 
 	i = 0;
 	vars->len_b = 0;
@@ -44,9 +43,9 @@ t_vars	*core(t_vars *vars)
 	vars->chunk = NULL;
 	while (vars->len_a > 2 || decreasing(vars->pa, vars->len_a) == 1)
 	{
-		chunk = chunk_init(sort_bubble(vars->pa, vars->len_a), vars);
-		if (!chunk)
-			exit(1);
+		//chunk = chunk_init(sort_bubble(vars->pa, vars->len_a), vars);
+		//if (!chunk)
+		//	exit(1);
 		ft_split_initb(vars);
 		i++;
 	}
@@ -68,12 +67,12 @@ int	main(int ac, char **av)
 		exit(0);
 	vars = ft_calloc(sizeof(t_vars), 1);
 	if (!vars)
-		return (NULL);
+		exit(1);
 	full_char = ft_strjoin(av, ac);
 	vars->pa = conversion_char_to_int_array(full_char, ' ', &vars->len_a);
 	free(full_char);
 	error_duplication(vars->pa, vars->len_a);
-	vars->pa = core(vars);
+	//vars->pa = core(vars);
 	while (i < vars->len_a)
 	{
 		ft_printf("%d\n", vars->pa[i]);
@@ -81,5 +80,6 @@ int	main(int ac, char **av)
 	}
 	ft_printf("%d", vars->len_a);
 	free(vars->pa);
+	free(vars);
 	return (0);
 }
