@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 10:34:27 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/28 13:25:40 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/02 15:01:00 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -63,13 +63,12 @@ int	error_no_number(char **av, int ac)
 		i = 0;
 		while (av[j][i])
 		{
-			if (av[j][i] != ' ' || av[j][i] != '+' || av[j][i] != '-')
+			if (av[j][i] == ' ' || av[j][i] == '+' || av[j][i] == '-')
+				i++;
+			if (av[j][i] < '0' || av[j][i] > '9')
 			{
-				if (av[j][i] < '0' || av[j][i] > '9')
-				{
-					write (2, "Error\n", 6);
-					exit(1);
-				}
+				write (2, "Error\n", 6);
+				exit(1);
 			}
 			i++;
 		}
