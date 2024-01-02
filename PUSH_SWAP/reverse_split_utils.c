@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 13:43:55 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/01 15:46:40 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/02 11:09:26 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -21,7 +21,7 @@ void	ft_chunk_check(t_vars *vars)
 {
 	int			i;
 	int			j;
-	static int	index_midpoint = i + 1;
+	static int	index_midpoint;
 
 	j = 0;
 	i = vars->len_c - 2;
