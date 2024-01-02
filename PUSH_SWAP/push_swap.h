@@ -66,9 +66,8 @@ int		error_no_number(char **av, int ac);
 int		error_isnt_int(char *s, int *tab, char *str);
 
 /*
-* Free / allocs
+* Allocs
 */
-void	ft_free(int	**list, int length);
 void	*ft_calloc(size_t nmemb, size_t size);
 
 
