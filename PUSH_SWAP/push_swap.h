@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:08:56 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/02 11:08:11 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/02 15:07:25 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -22,7 +22,7 @@ typedef struct s_vars{
 	int	len_b;
 	int	len_c;
 	int	nb_chunk;
-	int	**chunk;
+	int	*chunk;
 	int	*midpoint;
 	int	*pa;
 	int	*pb;
@@ -33,11 +33,11 @@ typedef struct s_vars{
 */
 void	ft_swap(int *tab, char c);
 void	ss(t_vars *vars);
-void	ft_push(int *p, int *length, int n, char c);
-void	ft_push_balance(int *p, int *length);
-void	ft_rotate(int *tab, int length, char c);
+int		*ft_push(int *p, int *length, int n, char c);
+int		*ft_push_balance(int *p, int *length);
+int		*ft_rotate(int *tab, int length, char c);
 void	rr(t_vars *vars);
-void	ft_reverse_rotate(int *tab, int length, char c);
+int		*ft_reverse_rotate(int *tab, int length, char c);
 void	rrr(t_vars *vars);
 
 /*
@@ -55,7 +55,7 @@ int		ft_midpoint(int *tab, int length);
 int		decreasing(int *pb, int lengthb);
 int		*ft_switch(int *sort, int j);
 int		*ft_fill(int *tab, int length);
-int		**chunk_init(int newmidpoint, t_vars *vars);
+int		*chunk_init(int newmidpoint, t_vars *vars);
 void	reverse_split(t_vars *vars);
 
 /*
