@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:19:40 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/01 16:32:55 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/02 10:48:18 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -15,7 +15,7 @@
 int	*ft_fill(int *tab, int length);
 int	*ft_switch(int *sort, int j);
 
-int	*ft_split_initb(t_vars *vars)
+void	ft_split_initb(t_vars *vars)
 {
 	int	midpoint;
 	int	i;
@@ -26,16 +26,17 @@ int	*ft_split_initb(t_vars *vars)
 	{
 		if (vars->pa[i] > midpoint)
 		{
-			vars->pb = ft_push(vars->pb, vars->len_b, vars->pa[0], 'b');
-			vars->pa = ft_push_balance(vars->pa, vars->len_a);
+			ft_push(vars->pb, &vars->len_b, vars->pa[0], 'b');
+			ft_push_balance(vars->pa, &vars->len_a);
 		}
 		else
-			vars->pa = ft_rotate(vars->pa, vars->len_a, 'a');
+			ft_rotate(vars->pa, vars->len_a, 'a');
 		if (!(vars->pa[i] > midpoint))
 			i++;
 	}
-	return ((int *)vars->pb);
 }
+
+/*
 
 int	*ft_split_inita(t_vars *vars)
 {
@@ -65,6 +66,8 @@ int	*ft_split_inita(t_vars *vars)
 	}
 	return ((int *)vars->pa);
 }
+
+*/
 
 //Trieur et midpoint maker
 
