@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:35:51 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/02 11:12:21 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/02 13:46:26 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -31,7 +31,7 @@ void	ss(t_vars *vars)
 	return ;
 }
 
-void	ft_push(int *p, int *length, int n, char c)
+int	*ft_push(int *p, int *length, int n, char c)
 {
 	// Prend le premier élément au sommet de b et le met sur a. Et vice versa selon les params.
 	//Ne fait rien si b est vide.
@@ -42,7 +42,7 @@ void	ft_push(int *p, int *length, int n, char c)
 	*length += 1;
 	pn = malloc(*length * sizeof(int));
 	if (!pn)
-		return ;
+		return (NULL);
 	while (*length - 1 > i++ && *length > 0)
 	{
 		if (i == 0)
@@ -51,12 +51,11 @@ void	ft_push(int *p, int *length, int n, char c)
 			pn[i] = p[i - 1];
 	}
 	ft_printf("p%c\n", c);
-	if (p != NULL)
-		free(p);
-	p = pn;
+	free(p);
+	return (pn);
 }
 
-void	ft_rotate(int *tab, int length, char c)
+int	*ft_rotate(int *tab, int length, char c)
 {
 	//Décale d’une position vers le haut tous les élements de la pile a ou b.
 	//Le premier élément devient le dernier.
@@ -68,7 +67,7 @@ void	ft_rotate(int *tab, int length, char c)
 	//ft_printf("\n\n\n\n\n\n\nl %d\n\n\n\n\n\n", length);
 	res = malloc (length * sizeof(int));
 	if (!res)
-		return ;
+		return (NULL);
 	while ((i + 1) < length)
 	{
 		res[i] = tab[i + 1];
@@ -78,11 +77,12 @@ void	ft_rotate(int *tab, int length, char c)
 	res[i] = tab[0];
 	if (c != 'x')
 		ft_printf("r%c\n", c);
-	tab = res;
+	free(tab);
+	return (res);
 }
 
 void	rr(t_vars *vars)
 {
-	ft_rotate(vars->pa, vars->len_a, 'r');
-	ft_rotate(vars->pb, vars->len_b, 'x');
+	vars->pa = ft_rotate(vars->pa, vars->len_a, 'r');
+	vars->pb = ft_rotate(vars->pb, vars->len_b, 'x');
 }
