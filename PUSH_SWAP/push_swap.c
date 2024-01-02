@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:07:53 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/02 11:13:51 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/02 15:19:38 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -28,7 +28,7 @@ int	*sort(int *pa, int length)
 		}
 		i++;
 	}
-	return (pa);
+	return (pa);                                                                                   
 }
 */
 // while (lengthb != 0 || decreasing(pb, lengthb) == 1)
@@ -39,22 +39,35 @@ t_vars	*core(t_vars *vars)
 
 	i = 0;
 	vars->len_b = 0;
+	vars->len_c = 0;
 	vars->pb = NULL;
 	vars->chunk = NULL;
 	while (vars->len_a > 2 || decreasing(vars->pa, vars->len_a) == 1)
 	{
-		//chunk = chunk_init(sort_bubble(vars->pa, vars->len_a), vars);
-		//if (!chunk)
-		//	exit(1);
+		vars->chunk = chunk_init(sort_bubble(vars->pa, vars->len_a), vars);
+		if (!vars->chunk)
+			exit(1);
 		ft_split_initb(vars);
 		i++;
 	}
+	i = 0;
+	while (i < vars->len_c)
+	{
+		ft_printf("\n%d\n", vars->chunk[i]);
+		i++;
+	}
+	ft_printf("\n");
+	if (vars->len_a == 2 && vars->pa[0] > vars->pa[1])
+		ft_swap(vars->pa, 'a');
 	free(vars->pb);
-	ft_free(vars->chunk, vars->len_c / 2);
+	free(vars->chunk);
 	return (vars);
 }
 
-//Gestion d'erreur pas de doublon peut recup le midpoint avant le split init
+/*
+* The instruct_one.c and instruct_two.c are verified !
+* Actually making the algorithm.
+*/
 
 int	main(int ac, char **av)
 {
@@ -72,7 +85,7 @@ int	main(int ac, char **av)
 	vars->pa = conversion_char_to_int_array(full_char, ' ', &vars->len_a);
 	free(full_char);
 	error_duplication(vars->pa, vars->len_a);
-	//vars->pa = core(vars);
+	vars = core(vars);
 	while (i < vars->len_a)
 	{
 		ft_printf("%d\n", vars->pa[i]);
