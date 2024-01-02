@@ -4,7 +4,6 @@ MY_SOURCES=	push_swap.c \
 		push_swap_utils.c \
 		order_functions.c \
 		chunk_functions.c \
-		chunk_utils.c \
 		reverse_split.c \
 		reverse_split_utils.c \
 		error_manager.c \
