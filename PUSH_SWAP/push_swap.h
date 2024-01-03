@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:08:56 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/02 15:07:25 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/03 11:34:55 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -53,6 +53,8 @@ void	ft_split_initb(t_vars *vars);
 int		sort_bubble(int *tab, int length);
 int		ft_midpoint(int *tab, int length);
 int		decreasing(int *pb, int lengthb);
+int		crescent(int *pb, int lengthb);
+int		alone(int midpoint, t_vars *vars);
 int		*ft_switch(int *sort, int j);
 int		*ft_fill(int *tab, int length);
 int		*chunk_init(int newmidpoint, t_vars *vars);
