@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:07:53 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/02 15:19:38 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/03 10:25:11 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -42,13 +42,19 @@ t_vars	*core(t_vars *vars)
 	vars->len_c = 0;
 	vars->pb = NULL;
 	vars->chunk = NULL;
-	while (vars->len_a > 2 || decreasing(vars->pa, vars->len_a) == 1)
+	while (vars->len_a > 2 && crescent(vars->pa, vars->len_a) == 1)
 	{
 		vars->chunk = chunk_init(sort_bubble(vars->pa, vars->len_a), vars);
 		if (!vars->chunk)
 			exit(1);
 		ft_split_initb(vars);
 		i++;
+	}
+	if (crescent(vars->pa, vars->len_a) == 1 && vars->len_b == 0)
+	{
+		reverse_split(vars);
+		if (vars->len_a == 2 && vars->pa[0] > vars->pa[1])
+			ft_swap(vars->pa, 'a');
 	}
 	i = 0;
 	while (i < vars->len_c)
@@ -57,8 +63,6 @@ t_vars	*core(t_vars *vars)
 		i++;
 	}
 	ft_printf("\n");
-	if (vars->len_a == 2 && vars->pa[0] > vars->pa[1])
-		ft_swap(vars->pa, 'a');
 	free(vars->pb);
 	free(vars->chunk);
 	return (vars);
