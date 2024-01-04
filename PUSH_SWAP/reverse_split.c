@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 13:55:58 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/03 11:26:29 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/04 16:22:00 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -26,6 +26,8 @@ static void	finish(t_vars *vars)
 	return ;
 }
 
+/*
+
 static void	decrease_order(t_vars *vars)
 {
 	int	j;
@@ -35,11 +37,13 @@ static void	decrease_order(t_vars *vars)
 		ft_swap(vars->pb, 'b');
 	while (j < vars->len_b)
 	{
-		//ft_chunk_check(vars);
+		ft_chunk_check(vars);
 		j++;
 	}
 	return ;
 }
+
+*/
 
 /*
 * Use the midpoint to sort the b stack and push it back in the stack a.
@@ -54,16 +58,21 @@ void	reverse_split(t_vars *vars)
 	{
 		if (alone(vars->chunk[vars->len_c], vars) != 0)
 		{
-			ft_push(vars->pa, &vars->len_a, vars->pb[0], 'b');
-			ft_push_balance(vars->pb, &vars->len_b);
+			vars->pa = ft_push(vars->pa, &vars->len_a, vars->pb[0], 'b');
+			vars->pb = ft_push_balance(vars->pb, &vars->len_b);
+			i++;
 		}
 		else if (decreasing(vars->pb, vars->len_b) == 1)
-			decrease_order(vars);
+		{
+			ft_chunk_check(vars, i);
+			i++;
+		}
 		else if (decreasing(vars->pb, vars->len_b) == 0)
 		{
 			finish(vars);
 			break ;
 		}
-		i++;
+		if (i == vars->len_c)
+			special_case(vars);
 	}
 }
