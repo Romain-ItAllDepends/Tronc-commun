@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 13:43:55 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/03 11:34:09 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/04 16:43:03 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -17,26 +17,29 @@
 * the stack b.
 */
 
-void	ft_chunk_check(t_vars *vars)
+void	ft_chunk_check(t_vars *vars, int ind)
 {
-	int			i;
-	int			j;
-	static int	index_midpoint;
+	int	i;
+	int	max;
+	int	m;
 
-	j = 0;
-	i = vars->len_c - 2;
-	index_midpoint--;
-	while (i > 0)
+	max = max_chunk(vars, ind);
+	i = min_chunk(vars, ind);
+	if (max - i > 2)
+		m = sort_bubble(&vars->chunk[i], max - i);
+	else
+		m = vars->chunk[ind];
+	while (i < max)
 	{
-		while (vars->chunk[i][2] != vars->pb[j])
-			j++;
-		while (j < vars->len_b)
+		if (m == vars->chunk[index] || (pb[i] > m && m < vars->chunk[ind]))
 		{
-			if (j)
-				j++;
-			j++;
+			ft_push(vars->pa, &vars->len_a, vars->pb[0], 'b');
+			ft_push_balance(vars->pb, &vars->len_b);
+			i++;
 		}
-		i--;
+		else if (m < vars->chunk[ind] && (pb[i] < m && p[i + 1] < m) && m != p[i + 1])
+		//Switch si pb[i] est inferieur a pb[i + 1] et diff de mid
+		i++;
 	}
 }
 
@@ -63,4 +66,57 @@ int	alone(int midpoint, t_vars *vars)
 	if (i - j != 1)
 		return (1);
 	return (0);
+}
+
+/*
+* Optimize the number of shots to set the biggest number in the top of B stack.
+* After getting the biggest number in the top of the B stack, we push it on 
+* the A stack.
+*/
+
+static void	order(t_vars *vars, int i_max)
+{
+	int	i;
+	int	r;
+
+	i = 0;
+	if (vars->len_b / 2 >= vars->pb[i_max])
+		r = 0;
+	else
+		r = 1;
+	if (i_max != i && r == 0)
+		ft_rotate(vars->pb, vars->len_b, 'b');
+	else if (i_max != i && r == 1)
+		ft_reverse_rotate(vars->pb, vars->len_b, 'b');
+	vars->pa = ft_push(vars->pa, &vars->len_a, vars->pb[0], 'b');
+	vars->pb = ft_push_balance(vars->pb, &vars->len_b);
+}
+
+/*
+* For the management of th e last chunk.
+* Use rrb and rb to sort in a decreasing order.
+* After the ordre function we need to swap if it's needed in A stack.
+*/
+
+void	special_case(t_vars *vars)
+{
+	int	i;
+	int	j;
+	int	max;
+
+	i = 0;
+	while (i < vars->len_b)
+	{
+		max = max(vars);
+		j = 0;
+		while (j < vars->len_B)
+		{
+			if (vars->pb[j] != max)
+				j++;
+			else
+				break ;
+		}
+		order(vars, max);
+		i++;
+	}
 }
