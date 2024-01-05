@@ -6,11 +6,33 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 13:54:16 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/04 16:31:27 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/05 14:45:40 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "push_swap.h"
+
+/*
+* Use to get the first number bigger than n.
+*/
+
+int	nb_sup(t_vars *vars, int n)
+{
+	int	i;
+
+	i = 0;
+	while (i < vars->len_a)
+	{
+		if (n < vars->pa[i])
+			return (i);
+		i++;
+	}
+	return (0);
+}
+
+/*
+* Get the range of the chunk.
+*/
 
 int	min_chunk(t_vars *vars, int index_midpoint)
 {
@@ -42,6 +64,10 @@ int	max_chunk(t_vars *vars, int index_midpoint)
 	return (i + 1);
 }
 
+/*
+* Biggest number of the stack.
+*/
+
 int	max(t_vars *vars)
 {
 	int	i;
@@ -56,4 +82,16 @@ int	max(t_vars *vars)
 		i++;
 	}
 	return (j);
+}
+
+void	reverse(t_vars *vars, int c)
+{
+	int	i;
+
+	i = 0;
+	while (i < c)
+	{
+		ft_reverse_rotate(vars->pa, vars->len_a, 'a');
+		i++;
+	}
 }
