@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:08:56 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/04 16:31:45 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/05 14:45:50 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -62,8 +62,10 @@ void	reverse_split(t_vars *vars);
 void	ft_chunk_check(t_vars *vars, int ind);
 int		max_chunk(t_vars *vars, int index_midpoint);
 int		min_chunk(t_vars *vars, int index_midpoint);
+int		nb_sup(t_vars *vars, int n);
 int		max(t_vars *vars);
 void	special_case(t_vars *vars);
+void	reverse(t_vars *vars, int c);
 
 /*
 * Error
