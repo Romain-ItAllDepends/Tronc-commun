@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 13:43:55 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/05 13:21:24 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/05 14:51:18 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -99,32 +99,36 @@ static void	order_b(t_vars *vars, int i_max)
 * until the next element is biggest than this element.
 */
 
-static void	order_a(t_vars *vars, int i_max)
+/*
+* [!WARNING]
+* We need to setup the value which is sort in nb_sup else we will
+* sort infinitely.
+* We need to reverse to send the list.
+* Previous line are done.
+* Maybe i_max is usefull ? Else than for the r variable.
+*/
+
+static void	order_a(t_vars *vars)
 {
 	int	i;
-	int	r;
+	int	s;
 
 	i = 0;
-	if (vars->len_a / 2 >= vars->pa[i_max])
-		r = 0;
-	else
-		r = 1;
+	s = vars->pa[i];
 	while (vars->pa[i] > vars->pa[i + 1])
 	{
-		if (vars->pa[i] > vars->pa[i + 1] && nb_sup > 1)
+		if (vars->pa[i] > vars->pa[i + 1] && nb_sup(vars, s) > 1)
 		{
 			ft_swap(vars->pa, 'a');
-			if (r == 0)
-				ft_rotate(vars->pa, vars->len_a, 'a');
-			else if (r == 1)
-				ft_reverse_rotate(vars->pa, vars->len_a, 'a');
+			ft_rotate(vars->pa, vars->len_a, 'a');
 		}
-		else if (nb_sup == 1)
+		else if (nb_sup(vars, s) == 1)
 			ft_swap(vars->pa, 'a');
-		else if (nb_sup == 0)
+		else if (nb_sup(vars, s) == 0)
 			break ;
 		i++;
 	}
+	reverse(vars, i);
 }
 
 /*
@@ -151,7 +155,8 @@ void	special_case(t_vars *vars)
 			else
 				break ;
 		}
-		order(vars, max);
+		order_b(vars, max);
+		order_a(vars);
 		i++;
 	}
 }
