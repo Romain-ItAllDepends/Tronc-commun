@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 14:31:52 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/28 14:14:23 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/06 13:12:41 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -33,6 +33,33 @@ int	decreasing(int *pb, int lengthb)
 				sort = ft_switch(sort, j);
 		}
 		l--;
+	}
+	i = ft_compare(pb, sort, lengthb);
+	free(sort);
+	return (i);
+}
+
+int	crescent(int *pb, int lengthb)
+{
+	int	*sort;
+	int	i;
+	int	j;
+	int	l;
+
+	i = 0;
+	l = lengthb;
+	sort = ft_fill(pb, lengthb);
+	while (i < lengthb)
+	{
+		j = 0;
+		while (j < l - 1)
+		{
+			if (sort[j] > sort[j + 1])
+				sort = ft_switch(sort, j);
+			j++;
+		}
+		l--;
+		i++;
 	}
 	i = ft_compare(pb, sort, lengthb);
 	free(sort);
