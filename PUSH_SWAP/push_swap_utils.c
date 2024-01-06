@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:19:40 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/02 14:51:24 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/06 13:31:31 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -29,7 +29,7 @@ void	ft_split_initb(t_vars *vars)
 			vars->pb = ft_push(vars->pb, &vars->len_b, vars->pa[0], 'b');
 			vars->pa = ft_push_balance(vars->pa, &vars->len_a);
 		}
-		else
+		else if (vars->len_a > 1)
 			vars->pa = ft_rotate(vars->pa, vars->len_a, 'a');
 		if (!(vars->pa[i] > midpoint))
 			i++;
