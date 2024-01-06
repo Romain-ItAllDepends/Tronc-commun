@@ -6,13 +6,13 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 14:14:09 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/02 11:13:11 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/06 14:31:53 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "push_swap.h"
 
-void	ft_reverse_rotate(int *tab, int length, char c)
+int	*ft_reverse_rotate(int *tab, int length, char c)
 {
 	//Décale d’une position vers le bas tous les élements de la pile a ou b selon les params.
 	//Le dernier élément devient le premier.
@@ -22,8 +22,8 @@ void	ft_reverse_rotate(int *tab, int length, char c)
 	i = 0;
 	rr = malloc (length * sizeof(int));
 	if (!rr)
-		return ;
-	while (length > i)
+		return (NULL);
+	while (length - 1 > i)
 	{
 		rr[i + 1] = tab[i];
 		i++;
@@ -32,16 +32,16 @@ void	ft_reverse_rotate(int *tab, int length, char c)
 	if (c != 'x')
 		ft_printf("rr%c\n", c);
 	free(tab);
-	tab = rr;
+	return (rr);
 }
 
 void	rrr(t_vars *vars)
 {
-	ft_reverse_rotate(vars->pa, vars->len_a, 'r');
-	ft_reverse_rotate(vars->pb, vars->len_b, 'x');
+	vars->pa = ft_reverse_rotate(vars->pa, vars->len_a, 'r');
+	vars->pb = ft_reverse_rotate(vars->pb, vars->len_b, 'x');
 }
 
-void	ft_push_balance(int *p, int *length)
+int	*ft_push_balance(int *p, int *length)
 {
 	int	i;
 	int	*pn;
@@ -49,7 +49,7 @@ void	ft_push_balance(int *p, int *length)
 	*length -= 1;
 	pn = malloc(*length * sizeof(int));
 	if (!pn)
-		return ;
+		return (NULL);
 	i = 0;
 	while (*length > i)
 	{
@@ -57,5 +57,5 @@ void	ft_push_balance(int *p, int *length)
 		i++;
 	}
 	free(p);
-	p = pn;
+	return (pn);
 }
