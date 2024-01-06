@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 13:54:16 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/05 14:45:40 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/06 14:30:48 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -32,43 +32,44 @@ int	nb_sup(t_vars *vars, int n)
 
 /*
 * Get the range of the chunk.
+* Normalement corriger mais pas sur d'etre ok avecle reste du code.
 */
 
 int	min_chunk(t_vars *vars, int index_midpoint)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (i < len_b)
-	{
-		while (j < len_b && vars->pb[j] < vars->chunk[index_midpoint])
-			j++;
-		i++;
-	}
-	return (j);
-}
-
-int	max_chunk(t_vars *vars, int index_midpoint)
 {
 	int	i;
 
 	i = 0;
 	while (i < vars->len_b)
 	{
-		if (vars->chunk[index_midpoint] < vars->pb[i])
+		if (vars->pb[i] < vars->chunk[index_midpoint])
 			return (i);
 		i++;
 	}
-	return (i + 1);
+	return (0);
+}
+
+int	max_chunk(t_vars *vars, int index_midpoint)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < vars->len_b)
+	{
+		if (vars->chunk[index_midpoint] < vars->pb[i])
+			j++;
+		i++;
+	}
+	return (j);
 }
 
 /*
 * Biggest number of the stack.
 */
 
-int	max(t_vars *vars)
+int	max(t_vars *vars, int index_midpoint)
 {
 	int	i;
 	int	j;
@@ -91,7 +92,7 @@ void	reverse(t_vars *vars, int c)
 	i = 0;
 	while (i < c)
 	{
-		ft_reverse_rotate(vars->pa, vars->len_a, 'a');
+		vars ->pa = ft_reverse_rotate(vars->pa, vars->len_a, 'a');
 		i++;
 	}
 }
