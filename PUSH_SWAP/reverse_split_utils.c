@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 13:43:55 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/05 14:51:18 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/06 12:39:06 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -15,6 +15,8 @@
 /*
 * We will sort in a decreasing order each chunk starting by the chunk above
 * the stack b.
+* m = midpoint
+* We will sort all the chunk other than the last one.
 */
 
 void	ft_chunk_check(t_vars *vars, int ind)
@@ -31,14 +33,19 @@ void	ft_chunk_check(t_vars *vars, int ind)
 		m = vars->chunk[ind];
 	while (i < max)
 	{
-		if (m == vars->chunk[index] || (pb[i] > m && m < vars->chunk[ind]))
+		if (m == vars->chunk[ind] || (vars->pb[i] > m && m < vars->chunk[ind]))
 		{
 			ft_push(vars->pa, &vars->len_a, vars->pb[0], 'b');
 			ft_push_balance(vars->pb, &vars->len_b);
+			order_a(vars);
 			i++;
 		}
-		else if (m < vars->chunk[ind] && (pb[i] < m && p[i + 1] < m) && m != p[i + 1])
+		else if (m < vars->chunk[ind] && (vars->pb[i] < m
+				&& vars->pb[i + 1] < m) && m != vars->pb[i + 1])
+			ft_swap(vars->pb, 'b');
 		//Switch si pb[i] est inferieur a pb[i + 1] et diff de mid
+		if (i == max)
+			i = 0;
 		i++;
 	}
 }
@@ -53,12 +60,13 @@ int	alone(int midpoint, t_vars *vars)
 {
 	int	i;
 	int	ic;
-	int	c;
+	int	j;
 
 	i = 0;
+	ic = 0;
 	while (ic < vars->len_c && vars->chunk[ic] != midpoint)
 		ic++;
-	while (i < vars->len_b && vars->pb[i] < vars->chunk[ic - 1])
+	while (i < vars->len_b && vars->pb[i] < vars->chunk[ic])//ic -1
 		i++;
 	j = i;
 	while (i < vars->len_b)
@@ -108,14 +116,14 @@ static void	order_b(t_vars *vars, int i_max)
 * Maybe i_max is usefull ? Else than for the r variable.
 */
 
-static void	order_a(t_vars *vars)
+void	order_a(t_vars *vars)
 {
 	int	i;
 	int	s;
 
 	i = 0;
-	s = vars->pa[i];
-	while (vars->pa[i] > vars->pa[i + 1])
+	s = vars->pa[0];
+	while (vars->pa[i] > vars->pa[i + 1] && i < vars->len_a)
 	{
 		if (vars->pa[i] > vars->pa[i + 1] && nb_sup(vars, s) > 1)
 		{
@@ -128,7 +136,7 @@ static void	order_a(t_vars *vars)
 			break ;
 		i++;
 	}
-	reverse(vars, i);
+	reverse(vars, i + 1);
 }
 
 /*
@@ -141,21 +149,21 @@ void	special_case(t_vars *vars)
 {
 	int	i;
 	int	j;
-	int	max;
+	int	mx;
 
 	i = 0;
 	while (i < vars->len_b)
 	{
-		max = max(vars);
+		mx = max(vars, vars->len_c - 1);
 		j = 0;
-		while (j < vars->len_B)
+		while (j < vars->len_b)
 		{
-			if (vars->pb[j] != max)
+			if (vars->pb[j] != mx)
 				j++;
 			else
 				break ;
 		}
-		order_b(vars, max);
+		order_b(vars, mx);
 		order_a(vars);
 		i++;
 	}
