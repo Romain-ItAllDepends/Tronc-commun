@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:07:53 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/03 10:25:11 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/06 13:09:25 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -50,19 +50,19 @@ t_vars	*core(t_vars *vars)
 		ft_split_initb(vars);
 		i++;
 	}
-	if (crescent(vars->pa, vars->len_a) == 1 && vars->len_b == 0)
+	if (crescent(vars->pa, vars->len_a) == 1 && vars->len_b > 0)
 	{
-		reverse_split(vars);
 		if (vars->len_a == 2 && vars->pa[0] > vars->pa[1])
 			ft_swap(vars->pa, 'a');
+		reverse_split(vars);
 	}
-	i = 0;
-	while (i < vars->len_c)
-	{
-		ft_printf("\n%d\n", vars->chunk[i]);
-		i++;
-	}
-	ft_printf("\n");
+	// i = 0;
+	// while (i < vars->len_c)
+	// {
+	// 	ft_printf("\n%d\n", vars->chunk[i]);
+	// 	i++;
+	// }
+	// ft_printf("\n");
 	free(vars->pb);
 	free(vars->chunk);
 	return (vars);
@@ -95,7 +95,7 @@ int	main(int ac, char **av)
 		ft_printf("%d\n", vars->pa[i]);
 		i++;
 	}
-	ft_printf("%d", vars->len_a);
+	ft_printf("\n%d", vars->len_a);
 	free(vars->pa);
 	free(vars);
 	return (0);
