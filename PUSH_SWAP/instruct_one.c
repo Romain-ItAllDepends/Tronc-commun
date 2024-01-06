@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:35:51 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/02 13:46:26 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/06 13:51:14 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -38,17 +38,16 @@ int	*ft_push(int *p, int *length, int n, char c)
 	int	i;
 	int	*pn;
 
-	i = -1;
+	i = 1;
 	*length += 1;
 	pn = malloc(*length * sizeof(int));
 	if (!pn)
 		return (NULL);
-	while (*length - 1 > i++ && *length > 0)
+	pn[0] = n;
+	while (*length > i && *length - 1 > 0)
 	{
-		if (i == 0)
-			pn[i] = n;
-		else if (p)
-			pn[i] = p[i - 1];
+		pn[i] = p[i - 1];
+		i++;
 	}
 	ft_printf("p%c\n", c);
 	free(p);
