@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 13:43:55 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/06 12:39:06 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/09 15:47:45 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -88,14 +88,13 @@ static void	order_b(t_vars *vars, int i_max)
 	int	r;
 
 	i = 0;
+	r = 1;
 	if (vars->len_b / 2 >= vars->pb[i_max])
 		r = 0;
-	else
-		r = 1;
 	if (i_max != i && r == 0)
 		ft_rotate(vars->pb, vars->len_b, 'b');
 	else if (i_max != i && r == 1)
-		ft_reverse_rotate(vars->pb, vars->len_b, 'b');
+		vars->pb = ft_reverse_rotate(vars->pb, vars->len_b, 'b');
 	vars->pa = ft_push(vars->pa, &vars->len_a, vars->pb[0], 'b');
 	vars->pb = ft_push_balance(vars->pb, &vars->len_b);
 }
@@ -114,6 +113,9 @@ static void	order_b(t_vars *vars, int i_max)
 * We need to reverse to send the list.
 * Previous line are done.
 * Maybe i_max is usefull ? Else than for the r variable.
+*
+* Maybe line 129 len_a -1
+*
 */
 
 void	order_a(t_vars *vars)
@@ -123,9 +125,9 @@ void	order_a(t_vars *vars)
 
 	i = 0;
 	s = vars->pa[0];
-	while (vars->pa[i] > vars->pa[i + 1] && i < vars->len_a)
+	while (i < vars->len_a - 1 && vars->pa[i] > vars->pa[i + 1])
 	{
-		if (vars->pa[i] > vars->pa[i + 1] && nb_sup(vars, s) > 1)
+		if (s > vars->pa[i + 1] && nb_sup(vars, s) > 1)
 		{
 			ft_swap(vars->pa, 'a');
 			ft_rotate(vars->pa, vars->len_a, 'a');
@@ -140,7 +142,7 @@ void	order_a(t_vars *vars)
 }
 
 /*
-* For the management of th e last chunk.
+* For the management of the last chunk.
 * Use rrb and rb to sort in a decreasing order.
 * After the ordre function we need to swap if it's needed in A stack.
 */
@@ -150,9 +152,11 @@ void	special_case(t_vars *vars)
 	int	i;
 	int	j;
 	int	mx;
+	int	length;
 
 	i = 0;
-	while (i < vars->len_b)
+	length = vars->len_b;
+	while (i < length)
 	{
 		mx = max(vars, vars->len_c - 1);
 		j = 0;
@@ -163,7 +167,7 @@ void	special_case(t_vars *vars)
 			else
 				break ;
 		}
-		order_b(vars, mx);
+		order_b(vars, j);
 		order_a(vars);
 		i++;
 	}
