@@ -1,0 +1,160 @@
+/******************************************************************************
+
+                            Online C Compiler.
+                Code, Compile, Run and Debug C program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <fcntl.h>
+
+int ft_strlen(char *s)
+{
+    int i;
+    
+    if (!s || s == NULL)
+        return (0);
+    i = 0;
+    while (s[i])
+        i++;
+    return (i);
+}
+
+int ft_strchr(char *s, char c)
+{
+    int i;
+    
+    if (!s)
+        return (0);
+    i = 0;
+    while (s[i])
+    {
+        if (s[i] == c)
+            return (i + 1);
+        i++;
+    }
+    return (0);
+}
+
+char    *ft_finish(char *s)
+{
+    if (s[0] == 0)
+    {
+        free(s);
+        s = NULL;
+    }
+    return (s);
+}
+
+void    ft_save(char *s, char *b)
+{
+    int i;
+    
+    i = 0;
+    while (s[i])
+    {
+        b[i] = s[i];
+        i++;
+    }
+    while (i < BUFFER_SIZE)
+    {
+        b[i] = 0;
+        i++;
+    }
+}
+
+char    *ft_cut(char *s, char *b)
+{
+    int i;
+    int j;
+    char    *tab;
+    
+    while (s[i] != '\n' || s[i] == 0)
+        i++;
+    if (s[i] == '\n' || s[i] == 0)
+        i++;
+    tab = malloc (i + 1);
+    if (!tab)
+        return (NULL);
+    j = 0;
+    while (j < i)
+    {
+        tab[j] = s[j];
+        j++;
+    }
+    tab[j] = 0;
+    ft_save(&s[ft_strchr(s, '\n')], b);
+    free(s);
+    return (tab);
+}
+
+char    *ft_strjoin(char *s, char *b, int count)
+{
+    int i;
+    int j;
+    char    *tab;
+    
+    i = 0;
+    j = 0;
+    tab = malloc (ft_strlen(s) + BUFFER_SIZE + 1);
+    if (!tab)
+        return (NULL);
+    while (s && s[i])
+    {
+        tab[i] = s[i];
+        i++;
+    }
+    while (b[j])
+    {
+        tab[i + j] = b[j];
+        j++;
+    }
+    tab[i + j] = 0;
+    if (count > 0)
+        free(s);
+    return (tab);
+}
+
+char *get_next_line(int fd)
+{
+    static char *buf;
+    static int  count;
+    char    *stash;
+    int n;
+    
+    n = BUFFER_SIZE;
+    if (fd < 0 || BUFFER_SIZE <= 0)
+        return (0);
+    if (count > 0)
+        stash = ft_strjoin(stash, buf, count);
+    while (ft_strchr(stash, '\n') == 0 && n != 0)
+    {
+        n = read(fd, buf, BUFFER_SIZE);
+        buf[n] = 0;
+        if (n < 0)
+            return (NULL);
+        stash = ft_strjoin(stash, buf, count++);
+    }
+    if (ft_strchr(stash, '\n') > 0)
+        return (ft_cut(stash, buf));
+    else if (n == 0)
+        return (ft_finish(stash));
+    return (0);
+}
+
+int main(void)
+{
+    int fd;
+    char *tab;
+    
+    fd = open("doc", O_RDWR);
+    tab = get_next_line(fd);
+    printf("%s", tab);
+    free(tab);
+    return (0);
+}
+
+
