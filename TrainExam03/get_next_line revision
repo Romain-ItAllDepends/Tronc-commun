@@ -1,11 +1,3 @@
-/******************************************************************************
-
-                            Online C Compiler.
-                Code, Compile, Run and Debug C program online.
-Write your code in this editor and press "Run" button to compile and execute it.
-
-*******************************************************************************/
-
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -110,6 +102,7 @@ char    *ft_strjoin(char *s, char *b, int count)
     while (b[j])
     {
         tab[i + j] = b[j];
+        b[j] = 0;
         j++;
     }
     tab[i + j] = 0;
@@ -120,16 +113,17 @@ char    *ft_strjoin(char *s, char *b, int count)
 
 char *get_next_line(int fd)
 {
-    static char *buf;
+    static char	buf[BUFFER_SIZE + 1];
     static int  count;
     char    *stash;
     int n;
     
     n = BUFFER_SIZE;
+    stash = NULL;
     if (fd < 0 || BUFFER_SIZE <= 0)
         return (0);
     if (count > 0)
-        stash = ft_strjoin(stash, buf, count);
+        stash = ft_strjoin(buf, stash, count);
     while (ft_strchr(stash, '\n') == 0 && n != 0)
     {
         n = read(fd, buf, BUFFER_SIZE);
@@ -144,17 +138,3 @@ char *get_next_line(int fd)
         return (ft_finish(stash));
     return (0);
 }
-
-int main(void)
-{
-    int fd;
-    char *tab;
-    
-    fd = open("doc", O_RDWR);
-    tab = get_next_line(fd);
-    printf("%s", tab);
-    free(tab);
-    return (0);
-}
-
-
