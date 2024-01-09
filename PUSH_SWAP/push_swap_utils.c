@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:19:40 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/06 13:31:31 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/09 16:37:22 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -15,6 +15,22 @@
 int	*ft_fill(int *tab, int length);
 int	*ft_switch(int *sort, int j);
 
+int	nb_inf(t_vars *vars, int n)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i > vars->len_a)
+	{
+		if (n < vars->pa[i])
+			j++;
+		i++;
+	}
+	return (j);
+}
+
 void	ft_split_initb(t_vars *vars)
 {
 	int	midpoint;
@@ -22,17 +38,17 @@ void	ft_split_initb(t_vars *vars)
 
 	i = 0;
 	midpoint = sort_bubble(vars->pa, vars->len_a);
-	while (i < (vars->len_a / 2))
+	while (1)
 	{
-		if (vars->pa[i] > midpoint)
+		if (vars->pa[i] < midpoint)
 		{
 			vars->pb = ft_push(vars->pb, &vars->len_b, vars->pa[0], 'b');
 			vars->pa = ft_push_balance(vars->pa, &vars->len_a);
 		}
-		else if (vars->len_a > 1)
+		else if (vars->pa[i] >= midpoint && vars->len_a > 1)
 			vars->pa = ft_rotate(vars->pa, vars->len_a, 'a');
-		if (!(vars->pa[i] > midpoint))
-			i++;
+		if (nb_inf(vars, midpoint) == 0)
+			break ;
 	}
 }
 
