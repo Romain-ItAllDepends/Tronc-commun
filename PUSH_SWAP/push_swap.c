@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:07:53 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/06 13:09:25 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/09 16:40:18 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -56,13 +56,13 @@ t_vars	*core(t_vars *vars)
 			ft_swap(vars->pa, 'a');
 		reverse_split(vars);
 	}
-	// i = 0;
-	// while (i < vars->len_c)
-	// {
-	// 	ft_printf("\n%d\n", vars->chunk[i]);
-	// 	i++;
-	// }
-	// ft_printf("\n");
+	i = 0;
+	while (i < vars->len_a)
+	{
+		ft_printf("\n%d", vars->pa[i]);
+		i++;
+	}
+	ft_printf("\n");
 	free(vars->pb);
 	free(vars->chunk);
 	return (vars);
