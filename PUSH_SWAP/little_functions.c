@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 13:54:16 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/06 14:30:48 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/06 14:47:52 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -19,15 +19,17 @@
 int	nb_sup(t_vars *vars, int n)
 {
 	int	i;
+	int	j;
 
 	i = 0;
+	j = 0;
 	while (i < vars->len_a)
 	{
-		if (n < vars->pa[i])
-			return (i);
+		if (n > vars->pa[i])
+			j++;
 		i++;
 	}
-	return (0);
+	return (j);
 }
 
 /*
