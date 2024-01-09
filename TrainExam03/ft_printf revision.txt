@@ -1,0 +1,112 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <stdarg.h>
+
+int ft_strlen(char *s)
+{
+    int i;
+    
+    i = 0;
+    while (s[i])
+        i++;
+    return (i);
+}
+
+int puthex(unsigned int n, char *base)
+{
+    int x;
+    
+    x = 0;
+    if (n > 15)
+        x += puthex(n / 16, base);
+    n = n % 16;
+    x += write (1, &base[n], 1);
+    return (x);
+}
+
+int putstr(char *s)
+{
+    int length;
+    
+    if (!s)
+        return (putstr("(null)"));
+    else
+    {
+        length = ft_strlen(s);
+        write (1, s, length);
+    }
+    return (length);
+}
+
+int putnbr(int n)
+{
+    int x;
+    char c;
+    
+    x = 0;
+    if (n == -2147483648)
+	{
+		write (1, "-2147483648", 11);
+		return (11);
+	}
+	if (n < 0)
+	{
+	    x += write (1, "-", 1);
+	    n *= -1;
+	}
+	if (n >= 10)
+	    x += putnbr(n / 10);
+	n = n % 10;
+	c = n + '0';
+	x += write (1, &c, 1);
+	return (x);
+}
+
+int ft_type(va_list print, char c)
+{
+    int result;
+    
+    if (c == 's')
+        result += putstr(va_arg(print, char *));
+    if (c == 'd')
+        result += putnbr(va_arg(print, int));
+    if (c == 'x')
+        result += puthex(va_arg(print, int), "0123456789abcdef");
+    return (result);
+}
+
+int ft_printf(char *s, ...)
+{
+    va_list print;
+    int result;
+    int i;
+    
+    va_start(print, s);
+    result = 0;
+    i = 0;
+    while (s[i])
+    {
+        if (s[i] == '%' && s[i + 1] != 0)
+        {
+            i++;
+            result += ft_type(print, s[i]);
+        }
+        else
+            result += write (1, &s[i], 1);
+        i++;
+    }
+    
+    va_end(print);
+}
+
+int main()
+{
+    int r;
+    //r = puthex(255, "0123456789abcdef");
+    //r = putstr(NULL);
+    //r = putnbr(-555);
+    r = ft_printf("%d\n%s\n%x\nHi\n", 449844, "Yo la zone", 4095);
+    printf("\n%d", r);
+
+    return 0;
+}
