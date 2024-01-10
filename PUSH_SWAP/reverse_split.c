@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 13:55:58 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/08 14:18:07 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/10 12:35:48 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -63,7 +63,7 @@ void	reverse_split(t_vars *vars)
 	length = vars->len_b;
 	while (i < length)
 	{
-		if (alone(vars->chunk[vars->len_c - 1], vars) != 0)
+		if (alone(vars->chunk[vars->len_c - 1], vars) != 0 && i == 0)
 			alone_push(vars);
 		else if (decreasing(vars->pb, vars->len_b) == 1 && i != vars->len_c)
 			ft_chunk_check(vars, i);
