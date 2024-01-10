@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 13:54:16 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/06 14:47:52 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/10 16:13:51 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -42,9 +42,12 @@ int	min_chunk(t_vars *vars, int index_midpoint)
 	int	i;
 
 	i = 0;
+	if (index_midpoint == 0)
+		return (vars->len_b - 1);
 	while (i < vars->len_b)
 	{
-		if (vars->pb[i] < vars->chunk[index_midpoint])
+		if (vars->chunk[index_midpoint] > vars->pb[i]
+			&& vars->chunk[index_midpoint - 1] <= vars->pb[i])
 			return (i);
 		i++;
 	}
@@ -58,9 +61,12 @@ int	max_chunk(t_vars *vars, int index_midpoint)
 
 	i = 0;
 	j = 0;
+	if (index_midpoint == 0)
+		return (vars->len_b - 1);
 	while (i < vars->len_b)
 	{
-		if (vars->chunk[index_midpoint] < vars->pb[i])
+		if (vars->chunk[index_midpoint] > vars->pb[i]
+			&& vars->chunk[index_midpoint - 1] <= vars->pb[i])
 			j++;
 		i++;
 	}
