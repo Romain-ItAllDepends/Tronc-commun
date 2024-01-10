@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 10:34:27 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/02 15:01:00 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/10 14:16:25 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -90,8 +90,6 @@ int	error_isnt_int(char *s, int *tab, char *str)
 	i = 0;
 	while (s[i] && s[i] != ' ')
 	{
-		if (s[i] == '-' || s[i] == '+')
-			i++;
 		if (ft_atol(&s[i]) == 1)
 		{
 			free(tab);
@@ -101,7 +99,8 @@ int	error_isnt_int(char *s, int *tab, char *str)
 		}
 		else
 			break ;
-		i++;
+		while (s[i] && s[i] != ' ')
+			i++;
 	}
 	return (0);
 }
@@ -109,18 +108,24 @@ int	error_isnt_int(char *s, int *tab, char *str)
 static long	ft_atol(char *s)
 {
 	long	num;
+	int		sign;
 	int		i;
 
 	i = 0;
 	num = 0;
+	sign = 1;
 	while (s[i] && s[i] != ' ')
 	{
 		if (s[i] == '-' || s[i] == '+')
+		{
+			sign = -1;
 			i++;
+		}
 		num = num * 10 + (s[i] - '0');
 		i++;
 	}
-	if (num > -2147483648 && 2147483648 > num)
+	num *= sign;
+	if (num >= -2147483648 && 2147483648 > num)
 		return (0);
 	else
 		return (1);
