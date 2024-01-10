@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 13:43:55 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/09 15:47:45 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/10 12:33:38 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -64,13 +64,18 @@ int	alone(int midpoint, t_vars *vars)
 
 	i = 0;
 	ic = 0;
+	j = 0;
 	while (ic < vars->len_c && vars->chunk[ic] != midpoint)
 		ic++;
-	while (i < vars->len_b && vars->pb[i] < vars->chunk[ic])//ic -1
-		i++;
-	j = i;
+	if (ic == 0 || ic >= vars->len_c)
+		return (1);
+	// && vars->pb[i] < vars->chunk[ic]
 	while (i < vars->len_b)
+	{
+		if (vars->chunk[ic] > vars->pb[i] && vars->pb[i] >= vars->chunk[ic - 1])
+			j++;
 		i++;
+	}
 	if (i - j != 1)
 		return (1);
 	return (0);
