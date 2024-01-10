@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 13:43:55 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/10 12:33:38 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/10 15:52:06 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -35,8 +35,8 @@ void	ft_chunk_check(t_vars *vars, int ind)
 	{
 		if (m == vars->chunk[ind] || (vars->pb[i] > m && m < vars->chunk[ind]))
 		{
-			ft_push(vars->pa, &vars->len_a, vars->pb[0], 'b');
-			ft_push_balance(vars->pb, &vars->len_b);
+			vars->pa = ft_push(vars->pa, &vars->len_a, vars->pb[0], 'a');
+			vars->pb = ft_push_balance(vars->pb, &vars->len_b);
 			order_a(vars);
 			i++;
 		}
@@ -129,7 +129,8 @@ void	order_a(t_vars *vars)
 	int	s;
 
 	i = 0;
-	s = vars->pa[0];
+	if (vars->len_a > 0)
+		s = vars->pa[0];
 	while (i < vars->len_a - 1 && vars->pa[i] > vars->pa[i + 1])
 	{
 		if (s > vars->pa[i + 1] && nb_sup(vars, s) > 1)
