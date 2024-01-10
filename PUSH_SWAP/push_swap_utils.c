@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:19:40 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/09 16:37:22 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/10 10:57:37 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -22,9 +22,9 @@ int	nb_inf(t_vars *vars, int n)
 
 	i = 0;
 	j = 0;
-	while (i > vars->len_a)
+	while (i < vars->len_a)
 	{
-		if (n < vars->pa[i])
+		if (n > vars->pa[i])
 			j++;
 		i++;
 	}
