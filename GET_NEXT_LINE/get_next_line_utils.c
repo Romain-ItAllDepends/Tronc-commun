@@ -108,11 +108,6 @@ char	*ft_cut(char *s, char *b)
 		j++;
 	}
 	tab[j] = 0;
-	i = 0;
-	while (s[j])
-	{
-		j++;
-	}
 	ft_save(&s[ft_strchr(s, '\n')], b);
 	free(s);
 	return (tab);
