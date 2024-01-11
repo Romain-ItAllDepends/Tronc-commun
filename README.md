@@ -13,7 +13,7 @@ Le tronc commun est la partie durant laquelle on apprend les bases de la program
 ## Maitise digitale : Édition, Virtualisation, Développement
 - VIM         ⭐⭐⭐⭐
 - VirtualBox         ⭐⭐⭐
-- VSCode        ⭐⭐⭐
+- VSCode        ⭐⭐⭐⭐
 
 > [!NOTE]
 > Les dossiers TrainExamxx sont les dossiers contenant des exercices d'entraînement fait en vue de cet examen.
