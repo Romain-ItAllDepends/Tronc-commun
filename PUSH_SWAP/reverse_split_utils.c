@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 13:43:55 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/10 15:52:06 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/12 13:30:55 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -19,7 +19,7 @@
 * We will sort all the chunk other than the last one.
 */
 
-void	ft_chunk_check(t_vars *vars, int ind)
+void	ft_chunk_check(t_vars *vars, int ind, int *v)
 {
 	int	i;
 	int	max;
@@ -27,13 +27,12 @@ void	ft_chunk_check(t_vars *vars, int ind)
 
 	max = max_chunk(vars, ind);
 	i = min_chunk(vars, ind);
-	if (max - i > 2)
-		m = sort_bubble(&vars->chunk[i], max - i);
-	else
-		m = vars->chunk[ind];
+	if (max != -1)
+		m = sort_bubble(&vars->chunk[ind], max - i);
 	while (i < max)
 	{
-		if (m == vars->chunk[ind] || (vars->pb[i] > m && m < vars->chunk[ind]))
+		if ((m == vars->chunk[ind] || (vars->pb[i] > m && m < vars->chunk[ind]))
+			&& crescent(vars->pa, vars->len_a) == 0)
 		{
 			vars->pa = ft_push(vars->pa, &vars->len_a, vars->pb[0], 'a');
 			vars->pb = ft_push_balance(vars->pb, &vars->len_b);
@@ -41,13 +40,12 @@ void	ft_chunk_check(t_vars *vars, int ind)
 			i++;
 		}
 		else if (m < vars->chunk[ind] && (vars->pb[i] < m
-				&& vars->pb[i + 1] < m) && m != vars->pb[i + 1])
+				&& vars->pb[i + 1] < m) && m != vars->pb[i + 1] && i + 1 < max)
 			ft_swap(vars->pb, 'b');
-		//Switch si pb[i] est inferieur a pb[i + 1] et diff de mid
-		if (i == max)
-			i = 0;
 		i++;
 	}
+	if (i == 0 && max == -1)
+		*v = 1;
 }
 
 /*
@@ -89,17 +87,20 @@ int	alone(int midpoint, t_vars *vars)
 
 static void	order_b(t_vars *vars, int i_max)
 {
-	int	i;
 	int	r;
+	int	m;
 
-	i = 0;
 	r = 1;
-	if (vars->len_b / 2 >= vars->pb[i_max])
+	m = vars->pb[i_max];
+	if (vars->len_b / 2 >= i_max)
 		r = 0;
-	if (i_max != i && r == 0)
-		ft_rotate(vars->pb, vars->len_b, 'b');
-	else if (i_max != i && r == 1)
-		vars->pb = ft_reverse_rotate(vars->pb, vars->len_b, 'b');
+	while (vars->pb[0] != m)
+	{
+		if (r == 0)
+			ft_rotate(vars->pb, vars->len_b, 'b');
+		else if (r == 1)
+			vars->pb = ft_reverse_rotate(vars->pb, vars->len_b, 'b');
+	}
 	vars->pa = ft_push(vars->pa, &vars->len_a, vars->pb[0], 'b');
 	vars->pb = ft_push_balance(vars->pb, &vars->len_b);
 }
@@ -144,7 +145,7 @@ void	order_a(t_vars *vars)
 			break ;
 		i++;
 	}
-	reverse(vars, i + 1);
+	//reverse(vars, i + 1);
 }
 
 /*
