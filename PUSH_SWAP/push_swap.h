@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:08:56 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/06 11:25:26 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/12 16:04:58 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -26,6 +26,7 @@ typedef struct s_vars{
 	int	*midpoint;
 	int	*pa;
 	int	*pb;
+	int	*np;
 }	t_vars;
 
 /*
@@ -59,7 +60,7 @@ int		*ft_switch(int *sort, int j);
 int		*ft_fill(int *tab, int length);
 int		*chunk_init(int newmidpoint, t_vars *vars);
 void	reverse_split(t_vars *vars);
-void	ft_chunk_check(t_vars *vars, int ind);
+void	ft_chunk_check(t_vars *vars, int ind, int *v);
 int		max_chunk(t_vars *vars, int index_midpoint);
 int		min_chunk(t_vars *vars, int index_midpoint);
 int		nb_sup(t_vars *vars, int n);
@@ -67,6 +68,8 @@ int		max(t_vars *vars, int index_midpoint);
 void	special_case(t_vars *vars);
 void	reverse(t_vars *vars, int c);
 void	order_a(t_vars *vars);
+int		*normalisation(int *p, int length);
+void	ft_sort_three(t_vars *vars);
 
 /*
 * Error
