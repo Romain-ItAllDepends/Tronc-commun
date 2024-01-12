@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:07:53 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/10 11:09:30 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/12 16:34:41 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -83,13 +83,14 @@ int	main(int ac, char **av)
 	vars->pa = conversion_char_to_int_array(full_char, ' ', &vars->len_a);
 	free(full_char);
 	error_duplication(vars->pa, vars->len_a);
-	vars = core(vars);
-	while (i < vars->len_a)
-	{
-		ft_printf("\n%d", vars->pa[i]);
-		i++;
-	}
-	ft_printf("\n\n%d", vars->len_a);
+	if (!(crescent(vars->pa, vars->len_a) == 0))
+		vars = core(vars);
+	// while (i < vars->len_a)
+	// {
+	// 	ft_printf("\n%d", vars->pa[i]);
+	// 	i++;
+	// }
+	// ft_printf("\n\n%d", vars->len_a);
 	free(vars->pa);
 	free(vars);
 	return (0);
