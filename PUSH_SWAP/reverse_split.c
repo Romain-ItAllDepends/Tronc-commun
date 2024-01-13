@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 13:55:58 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/13 13:48:36 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/13 16:24:18 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -77,7 +77,7 @@ void	reverse_split(t_vars *vars)
 		else if (i == vars->len_c - 1)
 			special_case(vars);
 		if (crescent(vars->pa, vars->len_a) == 1)
-			reverse(vars, i);
+			order_a(vars);
 		if (v == 1)
 			i++;
 	}
@@ -122,7 +122,6 @@ void	alone_push(t_vars *vars, int *verif, int ind)
 		if (vars->np == 0)
 			return ;
 		ft_sort_three(vars);
-		free(vars->np);
 		return ;
 	}
 	if (vars->len_a > 1 && vars->pa[0] > vars->pa[1])
@@ -164,4 +163,5 @@ void	ft_sort_three(t_vars *vars)
 		vars->pa = ft_push(vars->pa, &vars->len_a, vars->pb[0], 'a');
 		vars->pb = ft_push_balance(vars->pb, &vars->len_b);
 	}
+	free(vars->np);
 }
