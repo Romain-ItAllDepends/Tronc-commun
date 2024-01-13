@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 13:43:55 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/13 13:37:04 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/13 16:43:20 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -132,12 +132,12 @@ void	order_a(t_vars *vars)
 	i = 0;
 	if (vars->len_a > 0)
 		s = vars->pa[0];
-	while (i < vars->len_a - 1 && vars->pa[i] > vars->pa[i + 1])
+	while (i < vars->len_a - 1 && vars->pa[0] > vars->pa[1])
 	{
-		if (s > vars->pa[i + 1] && nb_sup(vars, s) > 1)
+		if (vars->pa[0] > vars->pa[1] && nb_sup(vars, s) > 1)
 		{
 			ft_swap(vars->pa, 'a');
-			ft_rotate(vars->pa, vars->len_a, 'a');
+			vars->pa = ft_rotate(vars->pa, vars->len_a, 'a');
 		}
 		else if (nb_sup(vars, s) == 1)
 			ft_swap(vars->pa, 'a');
@@ -145,7 +145,11 @@ void	order_a(t_vars *vars)
 			break ;
 		i++;
 	}
-	//reverse(vars, i + 1);
+	while (i >= 1)
+	{
+		vars->pa = ft_reverse_rotate(vars->pa, vars->len_a, 'a');
+		i--;
+	}
 }
 
 /*
