@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 13:55:58 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/12 16:18:28 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/13 13:48:36 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -131,8 +131,9 @@ void	alone_push(t_vars *vars, int *verif, int ind)
 		ft_swap(vars->pb, 'b');
 	if (ind + 1 >= vars->len_c)
 		ind -= 1;
-	while (i < vars->len_b && vars->pb[0] < vars->chunk[ind + 1])
+	while (i < vars->len_b && vars->pb[0] <= vars->chunk[ind + 1])
 	{
+		order_a(vars);
 		vars->pa = ft_push(vars->pa, &vars->len_a, vars->pb[0], 'a');
 		vars->pb = ft_push_balance(vars->pb, &vars->len_b);
 	}
@@ -144,15 +145,15 @@ void	ft_sort_three(t_vars *vars)
 		ft_swap(vars->pb, 'b');
 	else if (vars->np[0] == 2 && vars->np[1] == 1)
 	{
+		vars->pb = ft_rotate(vars->pb, vars->len_b, 'b');
 		ft_swap(vars->pb, 'b');
-		vars->pb = ft_reverse_rotate(vars->pb, vars->len_b, 'b');
 	}
 	else if (vars->np[0] == 2 && vars->np[1] == 0)
-		ft_rotate(vars->pb, vars->len_b, 'b');
+		vars->pb = ft_rotate(vars->pb, vars->len_b, 'b');
 	else if (vars->np[0] == 0 && vars->np[1] == 2)
 	{
 		ft_swap(vars->pb, 'b');
-		ft_rotate(vars->pb, vars->len_b, 'b');
+		vars->pb = ft_rotate(vars->pb, vars->len_b, 'b');
 	}
 	else if (vars->np[0] == 1 && vars->np[1] == 2)
 		vars->pb = ft_reverse_rotate(vars->pb, vars->len_b, 'b');
