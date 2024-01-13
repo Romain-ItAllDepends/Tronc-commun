@@ -6,12 +6,13 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 10:26:28 by rgobet            #+#    #+#             */
-/*   Updated: 2023/12/29 13:48:11 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/11 16:05:53 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "push_swap.h"
 
+/*
 static int	*sort_b(int	*tab, int length)
 {
 	int	*sort;
@@ -38,6 +39,15 @@ static int	*sort_b(int	*tab, int length)
 	return (sort);
 }
 
+*/
+
+/*
+* Find an algorithme to find the start and the end of each chunk.
+* Not used for the moment.
+*/
+
+/*
+
 static int	start_chunk(int *list, int length, int midpoint)
 {
 	int	i;
@@ -52,7 +62,7 @@ static int	start_chunk(int *list, int length, int midpoint)
 		if (sort[i] < midpoint)
 		{
 			free(sort);
-			return (i);
+			return (sort[i]);
 		}
 		i++;
 	}
@@ -74,55 +84,43 @@ static int	end_chunk(int *list, int length, int midpoint)
 	while (i < length)
 	{
 		if (sort[i] < midpoint)
-			res = i;
+			res = sort[i];
 		i++;
 	}
 	free(sort);
 	return (res);
 }
-
-static int	*mid_and_range(int *list, int length, int newmidpoint)
-{
-	int	*newchunk;
-
-	newchunk = malloc(sizeof(int) * 3);
-	if (!newchunk)
-		return (NULL);
-	newchunk[0] = newmidpoint;
-	newchunk[1] = start_chunk(list, length, newmidpoint);
-	newchunk[2] = end_chunk(list, length, newmidpoint);
-	return (newchunk);
-}
+*/
 
 /*
 * A chunk is an area in which the midpoint and the range of index of your chunk.
 * We need the chunk to send the integer in the stack b in the stack a.
 */
 
-int	**chunk_init(int newmidpoint, int *p, int **chunk)
+int	*chunk_init(int newmidpoint, t_vars *vars)
 {
-	static int	length;
-	int			**newchunk;
-	int			i;
+	int	*newchunk;
+	int	i;
 
-	if (length > 0)
-		newchunk = malloc (sizeof(int *) * length);
-	else
-		newchunk = malloc (sizeof(int *));
+	vars->len_c++;
+	newchunk = malloc (sizeof(int) * (vars->len_c));
 	if (!newchunk)
 		return (NULL);
-	newchunk[0] = malloc (sizeof(int));
-	if (!newchunk[0])
-		return (NULL);
-	i = 1;
-	while (i < length)
+	i = 0;
+	newchunk[i] = newmidpoint;
+	while (i < vars->len_c - 1)
 	{
-		newchunk[i] = mid_and_range(p, length, newmidpoint);
 		i++;
+		newchunk[i] = vars->chunk[i - 1];
 	}
-	length++;
-	newchunk[0][0] = length;
-	if (length > 1)
-		ft_free(chunk, length / 2);
+	if (vars->len_c > 1)
+		free(vars->chunk);
+	// i = 0;
+	// while (i < vars->len_c)
+	// {
+	// 	ft_printf("\n%d", newchunk[i]);
+	// 	i++;
+	// }
+	// ft_printf("\n\n\n\n%d\n\n\n\n\n", vars->len_c);
 	return (newchunk);
 }
