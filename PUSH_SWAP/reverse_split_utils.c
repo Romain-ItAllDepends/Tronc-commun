@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 13:43:55 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/12 13:30:55 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/13 13:37:04 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -97,7 +97,7 @@ static void	order_b(t_vars *vars, int i_max)
 	while (vars->pb[0] != m)
 	{
 		if (r == 0)
-			ft_rotate(vars->pb, vars->len_b, 'b');
+			vars->pb = ft_rotate(vars->pb, vars->len_b, 'b');
 		else if (r == 1)
 			vars->pb = ft_reverse_rotate(vars->pb, vars->len_b, 'b');
 	}
