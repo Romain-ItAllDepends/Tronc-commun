@@ -7,7 +7,7 @@ Le tronc commun est la partie durant laquelle on apprend les bases de la program
 - BORN2BEROOT ✅
 ## Mes compétences :
 - C
-  - ![40%](https://progress-bar.dev/40)
+  - ![50%](https://progress-bar.dev/50)
 - Shell
   - ![50%](https://progress-bar.dev/50)
 ## Maitise digitale : Édition, Virtualisation, Développement
