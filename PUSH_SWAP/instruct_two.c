@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 14:14:09 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/06 14:31:53 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/13 16:27:54 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -23,12 +23,12 @@ int	*ft_reverse_rotate(int *tab, int length, char c)
 	rr = malloc (length * sizeof(int));
 	if (!rr)
 		return (NULL);
+	rr[0] = tab[length - 1];
 	while (length - 1 > i)
 	{
 		rr[i + 1] = tab[i];
 		i++;
 	}
-	rr[0] = tab[length - 1];
 	if (c != 'x')
 		ft_printf("rr%c\n", c);
 	free(tab);
