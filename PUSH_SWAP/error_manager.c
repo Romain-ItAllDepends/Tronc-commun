@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 10:34:27 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/10 14:16:25 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/13 11:41:43 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -52,6 +52,12 @@ int	error_duplication(int *pa, int length)
 * The numbers can't be other than a numeric character, minus, plus or a space
 */
 
+void	ft_error(void)
+{
+	write (2, "Error\n", 6);
+	exit(1);
+}
+
 int	error_no_number(char **av, int ac)
 {
 	int	i;
@@ -61,15 +67,17 @@ int	error_no_number(char **av, int ac)
 	while (j < ac)
 	{
 		i = 0;
-		while (av[j][i])
+		while (av[j][i] || av[j][0] == 0)
 		{
-			if (av[j][i] == ' ' || av[j][i] == '+' || av[j][i] == '-')
+			if (av[j][i] == ' ')
+				i++;
+			if (av[j][i] == '+' || av[j][i] == '-')
 				i++;
 			if (av[j][i] < '0' || av[j][i] > '9')
-			{
-				write (2, "Error\n", 6);
-				exit(1);
-			}
+				ft_error();
+			if ((av[j][i] >= '0' || av[j][i] <= '9')
+				&& (av[j][i + 1] == '+' || av[j][i + 1] == '-'))
+				ft_error();
 			i++;
 		}
 		j++;
