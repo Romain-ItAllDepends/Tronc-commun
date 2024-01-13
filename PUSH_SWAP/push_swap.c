@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:07:53 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/12 16:34:41 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/13 12:42:18 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -73,9 +73,9 @@ int	main(int ac, char **av)
 	char	*full_char;
 	int		i;
 
-	i = 0;
 	if (ac == 1)
-		exit(0);
+		exit(1);
+	i = 0;
 	vars = ft_calloc(sizeof(t_vars), 1);
 	if (!vars)
 		exit(1);
@@ -85,12 +85,17 @@ int	main(int ac, char **av)
 	error_duplication(vars->pa, vars->len_a);
 	if (!(crescent(vars->pa, vars->len_a) == 0))
 		vars = core(vars);
-	// while (i < vars->len_a)
-	// {
-	// 	ft_printf("\n%d", vars->pa[i]);
-	// 	i++;
-	// }
+	while (i < vars->len_a)
+	{
+		ft_printf("\n%d", vars->pa[i]);
+		i++;
+	}
 	// ft_printf("\n\n%d", vars->len_a);
+	// if (!(crescent(vars->pa, vars->len_a) == 0))
+	// {
+	// 	ft_swap(vars->pa, 'a');
+	// 	vars->pa = ft_reverse_rotate(vars->pa, vars->len_a, 'a');
+	// }
 	free(vars->pa);
 	free(vars);
 	return (0);
