@@ -15,11 +15,11 @@ Si l'élément qui remplace celui qui était supérieur au midpoint y est infér
 7. Vue qu'il ne reste que deux éléments dans la liste a, il suffit de les trier.
 (ra si le premier élément est plus grand que le second.) ✔️
 
-8. Si un chunk ne comporte qu'un élément pa (On envoie le premier element de la pile b sur la pile a) sinon on trie par ordre décroissant (de sorte a se que le premier element de la liste sois le plus grand) en se basant sur le midpoint de se chunk (Si le chunk comporte les nombres 7,8,9 alors le midpoint est 8 (on l'obtient de la même façon que la pile a, mais en se basant que sur les nombres d'un chunk)) le premier chunk (le chunk du dessus) avec sb (switch les deux premiers éléments) puis pa. ❎
+8. Si un chunk ne comporte qu'un élément pa (On envoie le premier element de la pile b sur la pile a) sinon on trie par ordre décroissant (de sorte a se que le premier element de la liste sois le plus grand) en se basant sur le midpoint de se chunk (Si le chunk comporte les nombres 7,8,9 alors le midpoint est 8 (on l'obtient de la même façon que la pile a, mais en se basant que sur les nombres d'un chunk)) le premier chunk (le chunk du dessus) avec sb (switch les deux premiers éléments) puis pa. ✔️
 
-9. Si c'est le dernier chunk on peut utiliser directement rb ou rrb selon si il est inferieur a length / 2 de la pile B ou superieur. Si inferieur rb, si superieur rrb puis push A. ❎
+9. Si c'est le dernier chunk on peut utiliser directement rb ou rrb selon si il est inferieur a length / 2 de la pile B ou superieur. Si inferieur rb, si superieur rrb puis push A. ✔️
 
-10. Si la liste est déjà trier (ordre décroissant) dans le chunk peu importe le nombre d'éléments pa. ❎
+10. Si la liste est déjà trier (ordre décroissant) dans le chunk peu importe le nombre d'éléments pa. ✔️
 
 
 > [!IMPORTANT]
