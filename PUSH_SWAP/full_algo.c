@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:28:10 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/18 16:48:18 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/19 14:43:58 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -723,6 +723,26 @@ static void	finish(t_vars *vars)
 	return ;
 }
 
+/*
+* Algorithme de tri pas ouf
+*
+		if (i < vars->len_b - 1 && vars->pa[0] > vars->pb[0]
+			&& vars->pa[vars->len_a - 1] < vars->pb[0])
+		{
+			vars->pa = ft_push(vars->pa, &vars->len_a, vars->pb[0], 'a');
+			vars->pb = ft_push_balance(vars->pb, &vars->len_b);
+		}
+		else if (i < vars->len_b - 1 && vars->pa[0] > vars->pb[1]
+			&& vars->pa[vars->len_a - 1] < vars->pb[1] && i >= 1)
+		{
+			ft_swap(vars->pb, 'b');
+			vars->pa = ft_push(vars->pa, &vars->len_a, vars->pb[0], 'a');
+			vars->pb = ft_push_balance(vars->pb, &vars->len_b);
+		}
+*
+**/
+
+
 void	order_a(t_vars *vars)
 {
 	int	i;
@@ -736,8 +756,12 @@ void	order_a(t_vars *vars)
 		if (vars->pa[0] > vars->pa[1] && nb_sup(vars, s) > 1)
 		{
 			ft_swap(vars->pa, 'a');
-			vars->pa = ft_rotate(vars->pa, vars->len_a, 'a');
-			i++;
+			if (i < vars->len_a - 1 && (vars->pa[0] > vars->pa[1]
+					|| vars->pa[1] > vars->pa[2]))
+			{
+				vars->pa = ft_rotate(vars->pa, vars->len_a, 'a');
+				i++;
+			}
 		}
 		else if (nb_sup(vars, s) == 1)
 			ft_swap(vars->pa, 'a');
