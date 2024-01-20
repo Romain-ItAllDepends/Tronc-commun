@@ -1,6 +1,7 @@
 ### Algorithme push swap
 
 1. Trier. ✔️
+
 2. Trouver le midpoint en divisant par deux la length et prendre dans la liste triée le nombre à cet index dans midpoint. ✔️
    
 3. Maintenant, on divise par deux la length et on cherche tous les nombres inférieurs au midpoint jusqu'à pa[length / 2] ✔️
