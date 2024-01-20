@@ -26,7 +26,7 @@ Sans utiliser de midpoint sur la pile b.
 
 Si lors du order_a on peut push sur a un nombre au passage alors on le fait. (si pb[0] + 1 ou pb[1] + 1 sont == a pa[0]) ❎ Ne fonctionne pas.
 
-Retrecir les chunk a 25 max.
+Retrecir les chunk a 25/50 max.
 
 > [!IMPORTANT]
 > Source : https://www.youtube.com/watch?v=7KW59UO55TQ&ab_channel=JOHNPARK
