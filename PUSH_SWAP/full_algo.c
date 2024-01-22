@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:28:10 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/19 14:43:58 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/22 15:37:01 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -1259,6 +1259,45 @@ char	*ft_strjoin(char **s, int nbList, t_vars *vars)
 int	*ft_fill(int *tab, int length);
 int	*ft_switch(int *sort, int j);
 
+/*
+* Make a function to find the closest number lower than n.
+*/
+
+static int	r_or_rr(t_vars *vars, int n)
+{
+	int	i;
+	int	j;
+	int	m;
+	int	temp;
+
+	i = 0;
+	j = 0;
+	m = 0;
+	while (i < vars->len_a)
+	{
+		if (n > vars->pa[i])
+		{
+			j = i;
+			break ;
+		}
+		i++;
+	}
+	while (i > 0)
+	{
+		if (n > vars->pa[i])
+		{
+			m = i;
+			break ;
+		}
+		i--;
+	}
+	temp = m - vars->len_a - 1;
+	if (temp < j)
+		return (1);
+	else
+		return (0);
+}
+
 int	nb_inf(t_vars *vars, int n)
 {
 	int	i;
@@ -1278,19 +1317,26 @@ int	nb_inf(t_vars *vars, int n)
 void	ft_split_initb(t_vars *vars)
 {
 	int	midpoint;
+	int	nb;
 	int	i;
 
 	i = 0;
 	midpoint = sort_bubble(vars->pa, vars->len_a);
-	while (1)
+	nb = nb_inf(vars, midpoint);
+	while (i < 50 && i < nb)
 	{
-		if (vars->pa[i] < midpoint)
+		if (vars->pa[0] < midpoint)
 		{
 			vars->pb = ft_push(vars->pb, &vars->len_b, vars->pa[0], 'b');
 			vars->pa = ft_push_balance(vars->pa, &vars->len_a);
+			i++;
 		}
-		else if (vars->pa[i] >= midpoint && vars->len_a > 1)
+		else if (vars->pa[0] >= midpoint && vars->len_a > 1
+			&& r_or_rr(vars, midpoint) == 0)
 			vars->pa = ft_rotate(vars->pa, vars->len_a, 'a');
+		else if (vars->pa[0] >= midpoint && vars->len_a > 1
+			&& r_or_rr(vars, midpoint) == 1)
+			vars->pa = ft_reverse_rotate(vars->pa, vars->len_a, 'a');
 		if (nb_inf(vars, midpoint) == 0)
 			break ;
 	}
@@ -1357,7 +1403,12 @@ int	sort_bubble(int *tab, int length)
 		l--;
 		i++;
 	}
-	mid = sort[length / 2];
+	if (length < 53)
+		mid = sort[length / 2];
+	else if (length < 103)
+		mid = sort[length / 4];
+	else if (length > 100)
+		mid = sort[length / 10];
 	free(sort);
 	return (mid);
 }
