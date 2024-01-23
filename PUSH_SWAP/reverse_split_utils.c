@@ -1,51 +1,44 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   reverse_split_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/30 13:43:55 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/13 16:43:20 by rgobet           ###   ########.fr       */
+/*   Created: 2024/01/23 13:24:10 by rgobet            #+#    #+#             */
+/*   Updated: 2024/01/23 13:25:06 by rgobet           ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
 /*
 * We will sort in a decreasing order each chunk starting by the chunk above
 * the stack b.
-* m = midpoint
 * We will sort all the chunk other than the last one.
 */
 
-void	ft_chunk_check(t_vars *vars, int ind, int *v)
+void	ft_chunk_check(t_vars *vars, int ind)
 {
 	int	i;
 	int	max;
-	int	m;
 
 	max = max_chunk(vars, ind);
 	i = min_chunk(vars, ind);
-	if (max != -1)
-		m = sort_bubble(&vars->chunk[ind], max - i);
+	if (i - max <= 2 && vars->pb[0] < vars->pb[1])
+		ft_swap(vars->pb, 'b');
 	while (i < max)
 	{
-		if ((m == vars->chunk[ind] || (vars->pb[i] > m && m < vars->chunk[ind]))
-			&& crescent(vars->pa, vars->len_a) == 0)
+		if (vars->pb[0] > vars->pb[1])
 		{
 			vars->pa = ft_push(vars->pa, &vars->len_a, vars->pb[0], 'a');
 			vars->pb = ft_push_balance(vars->pb, &vars->len_b);
 			order_a(vars);
 			i++;
 		}
-		else if (m < vars->chunk[ind] && (vars->pb[i] < m
-				&& vars->pb[i + 1] < m) && m != vars->pb[i + 1] && i + 1 < max)
+		else if (vars->pb[0] < vars->pb[1])
 			ft_swap(vars->pb, 'b');
-		i++;
 	}
-	if (i == 0 && max == -1)
-		*v = 1;
 }
 
 /*
@@ -57,24 +50,27 @@ void	ft_chunk_check(t_vars *vars, int ind, int *v)
 int	alone(int midpoint, t_vars *vars)
 {
 	int	i;
-	int	ic;
 	int	j;
+	int	ac;
 
 	i = 0;
-	ic = 0;
 	j = 0;
-	while (ic < vars->len_c && vars->chunk[ic] != midpoint)
-		ic++;
-	if (ic == 0 || ic >= vars->len_c)
+	ac = 0;
+	while (vars->chunk[ac] != midpoint)
+		ac++;
+	if (ac == 0 && vars->len_b == 1)
 		return (1);
-	// && vars->pb[i] < vars->chunk[ic]
+	else if (ac == vars->len_c - 1 && vars->len_b == 1)
+		return (1);
+	else if (ac == vars->len_c - 1)
+		return (0);
 	while (i < vars->len_b)
 	{
-		if (vars->chunk[ic] > vars->pb[i] && vars->pb[i] >= vars->chunk[ic - 1])
+		if (midpoint > vars->pb[i] && vars->pb[i] >= vars->chunk[ac + 1])
 			j++;
 		i++;
 	}
-	if (i - j != 1)
+	if (j == 1)
 		return (1);
 	return (0);
 }
@@ -96,12 +92,12 @@ static void	order_b(t_vars *vars, int i_max)
 		r = 0;
 	while (vars->pb[0] != m)
 	{
-		if (r == 0)
+		if (r == 0 || r == 1)
 			vars->pb = ft_rotate(vars->pb, vars->len_b, 'b');
 		else if (r == 1)
 			vars->pb = ft_reverse_rotate(vars->pb, vars->len_b, 'b');
 	}
-	vars->pa = ft_push(vars->pa, &vars->len_a, vars->pb[0], 'b');
+	vars->pa = ft_push(vars->pa, &vars->len_a, vars->pb[0], 'a');
 	vars->pb = ft_push_balance(vars->pb, &vars->len_b);
 }
 
@@ -137,16 +133,33 @@ void	order_a(t_vars *vars)
 		if (vars->pa[0] > vars->pa[1] && nb_sup(vars, s) > 1)
 		{
 			ft_swap(vars->pa, 'a');
-			vars->pa = ft_rotate(vars->pa, vars->len_a, 'a');
+			if (i < vars->len_a - 1 && (vars->pa[0] > vars->pa[1]
+					|| vars->pa[1] > vars->pa[2]))
+			{
+				vars->pa = ft_rotate(vars->pa, vars->len_a, 'a');
+				i++;
+			}
 		}
 		else if (nb_sup(vars, s) == 1)
 			ft_swap(vars->pa, 'a');
 		else if (nb_sup(vars, s) == 0)
 			break ;
-		i++;
 	}
 	while (i >= 1)
 	{
+		if (i < vars->len_b - 1 && vars->pa[0] > vars->pb[0]
+			&& vars->pa[vars->len_a - 1] < vars->pb[0])
+		{
+			vars->pa = ft_push(vars->pa, &vars->len_a, vars->pb[0], 'a');
+			vars->pb = ft_push_balance(vars->pb, &vars->len_b);
+		}
+		else if (i < vars->len_b - 1 && vars->pa[0] > vars->pb[1]
+			&& vars->pa[vars->len_a - 1] < vars->pb[1] && i >= 1)
+		{
+			ft_swap(vars->pb, 'b');
+			vars->pa = ft_push(vars->pa, &vars->len_a, vars->pb[0], 'a');
+			vars->pb = ft_push_balance(vars->pb, &vars->len_b);
+		}
 		vars->pa = ft_reverse_rotate(vars->pa, vars->len_a, 'a');
 		i--;
 	}
@@ -160,14 +173,10 @@ void	order_a(t_vars *vars)
 
 void	special_case(t_vars *vars)
 {
-	int	i;
 	int	j;
 	int	mx;
-	int	length;
 
-	i = 0;
-	length = vars->len_b;
-	while (i < length)
+	while (vars->len_b)
 	{
 		mx = max(vars, vars->len_c - 1);
 		j = 0;
@@ -180,6 +189,5 @@ void	special_case(t_vars *vars)
 		}
 		order_b(vars, j);
 		order_a(vars);
-		i++;
 	}
 }
