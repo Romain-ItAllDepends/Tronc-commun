@@ -12,34 +12,6 @@
 
 #include "push_swap.h"
 
-int	alone(int midpoint, t_vars *vars)
-{
-	int	i;
-	int	j;
-	int	ac;
-
-	i = 0;
-	j = 0;
-	ac = 0;
-	while (vars->chunk[ac] != midpoint)
-		ac++;
-	if (ac == 0 && vars->len_b == 1)
-		return (1);
-	else if (ac == vars->len_c - 1 && vars->len_b == 1)
-		return (1);
-	else if (ac == vars->len_c - 1)
-		return (0);
-	while (i < vars->len_b)
-	{
-		if (midpoint > vars->pb[i] && vars->pb[i] >= vars->chunk[ac + 1])
-			j++;
-		i++;
-	}
-	if (j == 1)
-		return (1);
-	return (0);
-}
-
 static void	finish(t_vars *vars)
 {
 	int	j;
