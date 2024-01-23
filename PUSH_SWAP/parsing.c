@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/18 15:06:15 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/12 16:29:07 by rgobet           ###   ########.fr       */
+/*   Created: 2024/01/23 13:24:10 by rgobet            #+#    #+#             */
+/*   Updated: 2024/01/23 13:25:06 by rgobet           ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
@@ -64,14 +64,16 @@ static int	ft_strlendb(char **s, int length)
 	return (i + sp);
 }
 
-static int	ft_substr(char const *s, char c, int *tabl, char *str)
+static int	ft_substr(char const *s, int *tabl, char *str, t_vars *vars)
 {
+	char			c;
 	unsigned int	i;
 	int				tab;
 
 	i = 0;
 	tab = 0;
-	error_isnt_int((char *)s, tabl, str);
+	c = ' ';
+	error_isnt_int((char *)s, tabl, str, vars);
 	while (s[i] && s[i] != c)
 	{
 		if (s[i] == '-' || s[i] == '+')
@@ -84,7 +86,8 @@ static int	ft_substr(char const *s, char c, int *tabl, char *str)
 	return (tab);
 }
 
-int	*conversion_char_to_int_array(char const *s, char c, int *length)
+int	*conversion_char_to_int_array(char const *s, char c, int *length,
+	t_vars *vars)
 {
 	int	i;
 	int	x;
@@ -103,21 +106,21 @@ int	*conversion_char_to_int_array(char const *s, char c, int *length)
 		if (s[i] && s[i] == c)
 			i++;
 		if (s[i] && s[i] != c)
-			tab[x++] = ft_substr(&s[i], c, tab, (char *)s);
+			tab[x++] = ft_substr(&s[i], tab, (char *)s, vars);
 		while (s[i] && s[i] != c)
 			i++;
 	}
 	return (tab);
 }
 
-char	*ft_strjoin(char **s, int nbList)
+char	*ft_strjoin(char **s, int nbList, t_vars *vars)
 {
 	char	*tab;
 	int		i;
 	int		j;
 	int		x;
 
-	error_no_number(s, nbList);
+	error_no_number(s, nbList, vars);
 	tab = malloc((ft_strlendb(s, nbList) + 1) * sizeof(char));
 	i = 0;
 	j = 1;
@@ -138,28 +141,3 @@ char	*ft_strjoin(char **s, int nbList)
 	tab[i] = 0;
 	return (tab);
 }
-/*
-int	main(int ac, char **av)
-{
-	char	*full_char;
-	int		*tab;
-	int		i;
-	int		length;
-
-	i = 0;
-	if (ac > 1)
-	{
-		full_char = ft_strjoin(av, ac);
-		tab = conversion_char_to_int_array(full_char, ' ', &length);
-		while (i < length)
-		{
-			ft_printf("%d\n", tab[i]);
-			i++;
-		}
-		ft_printf("%d", length);
-		free(tab);
-		free(full_char);
-	}
-	return (0);
-}
-*/
