@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:28:10 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/22 15:37:01 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/23 11:32:19 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -726,19 +726,6 @@ static void	finish(t_vars *vars)
 /*
 * Algorithme de tri pas ouf
 *
-		if (i < vars->len_b - 1 && vars->pa[0] > vars->pb[0]
-			&& vars->pa[vars->len_a - 1] < vars->pb[0])
-		{
-			vars->pa = ft_push(vars->pa, &vars->len_a, vars->pb[0], 'a');
-			vars->pb = ft_push_balance(vars->pb, &vars->len_b);
-		}
-		else if (i < vars->len_b - 1 && vars->pa[0] > vars->pb[1]
-			&& vars->pa[vars->len_a - 1] < vars->pb[1] && i >= 1)
-		{
-			ft_swap(vars->pb, 'b');
-			vars->pa = ft_push(vars->pa, &vars->len_a, vars->pb[0], 'a');
-			vars->pb = ft_push_balance(vars->pb, &vars->len_b);
-		}
 *
 **/
 
@@ -770,6 +757,19 @@ void	order_a(t_vars *vars)
 	}
 	while (i >= 1)
 	{
+		if (i < vars->len_b - 1 && vars->pa[0] > vars->pb[0]
+			&& vars->pa[vars->len_a - 1] < vars->pb[0])
+		{
+			vars->pa = ft_push(vars->pa, &vars->len_a, vars->pb[0], 'a');
+			vars->pb = ft_push_balance(vars->pb, &vars->len_b);
+		}
+		else if (i < vars->len_b - 1 && vars->pa[0] > vars->pb[1]
+			&& vars->pa[vars->len_a - 1] < vars->pb[1] && i >= 1)
+		{
+			ft_swap(vars->pb, 'b');
+			vars->pa = ft_push(vars->pa, &vars->len_a, vars->pb[0], 'a');
+			vars->pb = ft_push_balance(vars->pb, &vars->len_b);
+		}
 		vars->pa = ft_reverse_rotate(vars->pa, vars->len_a, 'a');
 		i--;
 	}
@@ -786,7 +786,7 @@ static void	order_b(t_vars *vars, int i_max)
 		r = 0;
 	while (vars->pb[0] != m)
 	{
-		if (r == 0)
+		if (r == 0 || r == 1)
 			vars->pb = ft_rotate(vars->pb, vars->len_b, 'b');
 		else if (r == 1)
 			vars->pb = ft_reverse_rotate(vars->pb, vars->len_b, 'b');
@@ -823,14 +823,10 @@ void	ft_chunk_check(t_vars *vars, int ind)
 
 void	special_case(t_vars *vars)
 {
-	int	i;
 	int	j;
 	int	mx;
-	int	length;
 
-	i = 0;
-	length = vars->len_b;
-	while (i < length)
+	while (vars->len_b)
 	{
 		mx = max(vars, vars->len_c - 1);
 		j = 0;
@@ -843,7 +839,6 @@ void	special_case(t_vars *vars)
 		}
 		order_b(vars, j);
 		order_a(vars);
-		i++;
 	}
 }
 
@@ -1261,7 +1256,7 @@ int	*ft_switch(int *sort, int j);
 
 /*
 * Make a function to find the closest number lower than n.
-*/
+*
 
 static int	r_or_rr(t_vars *vars, int n)
 {
@@ -1298,6 +1293,9 @@ static int	r_or_rr(t_vars *vars, int n)
 		return (0);
 }
 
+*
+**/
+
 int	nb_inf(t_vars *vars, int n)
 {
 	int	i;
@@ -1316,14 +1314,14 @@ int	nb_inf(t_vars *vars, int n)
 
 void	ft_split_initb(t_vars *vars)
 {
-	int	midpoint;
-	int	nb;
-	int	i;
+	int			midpoint;
+	int			nb;
+	int			i;
 
 	i = 0;
 	midpoint = sort_bubble(vars->pa, vars->len_a);
 	nb = nb_inf(vars, midpoint);
-	while (i < 50 && i < nb)
+	while (i < 25 && i < nb)
 	{
 		if (vars->pa[0] < midpoint)
 		{
@@ -1331,12 +1329,11 @@ void	ft_split_initb(t_vars *vars)
 			vars->pa = ft_push_balance(vars->pa, &vars->len_a);
 			i++;
 		}
-		else if (vars->pa[0] >= midpoint && vars->len_a > 1
-			&& r_or_rr(vars, midpoint) == 0)
+		else if (vars->pa[0] >= midpoint && vars->len_a > 1)
 			vars->pa = ft_rotate(vars->pa, vars->len_a, 'a');
-		else if (vars->pa[0] >= midpoint && vars->len_a > 1
-			&& r_or_rr(vars, midpoint) == 1)
-			vars->pa = ft_reverse_rotate(vars->pa, vars->len_a, 'a');
+		// else if (vars->pa[0] >= midpoint && vars->len_a > 1
+		// 	&& r_or_rr(vars, midpoint) == 1)
+		// 	vars->pa = ft_reverse_rotate(vars->pa, vars->len_a, 'a');
 		if (nb_inf(vars, midpoint) == 0)
 			break ;
 	}
@@ -1407,8 +1404,10 @@ int	sort_bubble(int *tab, int length)
 		mid = sort[length / 2];
 	else if (length < 103)
 		mid = sort[length / 4];
-	else if (length > 100)
+	else if (length < 253)
 		mid = sort[length / 10];
+	else if (length > 252)
+		mid = sort[length / 20];
 	free(sort);
 	return (mid);
 }
