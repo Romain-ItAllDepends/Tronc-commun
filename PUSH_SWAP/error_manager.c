@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   error_manager.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/28 10:34:27 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/13 11:41:43 by rgobet           ###   ########.fr       */
+/*   Created: 2024/01/23 13:24:10 by rgobet            #+#    #+#             */
+/*   Updated: 2024/01/23 13:25:06 by rgobet           ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
@@ -20,7 +20,7 @@ static long	ft_atol(char *s);
 * The numbers can't be two times in the stack a.
 */
 
-int	error_duplication(int *pa, int length)
+int	error_duplication(int *pa, int length, t_vars *vars)
 {
 	int	i;
 	int	j;
@@ -36,6 +36,7 @@ int	error_duplication(int *pa, int length)
 			if (value == pa[j] && j != i)
 			{
 				free(pa);
+				free(vars);
 				write (2, "Error\n", 6);
 				exit(1);
 			}
@@ -58,7 +59,14 @@ void	ft_error(void)
 	exit(1);
 }
 
-int	error_no_number(char **av, int ac)
+void	ft_error_zero(t_vars *vars)
+{
+	write (2, "Error\n", 6);
+	free(vars);
+	exit(1);
+}
+
+int	error_no_number(char **av, int ac, t_vars *vars)
 {
 	int	i;
 	int	j;
@@ -69,16 +77,18 @@ int	error_no_number(char **av, int ac)
 		i = 0;
 		while (av[j][i] || av[j][0] == 0)
 		{
-			if (av[j][i] == ' ')
+			while (av[j][i] == ' ')
 				i++;
 			if (av[j][i] == '+' || av[j][i] == '-')
 				i++;
 			if (av[j][i] < '0' || av[j][i] > '9')
-				ft_error();
+				ft_error_zero(vars);
 			if ((av[j][i] >= '0' || av[j][i] <= '9')
 				&& (av[j][i + 1] == '+' || av[j][i + 1] == '-'))
-				ft_error();
+				ft_error_zero(vars);
 			i++;
+			while (av[j][i] == ' ')
+				i++;
 		}
 		j++;
 	}
@@ -91,7 +101,7 @@ int	error_no_number(char **av, int ac)
 * The numbers can't be above the size of a integer or below.
 */
 
-int	error_isnt_int(char *s, int *tab, char *str)
+int	error_isnt_int(char *s, int *tab, char *str, t_vars *vars)
 {
 	int	i;
 
@@ -100,6 +110,7 @@ int	error_isnt_int(char *s, int *tab, char *str)
 	{
 		if (ft_atol(&s[i]) == 1)
 		{
+			free(vars);
 			free(tab);
 			free(str);
 			write (2, "Error\n", 6);
