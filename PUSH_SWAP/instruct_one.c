@@ -1,18 +1,17 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   instruct_one.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/18 12:35:51 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/06 13:51:14 by rgobet           ###   ########.fr       */
+/*   Created: 2024/01/23 13:24:10 by rgobet            #+#    #+#             */
+/*   Updated: 2024/01/23 13:25:06 by rgobet           ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
-// Permet de swap les deux premiers nombre de la pile a ou b selon c et la liste en param.
 void	ft_swap(int *tab, char c)
 {
 	int	b;
@@ -33,8 +32,6 @@ void	ss(t_vars *vars)
 
 int	*ft_push(int *p, int *length, int n, char c)
 {
-	// Prend le premier élément au sommet de b et le met sur a. Et vice versa selon les params.
-	//Ne fait rien si b est vide.
 	int	i;
 	int	*pn;
 
@@ -56,14 +53,10 @@ int	*ft_push(int *p, int *length, int n, char c)
 
 int	*ft_rotate(int *tab, int length, char c)
 {
-	//Décale d’une position vers le haut tous les élements de la pile a ou b.
-	//Le premier élément devient le dernier.
-	//Exemple 6, 5, 8 -> 5, 8, 6
 	int	*res;
 	int	i;
 
 	i = 0;
-	//ft_printf("\n\n\n\n\n\n\nl %d\n\n\n\n\n\n", length);
 	res = malloc (length * sizeof(int));
 	if (!res)
 		return (NULL);
@@ -72,7 +65,6 @@ int	*ft_rotate(int *tab, int length, char c)
 		res[i] = tab[i + 1];
 		i++;
 	}
-	//ft_printf("\n\n\n\n\n\n\ni %d\n\n\n\n\n\n", i);
 	res[i] = tab[0];
 	if (c != 'x')
 		ft_printf("r%c\n", c);
