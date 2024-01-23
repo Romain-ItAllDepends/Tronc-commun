@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   push_swap_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/19 14:19:40 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/10 10:57:37 by rgobet           ###   ########.fr       */
+/*   Created: 2024/01/23 13:24:10 by rgobet            #+#    #+#             */
+/*   Updated: 2024/01/23 13:25:06 by rgobet           ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
@@ -33,59 +33,27 @@ int	nb_inf(t_vars *vars, int n)
 
 void	ft_split_initb(t_vars *vars)
 {
-	int	midpoint;
-	int	i;
+	int			midpoint;
+	int			nb;
+	int			i;
 
 	i = 0;
 	midpoint = sort_bubble(vars->pa, vars->len_a);
-	while (1)
+	nb = nb_inf(vars, midpoint);
+	while (i < 25 && i < nb)
 	{
-		if (vars->pa[i] < midpoint)
+		if (vars->pa[0] < midpoint)
 		{
 			vars->pb = ft_push(vars->pb, &vars->len_b, vars->pa[0], 'b');
 			vars->pa = ft_push_balance(vars->pa, &vars->len_a);
+			i++;
 		}
-		else if (vars->pa[i] >= midpoint && vars->len_a > 1)
+		else if (vars->pa[0] >= midpoint && vars->len_a > 1)
 			vars->pa = ft_rotate(vars->pa, vars->len_a, 'a');
 		if (nb_inf(vars, midpoint) == 0)
 			break ;
 	}
 }
-
-/*
-
-int	*ft_split_inita(t_vars *vars)
-{
-	int	i;
-	int	midpoint;
-
-	i = 0;
-	midpoint = sort_bubble(vars->pb, vars->len_b);
-	if (midpoint == 0)
-		return ((int *)vars->pa);
-	while (i < vars->len_b)
-	{
-		if (vars->pb[i] < midpoint)
-		{
-			vars->pa = ft_push(vars->pa, vars->len_a, vars->pb[0], 'b');
-			vars->pb = ft_push_balance(vars->pb, vars->len_b);
-		}
-		else if ((i + 1) < vars->len_b)
-			vars->pb = ft_rotate(vars->pb, vars->len_b, 'b');
-		else
-		{
-			vars->pa = ft_push(vars->pa, vars->len_a, vars->pb[0], 'b');
-			vars->pb = ft_push_balance(vars->pb, vars->len_b);
-		}
-		if (!(vars->pb[i] > midpoint))
-			i++;
-	}
-	return ((int *)vars->pa);
-}
-
-*/
-
-//Trieur et midpoint maker
 
 int	sort_bubble(int *tab, int length)
 {
@@ -100,6 +68,8 @@ int	sort_bubble(int *tab, int length)
 		return (0);
 	l = length;
 	sort = ft_fill(tab, length);
+	if (sort == 0)
+		return (-1);
 	while (i < length)
 	{
 		j = -1;
@@ -111,7 +81,14 @@ int	sort_bubble(int *tab, int length)
 		l--;
 		i++;
 	}
-	mid = sort[length / 2];
+	if (length < 53)
+		mid = sort[length / 2];
+	else if (length < 103)
+		mid = sort[length / 4];
+	else if (length < 253)
+		mid = sort[length / 10];
+	else if (length > 252)
+		mid = sort[length / 20];
 	free(sort);
 	return (mid);
 }
