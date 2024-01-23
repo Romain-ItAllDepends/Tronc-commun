@@ -1,21 +1,19 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   instruct_two.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/18 14:14:09 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/13 16:27:54 by rgobet           ###   ########.fr       */
+/*   Created: 2024/01/23 13:24:10 by rgobet            #+#    #+#             */
+/*   Updated: 2024/01/23 13:25:06 by rgobet           ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
 int	*ft_reverse_rotate(int *tab, int length, char c)
 {
-	//Décale d’une position vers le bas tous les élements de la pile a ou b selon les params.
-	//Le dernier élément devient le premier.
 	int	*rr;
 	int	i;
 
@@ -58,4 +56,36 @@ int	*ft_push_balance(int *p, int *length)
 	}
 	free(p);
 	return (pn);
+}
+
+int	nb_min(int *p, int length)
+{
+	int	i;
+	int	nb;
+
+	i = 1;
+	nb = p[0];
+	while (i < length)
+	{
+		if (nb > p[i])
+			nb = p[i];
+		i++;
+	}
+	return (nb);
+}
+
+int	nb_max(int *p, int length)
+{
+	int	i;
+	int	nb;
+
+	i = 1;
+	nb = p[0];
+	while (i < length)
+	{
+		if (nb < p[i])
+			nb = p[i];
+		i++;
+	}
+	return (nb);
 }
