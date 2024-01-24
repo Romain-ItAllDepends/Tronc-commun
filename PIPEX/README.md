@@ -4,8 +4,21 @@
 
 Pipex est un projet consistant a envoyer quatre parametres comme suit :
     ./pipex file1 cmd1 cmd2 file2
+    
+Il doit prendre 4 arguments :
+• file1 et file2 sont des noms de fichier.
+• cmd1 et cmd2 sont des commandes shell avec leurs paramètres.
+    
+Puis le contenu du premier fichier sera envoyé a la commande numéro une pour traitement qui sera envoyé a la deuxième commande finalement dans le second fichier.
 
-
+Si il reste une incompréhension veuilliez mettre votre terminal en mode bash.
+```
+bash
+```
+Puis exécuter cette commande selon le procédé expliqué précédemment.
+```
+< file1 cmd1 | cmd2 > file2
+```
 
 ### access :
 
