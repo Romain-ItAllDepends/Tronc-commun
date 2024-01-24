@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:24:10 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/23 13:25:06 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/24 10:57:30 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,6 @@ int	error_duplication(int *pa, int length, t_vars *vars)
 void	ft_error(void)
 {
 	write (2, "Error\n", 6);
-	exit(1);
-}
-
-void	ft_error_zero(t_vars *vars)
-{
-	write (2, "Error\n", 6);
-	free(vars);
 	exit(1);
 }
 
