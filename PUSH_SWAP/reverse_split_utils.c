@@ -6,40 +6,11 @@
 /*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:24:10 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/23 13:25:06 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/24 10:59:09 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-/*
-* We will sort in a decreasing order each chunk starting by the chunk above
-* the stack b.
-* We will sort all the chunk other than the last one.
-*/
-
-void	ft_chunk_check(t_vars *vars, int ind)
-{
-	int	i;
-	int	max;
-
-	max = max_chunk(vars, ind);
-	i = min_chunk(vars, ind);
-	if (i - max <= 2 && vars->pb[0] < vars->pb[1])
-		ft_swap(vars->pb, 'b');
-	while (i < max)
-	{
-		if (vars->pb[0] > vars->pb[1])
-		{
-			vars->pa = ft_push(vars->pa, &vars->len_a, vars->pb[0], 'a');
-			vars->pb = ft_push_balance(vars->pb, &vars->len_b);
-			order_a(vars);
-			i++;
-		}
-		else if (vars->pb[0] < vars->pb[1])
-			ft_swap(vars->pb, 'b');
-	}
-}
 
 /*
 * Verification of a chunk.
@@ -108,17 +79,27 @@ static void	order_b(t_vars *vars, int i_max)
 * until the next element is biggest than this element.
 */
 
-/*
-* [!WARNING]
-* We need to setup the value which is sort in nb_sup else we will
-* sort infinitely.
-* We need to reverse to send the list.
-* Previous line are done.
-* Maybe i_max is usefull ? Else than for the r variable.
-*
-* Maybe line 129 len_a -1
-*
-*/
+static void	reorder(t_vars *vars, int i)
+{
+	while (i >= 1)
+	{
+		if (i < vars->len_b - 1 && vars->pa[0] > vars->pb[0]
+			&& vars->pa[vars->len_a - 1] < vars->pb[0])
+		{
+			vars->pa = ft_push(vars->pa, &vars->len_a, vars->pb[0], 'a');
+			vars->pb = ft_push_balance(vars->pb, &vars->len_b);
+		}
+		else if (i < vars->len_b - 1 && vars->pa[0] > vars->pb[1]
+			&& vars->pa[vars->len_a - 1] < vars->pb[1] && i >= 1)
+		{
+			ft_swap(vars->pb, 'b');
+			vars->pa = ft_push(vars->pa, &vars->len_a, vars->pb[0], 'a');
+			vars->pb = ft_push_balance(vars->pb, &vars->len_b);
+		}
+		vars->pa = ft_reverse_rotate(vars->pa, vars->len_a, 'a');
+		i--;
+	}
+}
 
 void	order_a(t_vars *vars)
 {
@@ -145,24 +126,7 @@ void	order_a(t_vars *vars)
 		else if (nb_sup(vars, s) == 0)
 			break ;
 	}
-	while (i >= 1)
-	{
-		if (i < vars->len_b - 1 && vars->pa[0] > vars->pb[0]
-			&& vars->pa[vars->len_a - 1] < vars->pb[0])
-		{
-			vars->pa = ft_push(vars->pa, &vars->len_a, vars->pb[0], 'a');
-			vars->pb = ft_push_balance(vars->pb, &vars->len_b);
-		}
-		else if (i < vars->len_b - 1 && vars->pa[0] > vars->pb[1]
-			&& vars->pa[vars->len_a - 1] < vars->pb[1] && i >= 1)
-		{
-			ft_swap(vars->pb, 'b');
-			vars->pa = ft_push(vars->pa, &vars->len_a, vars->pb[0], 'a');
-			vars->pb = ft_push_balance(vars->pb, &vars->len_b);
-		}
-		vars->pa = ft_reverse_rotate(vars->pa, vars->len_a, 'a');
-		i--;
-	}
+	reorder(vars, i);
 }
 
 /*
