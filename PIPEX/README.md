@@ -110,4 +110,5 @@ La fonction fork est utilisée pour créer un nouveau processus appelé le proce
 
 > [!IMPORTANT]
 > Source : Teddy et Google
+> 
 > Source : [fr.subject.pdf](https://github.com/Romain-ItAllDepends/Tronc-commun/blob/main/PIPEX/fr.subject.pdf)
