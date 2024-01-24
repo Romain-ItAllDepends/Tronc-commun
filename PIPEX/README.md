@@ -110,6 +110,16 @@ La fonction fork est utilisée pour créer un nouveau processus appelé le proce
 
 ## Notions importantes à comprendre
 
+- Savoir ce qu'est path dans les variables d'environnements.
+
+- Comment récupérer les variables d'environnement (isoler chacun des paths puis tester à partir de quel path on a le droit d'exécuter les commandes)
+
+- Tester les path absolu.
+
+- Bien comprendre fork et excve.
+
+- Comment faire communiquer les deux process enfant et parents.
+
 > [!IMPORTANT]
 > Source : Teddy et Google
 > 
