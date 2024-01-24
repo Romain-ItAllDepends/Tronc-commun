@@ -20,6 +20,8 @@ Puis exécuter cette commande selon le procédé expliqué précédemment.
 < file1 cmd1 | cmd2 > file2
 ```
 
+## Fonctionnement des fonctions nécessaires
+
 ### access :
 
 Permet de verifier  l'existence d'un fichier
