@@ -32,3 +32,5 @@ Retrecir les chunk a 25/50 max.
 > Source : https://www.youtube.com/watch?v=7KW59UO55TQ&ab_channel=JOHNPARK
 > 
 > Source : https://medium.com/@jamierobertdawson/push-swap-the-least-amount-of-moves-with-two-stacks-d1e76a71789a
+>
+> Pour l'optimisation de l'algoritme : https://sam0611.github.io/
