@@ -1,6 +1,6 @@
 # PIPEX 
 
-## Introduction :
+## Introduction
 
 Pipex est un projet consistant a envoyer quatre parametres comme suit :
     ./pipex file1 cmd1 cmd2 file2
