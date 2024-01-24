@@ -40,3 +40,10 @@ void	*ft_calloc(size_t nmemb, size_t size)
 		ft_memset(ptr, 0, s);
 	return (ptr);
 }
+
+void	ft_error_zero(t_vars *vars)
+{
+	write (2, "Error\n", 6);
+	free(vars);
+	exit(1);
+}
