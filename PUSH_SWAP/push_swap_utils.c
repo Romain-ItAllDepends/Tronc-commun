@@ -58,7 +58,6 @@ void	ft_split_initb(t_vars *vars)
 int	sort_bubble(int *tab, int length)
 {
 	int	*sort;
-	int	mid;
 	int	i;
 	int	j;
 	int	l;
@@ -81,16 +80,7 @@ int	sort_bubble(int *tab, int length)
 		l--;
 		i++;
 	}
-	if (length < 53)
-		mid = sort[length / 2];
-	else if (length < 103)
-		mid = sort[length / 4];
-	else if (length < 253)
-		mid = sort[length / 10];
-	else if (length > 252)
-		mid = sort[length / 20];
-	free(sort);
-	return (mid);
+	return (select_chunk_size(sort, length));
 }
 
 int	*ft_switch(int *sort, int j)
