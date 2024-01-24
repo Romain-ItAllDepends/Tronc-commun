@@ -6,6 +6,7 @@ MY_SOURCES=	push_swap.c \
 		chunk_functions.c \
 		reverse_split.c \
 		reverse_split_utils.c \
+		little_functions.c \
 		error_manager.c \
 		instruct_one.c \
 		instruct_two.c \
