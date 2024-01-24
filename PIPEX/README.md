@@ -108,6 +108,8 @@ exit(int status)
 
 La fonction fork est utilisée pour créer un nouveau processus appelé le processus fils, qui est une copie exacte du processus parent.
 
+## Notions importantes à comprendre
+
 > [!IMPORTANT]
 > Source : Teddy et Google
 > 
