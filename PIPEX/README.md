@@ -1,6 +1,6 @@
-### PIPEX 
+# PIPEX 
 
-# access :
+### access :
 
 Permet de verifier  l'existence d'un fichier
 Permet de tester les permissions d'acces a un fichier.
@@ -18,7 +18,7 @@ return (0) -> si ok
 
 return (-1)-> si ko 
 
-# dup :
+### dup :
 
 Permet de dupliquer un descripteur de fichier existant.
 
@@ -27,7 +27,7 @@ int dup(int oldfd);
 
 oldfd -> fichier existant.
 
-# dup2: 
+### dup2: 
 
 Permet de dupliquer un descripteur de fichier existant
 et de specifier explicitement le numero de descripteur de fichier que vous souhaitez utiliser 
@@ -37,7 +37,7 @@ signature :
 
 int dup2(int oldfd, int newfd);
 
-# execve:
+### execve:
 
 Execute un programme dans le contexte du processus appelant.
 
@@ -68,14 +68,14 @@ return (0);
 
 valeur de return - 1 en cas d'erreur.
 
-# exit : 
+### exit : 
 
 Permet de terminer l'execution d'un programme , peu importe la fonction dans laquelle elle est appeler.
 
 signature :
 exit(int status) 
 
-# fork : 
+### fork : 
 
 La fonction fork est utilisée pour créer un nouveau processus appelé le processus fils, qui est une copie exacte du processus parent.
 
