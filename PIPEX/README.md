@@ -1,5 +1,9 @@
 # PIPEX 
 
+Pipex est particulièrement important pour le projet minishell qui se situe sur le prochain cercle.
+
+Les fonctions abordées dans pipex doivent être comprise afin de gagner du temps sur minishell, contrairement à minitalk qui ne constitue qu'une petite partie de minishell.
+
 ## Introduction
 
 Pipex est un projet consistant a envoyer quatre parametres comme suit :
