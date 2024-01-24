@@ -52,6 +52,8 @@ argv-> Un tableau de chaines de caracteres representant les variables d'environn
 element de ce tableau doit etre NULL. 
 
 envp-> Un tableau de chaines de caracteres representatant les variables d'environnement. Le dernier element de ce tableau doit etre NULL. 
+
+```
 int main()
 {
 char pathname;
@@ -65,6 +67,7 @@ return (1);
 }
 return (0);
 }
+```
 
 valeur de return - 1 en cas d'erreur.
 
