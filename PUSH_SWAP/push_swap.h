@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:24:10 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/23 13:25:06 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/24 10:58:24 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,9 @@ char	*ft_strjoin(char **s, int nbList, t_vars *vars);
 /*
 * Sort
 */
+void	alone_push(t_vars *vars);
 void	ft_split_initb(t_vars *vars);
+int		select_chunk_size(int *sort, int length);
 int		sort_bubble(int *tab, int length);
 int		ft_midpoint(int *tab, int length);
 int		decreasing(int *pb, int lengthb);
@@ -83,8 +85,9 @@ int		error_no_number(char **av, int ac, t_vars *vars);
 int		error_isnt_int(char *s, int *tab, char *str, t_vars *vars);
 
 /*
-* Allocs
+* Allocs and free
 */
 void	*ft_calloc(size_t nmemb, size_t size);
+void	ft_error_zero(t_vars *vars);
 
 #endif
