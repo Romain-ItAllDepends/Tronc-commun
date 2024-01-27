@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   chunk_functions.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:24:10 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/23 13:25:06 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/27 14:04:20 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,10 @@ void	ft_chunk_check(t_vars *vars, int ind)
 			order_a(vars);
 			i++;
 		}
-		else if (vars->pb[0] < vars->pb[1])
+		else if (vars->pb[0] < vars->pb[1] && vars->pa[0] > vars->pa[1]
+			&& max - i > 0)
+			ss(vars);
+		else if (vars->pb[0] < vars->pb[1] && max - i > 0)
 			ft_swap(vars->pb, 'b');
 	}
 }
@@ -82,4 +85,43 @@ int	select_chunk_size(int *sort, int length)
 		mid = sort[length / 20];
 	free(sort);
 	return (mid);
+}
+
+static int	ft_midpoint(int	*sort, int length)
+{
+	int	mid;
+
+	if (length / 20 == 0)
+		mid = sort[length - 1];
+	else
+		mid = sort[20];
+	free(sort);
+	return (mid);
+}
+
+int	sort(int *tab, int length)
+{
+	int	*sort;
+	int	i;
+	int	j;
+	int	l;
+
+	i = -1;
+	if (length == 0)
+		return (0);
+	l = length;
+	sort = ft_fill(tab, length);
+	if (sort == 0)
+		return (-1);
+	while (i++ < length)
+	{
+		j = -1;
+		while (j++ < l - 2)
+		{
+			if (sort[j] > sort[j + 1])
+				sort = ft_switch(sort, j);
+		}
+		l--;
+	}
+	return (ft_midpoint(sort, length));
 }
