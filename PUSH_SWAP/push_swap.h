@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:24:10 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/24 10:58:24 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/27 14:20:14 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	alone_push(t_vars *vars);
 void	ft_split_initb(t_vars *vars);
 int		select_chunk_size(int *sort, int length);
 int		sort_bubble(int *tab, int length);
-int		ft_midpoint(int *tab, int length);
 int		decreasing(int *pb, int lengthb);
 int		crescent(int *pb, int lengthb);
 int		alone(int midpoint, t_vars *vars);
@@ -72,10 +71,13 @@ void	special_case(t_vars *vars);
 void	reverse(t_vars *vars, int c);
 void	order_a(t_vars *vars);
 int		*normalisation(int *p, int length);
-void	ft_sort_three(t_vars *vars);
 void	ft_four(t_vars *vars);
 int		nb_min(int *p, int length);
 int		nb_max(int *p, int length);
+void	ft_one_hundred(t_vars *vars);
+int		sort(int *tab, int length);
+int		nb_inf(t_vars *vars, int n);
+void	ss_or_sa(t_vars *vars);
 
 /*
 * Error
