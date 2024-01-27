@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:24:10 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/23 13:25:06 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/26 16:42:05 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,9 @@ void	ft_split_initb(t_vars *vars)
 		{
 			vars->pb = ft_push(vars->pb, &vars->len_b, vars->pa[0], 'b');
 			vars->pa = ft_push_balance(vars->pa, &vars->len_a);
+			if (vars->len_b > 1 && (vars->len_b + vars->len_a) < 103
+				&& vars->pb[0] < vars->pb[1])
+				ft_swap(vars->pb, 'b');
 			i++;
 		}
 		else if (vars->pa[0] >= midpoint && vars->len_a > 1)
