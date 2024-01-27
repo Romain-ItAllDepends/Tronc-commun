@@ -3,6 +3,7 @@ NAME=push_swap
 MY_SOURCES=	push_swap.c \
 		push_swap_utils.c \
 		order_functions.c \
+		one_hundred.c \
 		chunk_functions.c \
 		reverse_split.c \
 		reverse_split_utils.c \
@@ -11,7 +12,7 @@ MY_SOURCES=	push_swap.c \
 		instruct_one.c \
 		instruct_two.c \
 		parsing.c \
-		ft_calloc.c \
+		calloc_free_error.c \
 		FT_PRINTF/ft_printf.c \
 		FT_PRINTF/LIBFT/ft_strlen.c \
 		FT_PRINTF/LIBFT/ft_putstr_fd.c \
