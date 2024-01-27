@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reverse_split_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:24:10 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/24 10:59:09 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/27 14:20:17 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ static void	reorder(t_vars *vars, int i)
 		}
 		vars->pa = ft_reverse_rotate(vars->pa, vars->len_a, 'a');
 		i--;
+		if (vars->len_b > 1 && vars->pb[0] < vars->pb[1])
+			ft_swap(vars->pb, 'b');
 	}
 }
 
@@ -113,7 +115,7 @@ void	order_a(t_vars *vars)
 	{
 		if (vars->pa[0] > vars->pa[1] && nb_sup(vars, s) > 1)
 		{
-			ft_swap(vars->pa, 'a');
+			ss_or_sa(vars);
 			if (i < vars->len_a - 1 && (vars->pa[0] > vars->pa[1]
 					|| vars->pa[1] > vars->pa[2]))
 			{
@@ -151,7 +153,11 @@ void	special_case(t_vars *vars)
 			else
 				break ;
 		}
-		order_b(vars, j);
+		if (vars->len_b + vars->len_a < 103 && vars->len_b > 1
+			&& vars->pb[0] < vars->pb[1])
+			ft_swap(vars->pb, 'b');
+		else
+			order_b(vars, j);
 		order_a(vars);
 	}
 }
