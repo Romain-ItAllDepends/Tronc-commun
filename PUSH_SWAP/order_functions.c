@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   order_functions.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:24:10 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/23 13:25:06 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/27 14:20:03 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,4 +94,12 @@ void	ft_four(t_vars *vars)
 	vars->pa = ft_push(vars->pa, &vars->len_a, vars->pb[0], 'a');
 	vars->pb = ft_push_balance(vars->pb, &vars->len_b);
 	free(vars->pb);
+}
+
+void	ss_or_sa(t_vars *vars)
+{
+	if (vars->pb[0] > vars->pb[1])
+		ft_swap(vars->pa, 'a');
+	else
+		ss(vars);
 }
