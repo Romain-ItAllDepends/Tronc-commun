@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:24:10 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/23 13:25:06 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/27 10:46:37 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 t_vars	*core(t_vars *vars)
 {
-	int	i;
-
-	i = 0;
 	vars->len_b = 0;
 	vars->len_c = 0;
 	vars->pb = NULL;
@@ -27,11 +24,13 @@ t_vars	*core(t_vars *vars)
 		if (!vars->chunk)
 			exit(1);
 		ft_split_initb(vars);
-		i++;
 	}
 	if (vars->len_b > 0)
 	{
-		if (vars->len_a == 2 && vars->pa[0] > vars->pa[1])
+		if (vars->len_a == 2 && vars->pa[0] > vars->pa[1]
+			&& vars->len_b >= 2 && vars->pb[0] < vars->pb[1])
+			ss(vars);
+		else if (vars->len_a == 2 && vars->pa[0] > vars->pa[1])
 			ft_swap(vars->pa, 'a');
 		if (!(crescent(vars->pa, vars->len_a) == 0 && vars->len_b == 0))
 			reverse_split(vars);
@@ -92,6 +91,8 @@ t_vars	*ft_sort_choice(t_vars *vars)
 		ft_four(vars);
 	if (vars->len_a == 5)
 		ft_five(vars);
+	if (vars->len_a > 5 && vars->len_a <= 100)
+		ft_one_hundred(vars);
 	else
 		vars = core(vars);
 	return (vars);
