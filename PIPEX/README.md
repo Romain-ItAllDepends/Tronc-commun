@@ -109,12 +109,14 @@ exit(int status)
 La fonction fork est utilisée pour créer un nouveau processus appelé le processus fils, qui est une copie exacte du processus parent.
 
 ```
-int		n;
-int		fd[2];
-char	tab[6];
-pid_t	pid;
-
-if (pipe(fd) == -1)
+int	main(void)
+{
+	int		n;
+	int		fd[2];
+	char	tab[6];
+	pid_t	pid;
+	
+	if (pipe(fd) == -1)
 		exit(1);
 	pid = fork();
 	if (pid == -1)
@@ -133,6 +135,8 @@ if (pipe(fd) == -1)
 		tab[n] = 0;
 		close(fd[0]);
 	}
+	return (0);
+}
 ```
 
 ## Notions importantes à comprendre
