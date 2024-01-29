@@ -82,16 +82,16 @@ envp-> Un tableau de chaines de caracteres representatant les variables d'enviro
 ```
 int main()
 {
-char pathname;
-charconst arguments[] = {"/bin/ls", "-l", NULL};
-char *const envp[] = {NULL};
-pathname = "/bin/ls";
-if (execve(pathname, arguments, envp) == -1)
-{
-printf("Error lors de l'executation du programme");
-return (1);
-}
-return (0);
+	char pathname;
+	charconst arguments[] = {"/bin/ls", "-l", NULL};
+	char *const envp[] = {NULL};
+	pathname = "/bin/ls";
+	if (execve(pathname, arguments, envp) == -1)
+	{
+		printf("Error lors de l'executation du programme");
+		return (1);
+	}
+	return (0);
 }
 ```
 
