@@ -111,8 +111,8 @@ La fonction fork est utilisée pour créer un nouveau processus appelé le proce
 ```
 int	main(void)
 {
-	int		n;
-	int		fd[2];
+	int	n;
+	int	fd[2];
 	char	tab[6];
 	pid_t	pid;
 	
