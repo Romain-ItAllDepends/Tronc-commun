@@ -93,11 +93,12 @@ static void	ft_execution(t_vars *vars, char **envp)
 		wait(NULL);
 		n = read(fd[0], test, 100);
 		ft_printf("%s\n", test);
+  dup2(fd[0], 0);
 		close(fd[0]);
 		m = open(vars->file2, O_WRONLY | O_APPEND);
 		if (m == -1)
 			exit(1);
-		dup2(STDOUT_FILENO, fd[1]);
+		dup2(fd[1], 1);
 		execve(vars->file2, vars->cmd2, envp);
 		close(m);
 		close(fd[1]);
