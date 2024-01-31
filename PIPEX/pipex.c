@@ -6,122 +6,137 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 14:23:08 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/31 11:39:57 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/31 14:44:03 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "pipex.h"
 
-static char	*path_verification(char **path, t_vars *vars, int opt);
-
-static void	verification(int ac, char **av)
+static void	child(t_vars *vars, char **envp)
 {
-	if (ac != 5 || access(av[1], F_OK) != 0 || access(av[1], R_OK) != 0
-		|| access(av[1], W_OK) != 0)
+	close(vars->fd[0]);
+	vars->fd_child = open(vars->file1, O_RDONLY);
+	if (vars->fd_child == -1)
 		exit(1);
-}
-
-static void	init_path(char **envp, t_vars *vars)
-{
-	int		i;
-	char	**path;
-
-	i = 0;
-	while (envp[i])
+	dup2(vars->fd_child, STDIN_FILENO);
+	dup2(vars->fd[1], STDOUT_FILENO);
+	close(vars->fd[1]);
+	if (execve(vars->cmd1[0], vars->cmd1, envp) == -1)
 	{
-		if (envp[i][0] == 'P' && envp[i][1] == 'A' && envp[i][2] == 'T'
-			&& envp[i][3] == 'H' && envp[i][4] == '=')
-			path = ft_split(&envp[i][5], ':');
-		i++;
+		perror("Error : ");
+		ft_free(vars->cmd1);
+		ft_free(vars->cmd2);
+		free(vars);
+		exit(1);
 	}
-	vars->cmd1[0] = path_verification(path, vars, 0);
-	vars->cmd2[0] = path_verification(path, vars, 1);
+	close(vars->fd_child);
 }
 
-static char	*path_verification(char **path, t_vars *vars, int opt)
+static void	parent(t_vars *vars, char **envp)
+{
+	wait(NULL);
+	close(vars->fd[1]);
+	dup2(vars->fd[0], STDIN_FILENO);
+	vars->fd_parent = open(vars->file2, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	if (vars->fd_parent == -1)
+	{
+		perror("Error : ");
+		ft_free(vars->cmd1);
+		ft_free(vars->cmd2);
+		free(vars);
+		exit(1);
+	}
+	dup2(vars->fd_parent, STDOUT_FILENO);
+	if (execve(vars->cmd2[0], vars->cmd2, envp) == -1)
+	{
+		perror("Error : ");
+		ft_free(vars->cmd1);
+		ft_free(vars->cmd2);
+		free(vars);
+		exit(1);
+	}
+	close(vars->fd[0]);
+	close(vars->fd_parent);
+}
+
+static char	*cmd_verification(t_vars *vars, char **path, int opt)
 {
 	int		i;
 	char	*tab;
 	char	*cmd;
+	char	*post_cmd;
 
 	i = 0;
 	tab = NULL;
-	while (path[i])
+	while (path[i] && tab == NULL)
 	{
 		if (opt == 0)
-			cmd = ft_strjoin(path[i], ft_strjoin("/", vars->cmd1[0]));
-		if (opt == 1)
-			cmd = ft_strjoin(path[i], ft_strjoin("/", vars->cmd2[0]));
-		if (access(cmd, X_OK) == 0)
 		{
-			tab = ft_fill(cmd, path, vars);
-			break ;
+			post_cmd = ft_strjoin("/", vars->cmd1[0]);
+			cmd = ft_strjoin(path[i], post_cmd);
+			free(post_cmd);
 		}
+		if (opt == 1)
+		{
+			post_cmd = ft_strjoin("/", vars->cmd2[0]);
+			cmd = ft_strjoin(path[i], post_cmd);
+			free(post_cmd);
+		}
+		tab = execution_right(cmd, path, vars);
 		i++;
-	}
-	if (tab == NULL)
-	{
-		free(path);
-		exit(1);
 	}
 	return (tab);
 }
 
-static void	ft_execution(t_vars *vars, char **envp)
+char	*path_verification(char **path, t_vars *vars, int opt)
 {
-	pid_t	pid;
-	int		m;
-	int		n;
-	int		fd[2];
+	char	*tab;
 
-	if (pipe(fd) == -1)
-		exit(1);
-	pid = fork();
-	if (pid == -1)
-		exit(1);
-	if (pid == 0)
+	tab = cmd_verification(vars, path, opt);
+	if (tab == NULL)
 	{
-		close(fd[0]);
-		n = open(vars->file1, O_RDONLY);
-		if (n == -1)
-			exit(1);
-		dup2(n, STDIN_FILENO);
-		dup2(fd[1], STDOUT_FILENO);
-		close(fd[1]);
-		execve(vars->cmd1[0], vars->cmd1, envp);
+		if (opt == 0)
+		{
+			ft_printf("%s: command not found\n", vars->cmd1[0]);
+			return (vars->cmd2[0]);
+		}
+		else
+		{
+			ft_printf("%s: command not found\n", vars->cmd2[0]);
+			return (vars->cmd2[0]);
+		}
 	}
+	if (opt == 0)
+		free(vars->cmd1[0]);
 	else
-	{
-		wait(NULL);
-		close(fd[1]);
-		dup2(fd[0], STDIN_FILENO);
-		m = open(vars->file2, O_WRONLY | O_CREAT | O_TRUNC, 0777);
-		if (m == -1)
-			exit(1);
-		dup2(m, STDOUT_FILENO);
-		if (execve(vars->cmd2[0], vars->cmd2, envp) == -1)
-			ft_printf("Bitch");
-		close(fd[0]);
-		close(m);
-	}
+		free(vars->cmd2[0]);
+	return (tab);
 }
 
 int	main(int ac, char **av, char **envp)
 {
 	t_vars	*vars;
 
+	verification(ac, av);
 	vars = ft_calloc(sizeof(t_vars), 1);
 	if (!vars)
 		exit(1);
-	verification(ac, av);
 	vars->file1 = av[1];
 	vars->file2 = av[4];
 	vars->cmd1 = ft_split(av[2], ' ');
 	vars->cmd2 = ft_split(av[3], ' ');
 	init_path(envp, vars);
-	// ft_printf("%s\n", vars->cmd1[0]);
-	// ft_printf("%s\n", vars->cmd2[0]);
-	ft_execution(vars, envp);
+	if (pipe(vars->fd) == -1)
+		exit(1);
+	vars->pid = fork();
+	if (vars->pid == -1)
+		exit(1);
+	if (vars->pid == 0)
+		child(vars, envp);
+	else
+		parent(vars, envp);
+	ft_free(vars->cmd1);
+	ft_free(vars->cmd2);
+	free(vars);
 	return (0);
 }
