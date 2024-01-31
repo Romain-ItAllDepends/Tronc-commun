@@ -1,7 +1,7 @@
 NAME=pipex
 
 MY_SOURCES=	pipex.c \
-		ft_calloc.c \
+		calloc_free.c \
 		ft_split.c \
 		little_functions.c \
 		FT_PRINTF/ft_printf.c \
