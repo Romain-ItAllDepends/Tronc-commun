@@ -63,6 +63,8 @@ signature :
 
 int dup2(int oldfd, int newfd);
 
+oldfd remplacera newfd, si newfd est 'stdout' alors tout ce que 'stdout' était sensé récupérer sera envoyer a oldfd.
+
 ### execve:
 
 Execute un programme dans le contexte du processus appelant.
