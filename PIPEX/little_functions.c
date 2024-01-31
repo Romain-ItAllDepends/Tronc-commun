@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:30:48 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/30 09:00:27 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/01/31 14:50:40 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,3 +63,52 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (tab);
 }
 
+void	verification(int ac, char **av)
+{
+	if (ac != 5 || access(av[1], F_OK) != 0 || access(av[1], R_OK) != 0
+		|| access(av[1], W_OK) != 0)
+		exit(1);
+}
+
+void	init_path(char **envp, t_vars *vars)
+{
+	int		i;
+	char	**path;
+
+	i = 0;
+	path = NULL;
+	while (envp[i])
+	{
+		if (envp[i][0] == 'P' && envp[i][1] == 'A' && envp[i][2] == 'T'
+			&& envp[i][3] == 'H' && envp[i][4] == '=')
+		{
+			path = ft_split(&envp[i][5], ':');
+			break ;
+		}
+		i++;
+	}
+	if (i > 0 && path == NULL)
+	{
+		perror("Error: ");
+		free(vars);
+		exit(1);
+	}
+	vars->cmd1[0] = path_verification(path, vars, 0);
+	vars->cmd2[0] = path_verification(path, vars, 1);
+	ft_free(path);
+}
+
+char	*execution_right(char *cmd, char **path, t_vars *vars)
+{
+	char	*tab;
+
+	tab = NULL;
+	if (access(cmd, X_OK) == 0)
+	{
+		tab = ft_fill(cmd, path, vars);
+		free(cmd);
+	}
+	else
+		free(cmd);
+	return (tab);
+}
