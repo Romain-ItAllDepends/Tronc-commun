@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 08:56:58 by rgobet            #+#    #+#             */
-/*   Updated: 2024/02/02 21:47:22 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/02/03 02:55:57 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,10 @@ typedef struct s_vars
 	int		nb_player;
 	int		nb_exit;
 	int		nb_move;
-	int		x;	/* Horizontale */
-	int		y;	/* Verticale */
+	int		i;	/* Horizontale */
+	int		j;	/* Verticale */
 	char	**map;
+	mlx_t	*mlx;
 	mlx_texture_t	*player_left_t;
 	mlx_image_t		*player_left_i;
 	mlx_texture_t	*player_right_t;
@@ -61,6 +62,8 @@ typedef struct s_vars
 	mlx_image_t		*corner_high_right_i;
 	mlx_texture_t	*exit_t;
 	mlx_image_t		*exit_i;
+	mlx_texture_t	*bush_t;
+	mlx_image_t		*bush_i;
 }	t_vars;
 
 int		ft_strlen_mod(char **s);
@@ -73,7 +76,11 @@ void	verification(t_vars *vars, int i, int j);
 char	**ft_fill(t_vars *vars);
 void	finishable(t_vars *vars);
 void	finishable_verif(t_vars *vars, char **map);
+void	parse_map(t_vars *vars, mlx_t *mlx);
+void	move(t_vars *vars, mlx_t *mlx);
 void	*ft_calloc(size_t nmemb, size_t size);
+void	free_textures(t_vars *vars);
+void	free_images(t_vars *vars);
 void	ft_free(char **s);
 
 #endif
