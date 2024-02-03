@@ -6,6 +6,8 @@ MY_SOURCES=	so_long.c \
 		init_map_functions.c \
 		little_functions.c \
 		map_finishable.c \
+		parse_map.c \
+		move.c \
 		FT_PRINTF/ft_printf.c \
 		FT_PRINTF/LIBFT/ft_strlen.c \
 		FT_PRINTF/LIBFT/ft_putstr_fd.c \
