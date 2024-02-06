@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 14:23:08 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/31 14:44:03 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/02/06 11:07:30 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,6 @@ static void	child(t_vars *vars, char **envp)
 	close(vars->fd[0]);
 	vars->fd_child = open(vars->file1, O_RDONLY);
 	if (vars->fd_child == -1)
-		exit(1);
-	dup2(vars->fd_child, STDIN_FILENO);
-	dup2(vars->fd[1], STDOUT_FILENO);
-	close(vars->fd[1]);
-	if (execve(vars->cmd1[0], vars->cmd1, envp) == -1)
 	{
 		perror("Error : ");
 		ft_free(vars->cmd1);
@@ -29,34 +24,41 @@ static void	child(t_vars *vars, char **envp)
 		free(vars);
 		exit(1);
 	}
+	dup2(vars->fd_child, STDIN_FILENO);
+	dup2(vars->fd[1], STDOUT_FILENO);
+	close(vars->fd[1]);
 	close(vars->fd_child);
+	execve(vars->cmd1[0], vars->cmd1, envp);
+	perror("Error : ");
+	ft_free(vars->cmd1);
+	ft_free(vars->cmd2);
+	free(vars);
+	exit(1);
 }
 
 static void	parent(t_vars *vars, char **envp)
 {
-	wait(NULL);
-	close(vars->fd[1]);
-	dup2(vars->fd[0], STDIN_FILENO);
-	vars->fd_parent = open(vars->file2, O_WRONLY | O_CREAT | O_TRUNC, 0777);
-	if (vars->fd_parent == -1)
+	vars->pid = fork();
+	if (vars->pid == -1)
+		error(vars);
+	if (vars->pid == 0)
 	{
-		perror("Error : ");
-		ft_free(vars->cmd1);
-		ft_free(vars->cmd2);
-		free(vars);
-		exit(1);
+		wait(NULL);
+		close(vars->fd[1]);
+		dup2(vars->fd[0], STDIN_FILENO);
+		vars->fd_parent = open(vars->file2, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+		if (vars->fd_parent == -1)
+			error(vars);
+		dup2(vars->fd_parent, STDOUT_FILENO);
+		close(vars->fd[0]);
+		close(vars->fd_parent);
+		execve(vars->cmd2[0], vars->cmd2, envp);
+		error(vars);
 	}
-	dup2(vars->fd_parent, STDOUT_FILENO);
-	if (execve(vars->cmd2[0], vars->cmd2, envp) == -1)
+	else
 	{
-		perror("Error : ");
-		ft_free(vars->cmd1);
-		ft_free(vars->cmd2);
-		free(vars);
-		exit(1);
+		return ;
 	}
-	close(vars->fd[0]);
-	close(vars->fd_parent);
 }
 
 static char	*cmd_verification(t_vars *vars, char **path, int opt)
@@ -95,6 +97,7 @@ char	*path_verification(char **path, t_vars *vars, int opt)
 	tab = cmd_verification(vars, path, opt);
 	if (tab == NULL)
 	{
+		dup2(2, 1);
 		if (opt == 0)
 		{
 			ft_printf("%s: command not found\n", vars->cmd1[0]);
@@ -135,8 +138,8 @@ int	main(int ac, char **av, char **envp)
 		child(vars, envp);
 	else
 		parent(vars, envp);
-	ft_free(vars->cmd1);
-	ft_free(vars->cmd2);
-	free(vars);
+	close(vars->fd[0]);
+	close(vars->fd[1]);
+	free_vars(vars);
 	return (0);
 }
