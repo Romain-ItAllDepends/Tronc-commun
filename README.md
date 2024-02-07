@@ -12,7 +12,7 @@ Le tronc commun est la partie durant laquelle on apprend les bases de la program
   - ![50%](https://progress-bar.dev/50)
 ## Maitise digitale : Édition, Virtualisation, Développement
 - VIM         ⭐⭐⭐⭐
-- VirtualBox         ⭐⭐⭐
+- VirtualBox         ⭐⭐⭐⭐
 - VSCode        ⭐⭐⭐⭐
 
 > [!NOTE]
