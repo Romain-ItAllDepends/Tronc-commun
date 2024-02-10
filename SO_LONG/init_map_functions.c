@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:14:40 by rgobet            #+#    #+#             */
-/*   Updated: 2024/02/02 18:11:27 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/02/10 09:38:32 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,22 +50,20 @@ static char	*get_map(int fd, t_vars *vars)
 	map = NULL;
 	buf = ft_calloc(11, sizeof(char));
 	if (!buf)
-	{
-		write (2, "Error\n", 6);
-		free(vars);
-		exit(1);
-	}
+		ft_error_one(vars);
 	while (map == NULL || n > 0)
 	{
 		n = read(fd, buf, 10);
 		if (n == -1)
-		{
-			write (2, "Error\n", 6);
-			free(vars);
-			exit(1);
-		}
+			ft_error_one(vars);
 		buf[n] = 0;
 		map = ft_strjoin(map, buf);
+	}
+	if (map[0] == 0)
+	{
+		free(map);
+		free(buf);
+		ft_error_one(vars);
 	}
 	free(buf);
 	return (map);
@@ -88,7 +86,7 @@ static void	rectangular_map(t_vars *vars)
 			tmp = length;
 		length = ft_strlen(vars->map[i]);
 		if (i != 0 && (tmp != length || (tmp == length + 1
-			&& vars->map[i + 1] == NULL)))
+					&& vars->map[i + 1] == NULL)))
 		{
 			write (2, "Error : The map need to be rectangular !\n", 41);
 			ft_free(vars->map);
@@ -139,7 +137,7 @@ void	init_map(char *path, t_vars *vars)
 	if (path[length - 1] != 'r' || path[length - 2] != 'e'
 		|| path[length - 3] != 'b' || path[length - 4] != '.')
 	{
-		write (2, "Error : Wrong map extension !\n", 6);
+		write (2, "Error : Wrong map extension !\n", 30);
 		free(vars);
 		exit(1);
 	}
