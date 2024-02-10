@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 23:29:52 by rgobet            #+#    #+#             */
-/*   Updated: 2024/02/03 03:40:09 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/02/10 12:50:51 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,67 +88,12 @@ void	parse_map(t_vars *vars, mlx_t *mlx)
 		j = 0;
 		while (vars->map[i][j])
 		{
-			if (vars->map[i][j] == '0' || vars->map[i][j] == 'P'
-			|| vars->map[i][j] == 'C')
-			{
-				vars->grass_i = mlx_texture_to_image(mlx, vars->grass_t);
-				mlx_image_to_window(mlx, vars->grass_i, 64 * j, 64 * i);
-			}
-			if (vars->map[i][j] == 'E')
-			{
-				vars->exit_i = mlx_texture_to_image(mlx, vars->exit_t);
-				mlx_image_to_window(mlx, vars->exit_i, 64 * j, 64 * i);
-			}
-			if (vars->map[i][j] == 'P')
-			{
-				vars->player_down_i = mlx_texture_to_image(mlx, vars->player_down_t);
-				mlx_image_to_window(mlx, vars->player_down_i, 64 * j, 64 * i);
-				vars->i = i;
-				vars->j = j;
-			}
-			if (vars->map[i][j] == 'C')
-			{
-				vars->collectable_i = mlx_texture_to_image(mlx, vars->collectable_t);
-				mlx_image_to_window(mlx, vars->collectable_i, 64 * j, 64 * i);
-			}
-			else if (vars->map[i][j] == '1' && i == 0 && (j > 0 && j < length))
-			{
-				vars->wall_high_i = mlx_texture_to_image(mlx, vars->wall_high_t);
-				mlx_image_to_window(mlx, vars->wall_high_i, 64 * j, 64 * i);
-			}
-			else if (i == length_v && j > 0 && j < length)
-			{
-				vars->wall_down_i = mlx_texture_to_image(mlx, vars->wall_down_t);
-				mlx_image_to_window(mlx, vars->wall_down_i, 64 * j, 64 * i);
-			}
-			else if (i > 0 && i < length_v && j == 0)
-			{
-				vars->wall_left_i = mlx_texture_to_image(mlx, vars->wall_left_t);
-				mlx_image_to_window(mlx, vars->wall_left_i, 64 * j, 64 * i);
-			}
-			else if (i > 0 && i < length_v && j == length)
-			{
-				vars->wall_right_i = mlx_texture_to_image(mlx, vars->wall_right_t);
-				mlx_image_to_window(mlx, vars->wall_right_i, 64 * j, 64 * i);
-			}
-			else if (vars->map[i][j] == '1' && i !=0 && i != length_v && j != 0 && j != length)
-			{
-				vars->bush_i = mlx_texture_to_image(mlx, vars->bush_t);
-				mlx_image_to_window(mlx, vars->bush_i, 64 * j, 64 * i);
-			}
+			grass_and_bush_print(vars, length_v, i, j);
+			wall_print(vars, length_v, i, j);
+			other_print(vars, mlx, i, j);
 			j++;
 		}
 		i++;
 	}
-	vars->corner_high_left_i = mlx_texture_to_image(mlx, vars->corner_high_left_t);
-	mlx_image_to_window(mlx, vars->corner_high_left_i, 0, 0);
-
-	vars->corner_high_right_i = mlx_texture_to_image(mlx, vars->corner_high_right_t);
-	mlx_image_to_window(mlx, vars->corner_high_right_i, 64 * length, 0);
-
-	vars->corner_down_left_i = mlx_texture_to_image(mlx, vars->corner_down_left_t);
-	mlx_image_to_window(mlx, vars->corner_down_left_i, 64 * length, 64 * length_v);
-
-	vars->corner_down_right_i = mlx_texture_to_image(mlx, vars->corner_down_right_t);
-	mlx_image_to_window(mlx, vars->corner_down_right_i, 0, 64 * length_v);
+	corner_print(vars, mlx, length_v, length);
 }
