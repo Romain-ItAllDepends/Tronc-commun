@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 14:23:08 by rgobet            #+#    #+#             */
-/*   Updated: 2024/02/06 11:07:30 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/02/10 14:25:39 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	parent(t_vars *vars, char **envp)
 		wait(NULL);
 		close(vars->fd[1]);
 		dup2(vars->fd[0], STDIN_FILENO);
-		vars->fd_parent = open(vars->file2, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+		vars->fd_parent = open(vars->file2, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (vars->fd_parent == -1)
 			error(vars);
 		dup2(vars->fd_parent, STDOUT_FILENO);
@@ -121,6 +121,7 @@ int	main(int ac, char **av, char **envp)
 	t_vars	*vars;
 
 	verification(ac, av);
+	envp_path_verif(envp);
 	vars = ft_calloc(sizeof(t_vars), 1);
 	if (!vars)
 		exit(1);
