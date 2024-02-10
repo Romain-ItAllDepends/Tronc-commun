@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:30:48 by rgobet            #+#    #+#             */
-/*   Updated: 2024/01/31 14:50:40 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/02/02 11:19:47 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,17 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 void	verification(int ac, char **av)
 {
-	if (ac != 5 || access(av[1], F_OK) != 0 || access(av[1], R_OK) != 0
-		|| access(av[1], W_OK) != 0)
+	if (ac != 5)
+	{
+		write(2, "Error : Too many or too less arguments\n", 39);
 		exit(1);
+	}
+	if (access(av[1], F_OK) != 0 || access(av[1], R_OK) != 0
+		|| access(av[1], W_OK) != 0 || access(av[1], X_OK != 0))
+	{
+		write(2, "Error : Don't have permissions\n", 31);
+		exit(1);
+	}
 }
 
 void	init_path(char **envp, t_vars *vars)
