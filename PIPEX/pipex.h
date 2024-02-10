@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 14:23:46 by rgobet            #+#    #+#             */
-/*   Updated: 2024/02/06 11:06:44 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/02/10 14:25:56 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_vars{
 	pid_t	pid;
 }	t_vars;
 
+void envp_path_verif(char **envp);
 void	*ft_calloc(size_t nmemb, size_t size);
 void	ft_free(char **s);
 void	free_vars(t_vars *vars);
