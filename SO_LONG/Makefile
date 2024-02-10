@@ -7,7 +7,10 @@ MY_SOURCES=	so_long.c \
 		little_functions.c \
 		map_finishable.c \
 		parse_map.c \
+		graphic_print.c \
 		move.c \
+		key_press.c \
+		error.c \
 		FT_PRINTF/ft_printf.c \
 		FT_PRINTF/LIBFT/ft_strlen.c \
 		FT_PRINTF/LIBFT/ft_putstr_fd.c \
