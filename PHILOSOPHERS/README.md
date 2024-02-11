@@ -36,3 +36,8 @@ Lors de l'execution du programme si la fonction en parametre de pthread_create e
   
 - pthread_join(thread_name, NULL);
 Permet d'attendre que le thread termine sa fonction avant de passer a la suite.
+
+> [!IMPORTANT]
+> Source : Google
+> Source : https://www.youtube.com/watch?v=9JAblZeSwOI
+> Source : https://www.youtube.com/watch?v=o_GbRujGCnM
