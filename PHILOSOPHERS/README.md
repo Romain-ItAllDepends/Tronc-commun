@@ -39,5 +39,7 @@ Permet d'attendre que le thread termine sa fonction avant de passer a la suite.
 
 > [!IMPORTANT]
 > Source : Google
+> 
 > Source : https://www.youtube.com/watch?v=9JAblZeSwOI
+> 
 > Source : https://www.youtube.com/watch?v=o_GbRujGCnM
