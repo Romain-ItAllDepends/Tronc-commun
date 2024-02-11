@@ -144,6 +144,7 @@ int	main(void)
 ### pipe :
 
 Permet la communication entre le processus parent et enfant.
+
 ![image](https://github.com/Romain-ItAllDepends/Tronc-commun/assets/140979120/9a0670b4-3c04-41c5-bc02-f526f5d0d3ec)
 
 
