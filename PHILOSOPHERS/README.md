@@ -37,6 +37,16 @@ Lors de l'execution du programme si la fonction en parametre de pthread_create e
 - pthread_join(thread_name, NULL);
 Permet d'attendre que le thread termine sa fonction avant de passer a la suite.
 
+- Initialisation d'un thread mutex :
+```
+int  main(void)
+{
+  pthread_t  thread1;
+
+  return (0);
+}
+```
+
 > [!IMPORTANT]
 > Source : Google
 > 
