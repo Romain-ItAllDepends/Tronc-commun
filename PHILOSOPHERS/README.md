@@ -46,12 +46,7 @@ Un mutex permet le blocage d'un thread, lorsque le mutex est cree il est par def
 
 - Initialisation d'un thread mutex :
 ```
-int  main(void)
-{
-  pthread_t  thread1;
-
-  return (0);
-}
+pthread_mutex_t  mutex = PTHREAD_MUTEX_INITIALIZER
 ```
 
 > [!IMPORTANT]
