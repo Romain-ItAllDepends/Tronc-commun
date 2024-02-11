@@ -207,3 +207,5 @@ Le premier philosophe mange, le second dort, le troisième pense, le quatrième 
 > Source : https://www.youtube.com/watch?v=o_GbRujGCnM
 >
 > Source : https://www.codequoi.com/threads-mutex-et-programmation-concurrente-en-c/
+>
+> Source : https://www.youtube.com/watch?v=t_9Zz58PzxY
