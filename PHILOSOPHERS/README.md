@@ -191,6 +191,8 @@ Tout d'abord, il faudra créer un tableau de thread qui varie selon le nombre de
 
 Autant de fourchettes que de philosophe, chaque fourchette a son mutex, la première est lier à la seconde (droite et gauche) afin de pouvoir mutex des binômes de fourchette.
 
+![Screenshot from 2024-02-11 17-09-29](https://github.com/Romain-ItAllDepends/Tronc-commun/assets/140979120/d088c55f-d41d-41c5-beb9-a036599e9f37)
+
 Récupérer l'heure actuelle en ms.
 
 Créer plusieurs mutex afin de ne pas verrouiller tous les threads quand un philosophe mange, car si les philosophes sont quatre, ils peuvent au moins manger deux par deux.
