@@ -2,6 +2,7 @@
 
 ## Commandes
 
+Les threads permettent de faire du multi-tache comme l'utilisation de processus parent et enfant mais bien moins exigeant au niveau de la memoire.
 Lors de la creation d'un thread il est nescessaire de l'initialiser de la facon suivante :
 
 ```
@@ -25,4 +26,7 @@ gcc -Wall -Werror -Wextra -lpthread thread.c -o thread
 ```
 
 - pthread_create(&(thread_name), priorite, fonction a execute, argument d'entree de la fonction precedente);
-
+Lors de l'execution du programme si la fonction en parametre de pthread_create est assez lourde le programme se terminera avant de l'avoir terminer.
+  
+- pthread_join(thread_name, NULL);
+Permet d'attendre que le thread termine sa fonction avant de passer a la suite.
