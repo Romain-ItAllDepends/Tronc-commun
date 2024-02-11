@@ -186,10 +186,15 @@ Une data race est une situation où deux threads accèdent à un emplacement mé
 # Idée de comment faire le projet
 
 Il faut plusieurs structures et comprendre les listes chaînées.
+
 Tout d'abord, il faudra créer un tableau de thread qui varie selon le nombre de philosophes.
+
 Autant de fourchettes que de philosophe.
+
 Récupérer l'heure actuelle en ms.
+
 Créer plusieurs mutex afin de ne pas verrouiller tous les threads quand un philosophe mange, car si les philosophes sont quatre, ils peuvent au moins manger deux par deux.
+
 À chaque fois qu'un philosophe mange, on obtient le temps lorsqu'il commence à manger puis à le comparer à l'heure actuelle en faisant une simple différence, on peut savoir s'il a fini de manger ou non.
 
 > [!IMPORTANT]
