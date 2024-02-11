@@ -202,10 +202,10 @@ Le premier philosophe mange, le second dort, le troisième pense, le quatrième 
 > [!IMPORTANT]
 > Source : Google
 > 
-> Source : https://www.youtube.com/watch?v=9JAblZeSwOI
+> Source : [Thread](https://www.youtube.com/watch?v=9JAblZeSwOI)
 > 
-> Source : https://www.youtube.com/watch?v=o_GbRujGCnM
+> Source : [Mutex et thread](https://www.youtube.com/watch?v=o_GbRujGCnM)
 >
-> Source : https://www.codequoi.com/threads-mutex-et-programmation-concurrente-en-c/
+> Source : [Mutex et thread](https://www.codequoi.com/threads-mutex-et-programmation-concurrente-en-c/)
 >
 > Source : [Listes chaînées](https://www.youtube.com/watch?v=t_9Zz58PzxY)
