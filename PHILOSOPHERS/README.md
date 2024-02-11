@@ -46,7 +46,7 @@ Un mutex permet le blocage d'un thread, lorsque le mutex est cree il est par def
 
 - Initialisation d'un thread mutex :
 ```
-pthread_mutex_t  mutex = PTHREAD_MUTEX_INITIALIZER
+pthread_mutex_t  mutex = PTHREAD_MUTEX_INITIALIZER;
 ```
 L'utilisation de mutex se fait avec les deux commandes suivantes :
 ```
@@ -60,6 +60,63 @@ pthread_mutex_unlock(&mutex);
 ```
 
 Les deux commandes verouilleront et deverouilleront les threads qui ont se mutex en commun.
+
+Exemple :
+
+```
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <pthread.h>
+
+pthread_mutex_t  mutex = PTHREAD_MUTEX_INITIALIZER;
+
+void  *print1(void)
+{
+  int    i;
+  char  str[] = "Hello 42";
+
+  i = 0;
+  pthread_mutex_lock(&mutex);
+  while (i < 8)
+  {
+    fprintf(stderr, "%c", str[i]);
+    i++;
+  }
+  write(1, "\n", 1);
+  pthread_mutex_unlock(&mutex);
+}
+
+void  *print2(void)
+{
+  int    i;
+  char  str[] = "Bye 42";
+
+  i = 0;
+  pthread_mutex_lock(&mutex);
+  while (i < 6)
+  {
+    fprintf(stderr, "%c", str[i]);
+    i++;
+  }
+  write(1, "\n", 1);
+  pthread_mutex_unlock(&mutex);
+}
+
+int  main(void)
+{
+  pthread_t  t1;
+  pthread_t  t2;
+
+  pthread_create(&t1, NULL, print1, NULL);
+  pthread_create(&t2, NULL, print2, NULL);
+
+  pthread_join(t1, NULL);
+  pthread_join(t2, NULL);
+
+  return (0);
+}
+```
 
 
 > [!IMPORTANT]
