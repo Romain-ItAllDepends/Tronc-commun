@@ -13,5 +13,16 @@ int  main(void)
 }
 ```
 
+Il est egalement important d'utiliser la commande suivante lors de la compilation pour que le programme puisse s'executer.
+
+Version classique :
+```
+gcc -lpthread thread.c -o thread
+```
+Version 42 :
+```
+gcc -Wall -Werror -Wextra -lpthread thread.c -o thread
+```
+
 - pthread_create(&(thread_name), priorite, fonction a execute, argument d'entree de la fonction precedente);
 
