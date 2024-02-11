@@ -3,6 +3,9 @@
 ## Commandes
 
 Les threads permettent de faire du multi-tache comme l'utilisation de processus parent et enfant mais bien moins exigeant au niveau de la memoire.
+Un thread ne copie pas le programme du parent mais execute seulement la fonction qui lui est donnee.
+Un processus parent peut avoir plusieurs thread.
+
 Lors de la creation d'un thread il est nescessaire de l'initialiser de la facon suivante :
 
 ```
