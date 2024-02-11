@@ -110,6 +110,10 @@ exit(int status)
 
 La fonction fork est utilisée pour créer un nouveau processus appelé le processus fils, qui est une copie exacte du processus parent.
 
+![image](https://github.com/Romain-ItAllDepends/Tronc-commun/assets/140979120/42250964-789f-4823-a9a7-44b2240e477c)
+
+
+
 ```
 int	main(void)
 {
