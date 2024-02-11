@@ -48,6 +48,19 @@ Un mutex permet le blocage d'un thread, lorsque le mutex est cree il est par def
 ```
 pthread_mutex_t  mutex = PTHREAD_MUTEX_INITIALIZER
 ```
+L'utilisation de mutex se fait avec les deux commandes suivantes :
+```
+pthread_mutex_lock(&mutex);
+
+/**
+* Programme ..
+**/
+
+pthread_mutex_unlock(&mutex);
+```
+
+Les deux commandes verouilleront et deverouilleront les threads qui ont se mutex en commun.
+
 
 > [!IMPORTANT]
 > Source : Google
