@@ -37,6 +37,10 @@ Lors de l'execution du programme si la fonction en parametre de pthread_create e
 - pthread_join(thread_name, NULL);
 Permet d'attendre que le thread termine sa fonction avant de passer a la suite.
 
+-Qu'est-ce qu'un mutex et a quoi sa sert ?
+![image](https://github.com/Romain-ItAllDepends/Tronc-commun/assets/140979120/53734010-bc1f-4d09-862f-5da1dd34a545)
+
+
 - Initialisation d'un thread mutex :
 ```
 int  main(void)
