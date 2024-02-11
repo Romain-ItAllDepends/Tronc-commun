@@ -37,6 +37,9 @@ Lors de l'execution du programme si la fonction en parametre de pthread_create e
 - pthread_join(thread_name, NULL);
 Permet d'attendre que le thread termine sa fonction avant de passer a la suite.
 
+- pthread_mutex_destroy(&mutex);
+Permet de detruire le mutex, 
+
 -Qu'est-ce qu'un mutex et a quoi sa sert ?
 
 Un mutex permet le blocage d'un thread, lorsque le mutex est cree il est par defaut deverouiller.
@@ -110,7 +113,7 @@ int  main(void)
 
   pthread_create(&t1, NULL, print1, NULL);
   pthread_create(&t2, NULL, print2, NULL);
-
+  pthread_mutex_destroy(&mutex);
   pthread_join(t1, NULL);
   pthread_join(t2, NULL);
 
@@ -118,6 +121,20 @@ int  main(void)
 }
 ```
 
+PS: Variable globale a eviter, il vaut mieux envoyer le mutex en parametre de la fonction.
+
+Le resultat retourner sera :
+```
+Hello 42
+Bye 42
+```
+Alors que sans mutex le resultat serait plus semblable a celui-ci :
+```
+HeBlyloe  442
+2
+
+```
+Le resultat sans mutex depend de l'horloge du processeur comme expliquer dans l'introduction.
 
 > [!IMPORTANT]
 > Source : Google
