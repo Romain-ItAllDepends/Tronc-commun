@@ -49,7 +49,10 @@ Lors de l'execution du programme si la fonction en parametre de pthread_create e
 - pthread_join(thread_name, NULL);
 Permet d'attendre que le thread termine sa fonction avant de passer a la suite.
 
-### 
+### Liberer un thread
+
+- pthread_detach(thread_name);
+Permet de liberer les ressources du thread mais empeche de synchroniser plusieurs thread a l'aide de pthread_join.
 
 ### Detruire un mutex
 
