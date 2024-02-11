@@ -6,16 +6,16 @@
 
 Un thread est l'unité de base à laquelle un système d'exploitation alloue du temps processeur. Chaque thread a une priorité de planification et maintient un ensemble de structures utilisé par le système pour enregistrer le contexte du thread quand l'exécution du thread est en pause.
 
-Les threads permettent de faire du multi-tache comme l'utilisation de processus parent et enfant mais bien moins exigeant au niveau de la memoire.
-Un thread ne copie pas le programme du parent mais execute seulement la fonction qui lui est donnee.
-Les threads sont generalement utiliser pour effectuer de petite tache.
-Un processus parent peut avoir plusieurs thread.
+Les threads permettent de faire du multi-tache comme l'utilisation de processus parent et enfant, mais bien moins exigeant au niveau de la mémoire.
+Un thread ne copie pas le programme du parent, mais exécute seulement la fonction qui lui est donnée.
+Les threads sont généralement utilisés pour effectuer de petite tache.
+Un processus parent peut avoir plusieurs threads.
 
 ## Commandes
 
 ### Initialisation d'un thread
 
-Lors de la creation d'un thread il est nescessaire de l'initialiser de la facon suivante :
+Lors de la création d'un thread, il est nécessaire de l'initialiser de la façon suivante :
 
 ```
 int  main(void)
@@ -28,7 +28,7 @@ int  main(void)
 
 ### Compilation lors de l'utilisation de thread
 
-Il est egalement important d'utiliser la commande suivante lors de la compilation pour que le programme puisse s'executer.
+Il est également important d'utiliser la commande suivante lors de la compilation pour que le programme puisse s'exécuter.
 
 Version classique :
 ```
@@ -39,30 +39,30 @@ Version 42 :
 gcc -Wall -Werror -Wextra -lpthread thread.c -o thread
 ```
 
-### Creation de thread
+### Création de thread
 
-- pthread_create(&(thread_name), priorite, fonction a execute, argument d'entree de la fonction precedente);
-Lors de l'execution du programme si la fonction en parametre de pthread_create est assez lourde le programme se terminera avant de l'avoir terminer.
+- pthread_create(&(thread_name), priorite, fonction, arg);
+Lors de l'exécution du programme si la fonction en paramètre de pthread_create est assez lourde le programme se terminera avant de l'avoir terminé.
 
-### Attendre la fin de l'execution d'un thread
+### Attendre la fin de l'exécution d'un thread
 
 - pthread_join(thread_name, NULL);
 Permet d'attendre que le thread termine sa fonction avant de passer a la suite.
 
-### Liberer un thread
+### Libérer un thread
 
 - pthread_detach(thread_name);
-Permet de liberer les ressources du thread mais empeche de synchroniser plusieurs thread a l'aide de pthread_join.
+Permet de libérer les ressources du thread, mais empêche de synchroniser plusieurs threads a l'aide de pthread_join.
 
-### Detruire un mutex
+### Détruire un mutex
 
 - pthread_mutex_destroy(&mutex);
-Permet de detruire le mutex et donc libere les ressources occupe par se mutex.
+Permet de détruire le mutex et donc libère les ressources occupe par se mutex.
 Les mutex sont expliquer ci-dessous.
 
-### Qu'est-ce qu'un mutex et a quoi sa sert ?
+### Qu'est-ce qu'un mutex et a quoi ça sert ?
 
-Un mutex permet le blocage d'un thread, lorsque le mutex est cree il est par defaut deverouiller.
+Un mutex permet le blocage d'un thread, lorsque le mutex est créé il est par défaut déverrouiller.
 
 ![image](https://github.com/Romain-ItAllDepends/Tronc-commun/assets/140979120/53734010-bc1f-4d09-862f-5da1dd34a545)
 
@@ -88,7 +88,7 @@ pthread_mutex_lock(&mutex);
 pthread_mutex_unlock(&mutex);
 ```
 
-Les deux commandes verouilleront et deverouilleront les threads qui ont se mutex en commun.
+Les deux commandes verrouilleront et déverrouilleront les threads qui ont se mutex en commun.
 
 Exemple :
 
@@ -147,29 +147,29 @@ int  main(void)
 }
 ```
 
-Le resultat retourner sera :
+Le résultat retourné sera :
 ```
 Hello 42
 Bye 42
 ```
-Alors que sans mutex le resultat serait plus semblable a celui-ci :
+Alors que sans mutex le résultat serait plus semblable a celui-ci :
 ```
 HeBlyloe  442
 2
 
 ```
-Le resultat sans mutex depend de l'horloge du processeur comme expliquer dans l'introduction.
+Le résultat sans mutex dépend de l'horloge du processeur comme expliquer dans l'introduction.
 
 ### Mettre en attente le programme
 
 - usleep(nb_en_ms);
-Met en attente le programme/thread/processus selon le temps en miliseconde renseigner en parametre de usleep.
+Met en attente le programme/thread/processus selon le temps en milliseconde renseigner en paramètre de usleep.
 
 ### Obtenir l'heure
 
 - int gettimeofday(struct timeval *tv, struct timezone *tz);
 
-La structure suivante va etre nescessaire pour le projet Philosophers.
+La structure suivante va être nécessaire pour le projet Philosophers.
 
 ```
 struct timeval {
@@ -177,15 +177,20 @@ struct timeval {
     suseconds_t tv_usec;    /* microseconds */
 };
 ```
-### Verification des data race
+### Vérification des data race
 
 - valgrind --tool=drd --read-var-info=yes programme parametres
 Les data race ne sont pas autoriser sur le projet Philosophers.
 Une data race est une situation où deux threads accèdent à un emplacement mémoire "en même temps" et qu'un des deux au moins le fait en écriture. 
 
-# Idee de comment faire le projet
+# Idée de comment faire le projet
 
-Tout d'abord il faudra cree un tableau de thread qui varie selon le nombre de philosophe.
+Il faut plusieurs structures et comprendre les listes chaînées.
+Tout d'abord, il faudra créer un tableau de thread qui varie selon le nombre de philosophes.
+Autant de fourchettes que de philosophe.
+Récupérer l'heure actuelle en ms.
+Créer plusieurs mutex afin de ne pas verrouiller tous les threads quand un philosophe mange, car si les philosophes sont quatre, ils peuvent au moins manger deux par deux.
+À chaque fois qu'un philosophe mange, on obtient le temps lorsqu'il commence à manger puis à le comparer à l'heure actuelle en faisant une simple différence, on peut savoir s'il a fini de manger ou non.
 
 > [!IMPORTANT]
 > Source : Google
