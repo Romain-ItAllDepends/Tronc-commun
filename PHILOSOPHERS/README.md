@@ -39,7 +39,7 @@ Permet d'attendre que le thread termine sa fonction avant de passer a la suite.
 
 -Qu'est-ce qu'un mutex et a quoi sa sert ?
 
-Un mutex permet le blocage d'un thread
+Un mutex permet le blocage d'un thread, lorsque le mutex est cree il est par defaut deverouiller.
 
 ![image](https://github.com/Romain-ItAllDepends/Tronc-commun/assets/140979120/53734010-bc1f-4d09-862f-5da1dd34a545)
 
