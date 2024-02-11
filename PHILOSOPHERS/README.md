@@ -160,6 +160,33 @@ HeBlyloe  442
 ```
 Le resultat sans mutex depend de l'horloge du processeur comme expliquer dans l'introduction.
 
+### Mettre en attente le programme
+
+- usleep(nb_en_ms);
+Met en attente le programme/thread/processus selon le temps en miliseconde renseigner en parametre de usleep.
+
+### Obtenir l'heure
+
+- int gettimeofday(struct timeval *tv, struct timezone *tz);
+
+La structure suivante va etre nescessaire pour le projet Philosophers.
+
+```
+struct timeval {
+    time_t      tv_sec;     /* seconds */
+    suseconds_t tv_usec;    /* microseconds */
+};
+```
+### Verification des data race
+
+- valgrind --tool=drd --read-var-info=yes programme parametres
+Les data race ne sont pas autoriser sur le projet Philosophers.
+Une data race est une situation où deux threads accèdent à un emplacement mémoire "en même temps" et qu'un des deux au moins le fait en écriture. 
+
+# Idee de comment faire le projet
+
+Tout d'abord il faudra cree un tableau de thread qui varie selon le nombre de philosophe.
+
 > [!IMPORTANT]
 > Source : Google
 > 
