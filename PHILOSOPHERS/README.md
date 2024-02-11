@@ -1,5 +1,16 @@
 # Philisophers
 
+## Introduction
+
+# Qu'est-ce qu'un thread ?
+
+Un thread est l'unité de base à laquelle un système d'exploitation alloue du temps processeur. Chaque thread a une priorité de planification et maintient un ensemble de structures utilisé par le système pour enregistrer le contexte du thread quand l'exécution du thread est en pause.
+
+Les threads permettent de faire du multi-tache comme l'utilisation de processus parent et enfant mais bien moins exigeant au niveau de la memoire.
+Un thread ne copie pas le programme du parent mais execute seulement la fonction qui lui est donnee.
+Les threads sont generalement utiliser pour effectuer de petite tache.
+Un processus parent peut avoir plusieurs thread.
+
 ## Commandes
 
 Un thread est l'unité de base à laquelle un système d'exploitation alloue du temps processeur. Chaque thread a une priorité de planification et maintient un ensemble de structures utilisé par le système pour enregistrer le contexte du thread quand l'exécution du thread est en pause.
