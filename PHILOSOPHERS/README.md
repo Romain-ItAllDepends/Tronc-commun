@@ -2,7 +2,7 @@
 
 ## Introduction
 
-### Qu'est-ce qu'un thread 
+### Qu'est-ce qu'un thread ?
 
 Un thread est l'unité de base à laquelle un système d'exploitation alloue du temps processeur. Chaque thread a une priorité de planification et maintient un ensemble de structures utilisé par le système pour enregistrer le contexte du thread quand l'exécution du thread est en pause.
 
