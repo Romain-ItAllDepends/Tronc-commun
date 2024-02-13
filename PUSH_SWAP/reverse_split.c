@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:24:10 by rgobet            #+#    #+#             */
-/*   Updated: 2024/02/08 11:33:34 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/02/12 12:37:50 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,20 @@ static void	finish(t_vars *vars)
 	return ;
 }
 
+static void	push_to_stack_a(t_vars *vars)
+{
+	int	n;
+	int	j;
+
+	j = 0;
+	n = nb_max(vars->pb, vars->len_b);
+	while (vars->pb[j] != n)
+		j++;
+	j = verif_and_push(vars, j);
+	if (j != 0)
+		exit(1);
+}
+
 /*
 * Use the midpoint to sort the b stack and push it back in the stack a.
 * I think it's a better idea to while on the length of the chunk.
@@ -36,11 +50,8 @@ static void	finish(t_vars *vars)
 void	reverse_split(t_vars *vars)
 {
 	int	i;
-	int	j;
-	int	n;
 
 	i = 0;
-	j = 0;
 	while (i < vars->len_c)
 	{
 		if (alone(vars->chunk[i], vars) != 0)
@@ -48,16 +59,8 @@ void	reverse_split(t_vars *vars)
 		else if (i < vars->len_c - 1)
 		{
 			while (vars->len_b != 0)
-			{
-				n = nb_max(vars->pb, vars->len_b);
-				while (vars->pb[j] != n)
-					j++;
-				j = verif_and_push(vars, j);
-				if (j != 0)
-					exit(1);
-			}
+				push_to_stack_a(vars);
 		}
-			// ft_chunk_check(vars, i);
 		else if (decreasing(vars->pb, vars->len_b) == 0)
 		{
 			finish(vars);
