@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:30:48 by rgobet            #+#    #+#             */
-/*   Updated: 2024/02/02 11:19:47 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/02/12 17:16:40 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	verification(int ac, char **av)
 		exit(1);
 	}
 	if (access(av[1], F_OK) != 0 || access(av[1], R_OK) != 0
-		|| access(av[1], W_OK) != 0 || access(av[1], X_OK != 0))
+		|| access(av[1], W_OK) != 0)
 	{
 		write(2, "Error : Don't have permissions\n", 31);
 		exit(1);

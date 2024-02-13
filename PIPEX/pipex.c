@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 14:23:08 by rgobet            #+#    #+#             */
-/*   Updated: 2024/02/10 14:25:39 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/02/13 10:47:21 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,7 @@ static void	child(t_vars *vars, char **envp)
 	close(vars->fd[1]);
 	close(vars->fd_child);
 	execve(vars->cmd1[0], vars->cmd1, envp);
-	perror("Error : ");
-	ft_free(vars->cmd1);
-	ft_free(vars->cmd2);
-	free(vars);
-	exit(1);
+	error(vars);
 }
 
 static void	parent(t_vars *vars, char **envp)
@@ -101,12 +97,12 @@ char	*path_verification(char **path, t_vars *vars, int opt)
 		if (opt == 0)
 		{
 			ft_printf("%s: command not found\n", vars->cmd1[0]);
-			return (vars->cmd2[0]);
+			error_g(vars, path);
 		}
 		else
 		{
 			ft_printf("%s: command not found\n", vars->cmd2[0]);
-			return (vars->cmd2[0]);
+			error_g(vars, path);
 		}
 	}
 	if (opt == 0)

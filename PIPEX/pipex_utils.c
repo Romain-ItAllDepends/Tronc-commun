@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:01:16 by rgobet            #+#    #+#             */
-/*   Updated: 2024/02/10 14:28:51 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/02/13 10:47:35 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,15 @@ void	error(t_vars *vars)
 	exit(1);
 }
 
+void	error_g(t_vars *vars, char **path)
+{
+	ft_free(vars->cmd1);
+	ft_free(vars->cmd2);
+	ft_free(path);
+	free(vars);
+	exit(1);
+}
+
 void	free_vars(t_vars *vars)
 {
 	ft_free(vars->cmd1);
@@ -28,7 +37,7 @@ void	free_vars(t_vars *vars)
 	free(vars);
 }
 
-void envp_path_verif(char **envp)
+void	envp_path_verif(char **envp)
 {
 	int	i;
 
