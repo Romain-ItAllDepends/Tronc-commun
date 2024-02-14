@@ -201,6 +201,8 @@ Créer plusieurs mutex afin de ne pas verrouiller tous les threads quand un phil
 
 Le premier philosophe mange, le second dort, le troisième pense, le quatrième mange, le cinquième dort et ainsi de suite...
 
+
+
 > [!IMPORTANT]
 > Source : Google
 > 
