@@ -7,19 +7,34 @@ MY_SOURCES=ft_atoi.c ft_isdigit.c ft_memmove.c ft_split.c ft_strlcpy.c \
 			ft_putendl_fd.c ft_striteri.c ft_strncmp.c ft_toupper.c \
 			ft_isalpha.c ft_memcmp.c ft_putnbr_fd.c ft_strjoin.c ft_strnstr.c \
 			ft_isascii.c ft_memcpy.c ft_putstr_fd.c ft_strlcat.c ft_strrchr.c
+		
+BONUS= ft_lstnew_bonus.c \
+	ft_lstadd_front_bonus.c \
+	ft_lstsize_bonus.c \
+	ft_lstlast_bonus.c \
+	ft_lstadd_back_bonus.c \
+	ft_lstdelone_bonus.c \
+	ft_lstclear_bonus.c \
+	ft_lstiter_bonus.c \
+	ft_lstmap_bonus.c
 
-MY_OBJECTS=$(MY_SOURCES:.c=.o)
+ALL_SOURCES=$(MY_SOURCES) $(BONUS)
+
+MY_OBJECTS=$(ALL_SOURCES:.c=.o)
 
 RM=rm -f
 
 CC=cc
-ARRC=ar -rc
-FLAGS=-Wall -Werror -Wextra
+ARRC=ar -rcs
+FLAGS=-Wall -Werror -Wextra -g
 
-all: $(NAME)
+all: $(NAME) $(BONUS)
 
 $(NAME) : $(MY_OBJECTS)
 	$(ARRC) $(NAME) $(MY_OBJECTS)
+	
+bonus: $(BONUS:.c=.o)
+	$(ARRC) $(NAME) $^
 
 %.o: %.c
 	$(CC) $(FLAGS) -c $< -o $@
@@ -32,4 +47,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all bonus clean fclean re
