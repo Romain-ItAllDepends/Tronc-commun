@@ -42,21 +42,25 @@ gcc -Wall -Werror -Wextra -lpthread thread.c -o thread
 ### Création de thread
 
 - pthread_create(&(thread_name), priorite, fonction, arg);
+
 Lors de l'exécution du programme si la fonction en paramètre de pthread_create est assez lourde le programme se terminera avant de l'avoir terminé.
 
 ### Attendre la fin de l'exécution d'un thread
 
 - pthread_join(thread_name, NULL);
+
 Permet d'attendre que le thread termine sa fonction avant de passer a la suite.
 
 ### Libérer un thread
 
 - pthread_detach(thread_name);
+
 Permet de libérer les ressources du thread, mais empêche de synchroniser plusieurs threads a l'aide de pthread_join.
 
 ### Détruire un mutex
 
 - pthread_mutex_destroy(&mutex);
+
 Permet de détruire le mutex et donc libère les ressources occupe par se mutex.
 Les mutex sont expliquer ci-dessous.
 
