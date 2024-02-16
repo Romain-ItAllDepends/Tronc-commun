@@ -167,6 +167,7 @@ Le résultat sans mutex dépend de l'horloge du processeur comme expliquer dans 
 ### Mettre en attente le programme
 
 - usleep(nb_en_ms);
+
 Met en attente le programme/thread/processus selon le temps en milliseconde renseigner en paramètre de usleep.
 
 ### Obtenir l'heure
