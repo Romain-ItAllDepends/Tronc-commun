@@ -1,7 +1,9 @@
 NAME=philo
 
 MY_SOURCES=	philosophers.c \
-			philosophers_utils.c 
+			philosophers_utils.c \
+			utilitaries.c \
+			initialize.c \
 		
 red='\033[0;31m'
 green='\033[0;32m'
@@ -23,7 +25,7 @@ MY_OBJECTS=$(MY_SOURCES:.c=.o)
 
 RM=rm -f
 CC=cc
-FLAGS=-Wall -Werror -Wextra
+FLAGS=-Wall -Werror -Wextra -pthread -g
 
 all: $(NAME)
 
@@ -35,7 +37,7 @@ $(NAME) : $(MY_OBJECTS)
 	@echo $(light_cyan)"\t       _______________"
 	@echo $(light_cyan)"\t      /               \\"
 	@echo $(light_cyan)"\t   »»-————　Make　————-««"
-	@echo $(light_cyan)"\t      \_______________/"
+	@echo $(light_cyan)"\t      \_______________/\n"
 	
 clean: 
 	@$(RM) $(MY_OBJECTS)
