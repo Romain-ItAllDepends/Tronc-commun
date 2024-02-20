@@ -1,4 +1,4 @@
-# Philisopher
+# Philisophers
 
 ## Introduction
 
