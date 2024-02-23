@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 09:25:19 by rgobet            #+#    #+#             */
-/*   Updated: 2024/02/10 10:02:00 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/02/21 10:45:11 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,17 @@ void	ft_error_three(t_vars *vars)
 }
 
 void	ft_error_four(t_vars *vars)
+{
+	write (2, "Error : Some(s) texture(s) are missing !\n", 41);
+	ft_free(vars->map);
+	free_textures(vars);
+	free(vars);
+	mlx_close_window(vars->mlx);
+	mlx_terminate(vars->mlx);
+	exit(1);
+}
+
+void	ft_win(t_vars *vars)
 {
 	ft_free(vars->map);
 	free_images(vars);

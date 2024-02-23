@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:14:40 by rgobet            #+#    #+#             */
-/*   Updated: 2024/02/10 09:38:32 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/02/20 16:07:31 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ static char	*get_map(int fd, t_vars *vars)
 		ft_error_one(vars);
 	}
 	free(buf);
+	no_void(vars, map);
 	return (map);
 }
 

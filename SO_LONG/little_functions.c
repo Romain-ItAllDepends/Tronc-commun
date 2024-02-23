@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 12:19:22 by rgobet            #+#    #+#             */
-/*   Updated: 2024/02/10 09:50:06 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/02/20 16:11:16 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,28 @@ int	ft_strlen_mod(char **s)
 	while (s[i])
 		i++;
 	return (i);
+}
+
+void	no_void(t_vars *vars, char *map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
+	{
+		if (map[i] == '0' || map[i] == '1' || map[i] == 'P'
+			|| map[i] == 'E' || map[i] == 'C')
+		{
+			if (map[i + 1] == '\n' && map[i + 2] == '\n')
+			{
+				free(map);
+				free(vars);
+				write (2, "The map isn't rectangular !", 27);
+				exit(1);
+			}
+		}
+		i++;
+	}
 }
 
 void	verification(t_vars *vars, int i, int j)
@@ -95,7 +117,7 @@ void	forbidden_char(t_vars *vars)
 			&& vars->map[i][j] != 'E')
 			{
 				write (2,
-					"Error : An unknown character sliped on the map !\n", 54);
+					"Error : An unknown character sliped on the map !\n", 49);
 				ft_free(vars->map);
 				free(vars);
 				exit(1);

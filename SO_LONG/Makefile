@@ -6,6 +6,7 @@ MY_SOURCES=	so_long.c \
 		init_map_functions.c \
 		little_functions.c \
 		map_finishable.c \
+		textures.c \
 		parse_map.c \
 		graphic_print.c \
 		move.c \
@@ -46,7 +47,6 @@ MLXFLAGS= -ldl -lX11 -lglfw -lm -lz -lbsd -lXext
 
 all: $(NAME)
 
-
 $(NAME) : $(MY_OBJECTS)
 	make --directory ./MLX42/build
 	$(CC) $(FLAGS) $(MY_OBJECTS) $(MLXFLAGS) ./MLX42/build/libmlx42.a -o $@
@@ -54,6 +54,13 @@ $(NAME) : $(MY_OBJECTS)
 	@if [ $$? -eq 0 ]; then \
 		echo $(light_cyan)"\t   »»-————　Make　————-««\n"; \
 	fi
+
+mlx:
+	@git clone https://github.com/codam-coding-college/MLX42.git
+	@cmake ./MLX42 -B ./MLX42/build 
+	@make -C ./MLX42/build --no-print-directory -j4
+	@clear
+	@echo $(light_green)"\t  »»-————　MLX COMPILED　————-««\n"
 
 %.o: %.c
 	@$(CC) $(FLAGS) -c $< -o $@
@@ -69,4 +76,4 @@ fclean: clean
 re: fclean all
 	@echo $(green_c)"\t   »»-————　Done　————-««"
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean mlx re
