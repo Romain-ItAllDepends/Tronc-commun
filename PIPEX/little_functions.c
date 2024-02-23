@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:30:48 by rgobet            #+#    #+#             */
-/*   Updated: 2024/02/12 17:16:40 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/02/23 16:09:22 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 void	verification(int ac, char **av)
 {
+	int	fd;
+
 	if (ac != 5)
 	{
 		write(2, "Error : Too many or too less arguments\n", 39);
@@ -75,6 +77,13 @@ void	verification(int ac, char **av)
 	{
 		write(2, "Error : Don't have permissions\n", 31);
 		exit(1);
+	}
+	if (access(av[4], F_OK) != 0)
+	{
+		fd = open(av[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		if (fd == -1)
+			close(fd);
+		close(fd);
 	}
 }
 
@@ -97,10 +106,11 @@ void	init_path(char **envp, t_vars *vars)
 	}
 	if (i > 0 && path == NULL)
 	{
-		perror("Error: ");
+		write (2, "PATH is unset !\n", 16);
 		free(vars);
 		exit(1);
 	}
+	verif_cmd(vars, path);
 	vars->cmd1[0] = path_verification(path, vars, 0);
 	vars->cmd2[0] = path_verification(path, vars, 1);
 	ft_free(path);
