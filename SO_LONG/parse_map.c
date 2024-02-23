@@ -6,13 +6,13 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 23:29:52 by rgobet            #+#    #+#             */
-/*   Updated: 2024/02/10 12:50:51 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/02/23 14:30:55 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	init_textures(t_vars *vars)
+static void	init_textures(t_vars *vars)
 {
 	vars->collectable_t = mlx_load_png("textures/collectable.png");
 	vars->player_down_t = mlx_load_png("textures/player_down.png");
@@ -30,26 +30,28 @@ void	init_textures(t_vars *vars)
 	vars->corner_high_right_t = mlx_load_png("textures/corner_high_right.png");
 	vars->corner_down_left_t = mlx_load_png("textures/corner_down_left.png");
 	vars->corner_down_right_t = mlx_load_png("textures/corner_down_right.png");
+	textures_verif(vars);
 }
 
 void	free_textures(t_vars *vars)
 {
-	mlx_delete_texture(vars->collectable_t);
-	mlx_delete_texture(vars->player_down_t);
-	mlx_delete_texture(vars->player_forward_t);
-	mlx_delete_texture(vars->player_left_t);
-	mlx_delete_texture(vars->player_right_t);
-	mlx_delete_texture(vars->exit_t);
-	mlx_delete_texture(vars->grass_t);
-	mlx_delete_texture(vars->wall_high_t);
-	mlx_delete_texture(vars->wall_down_t);
-	mlx_delete_texture(vars->wall_left_t);
-	mlx_delete_texture(vars->wall_right_t);
-	mlx_delete_texture(vars->bush_t);
-	mlx_delete_texture(vars->corner_high_left_t);
-	mlx_delete_texture(vars->corner_high_right_t);
-	mlx_delete_texture(vars->corner_down_left_t);
-	mlx_delete_texture(vars->corner_down_right_t);
+	if (vars->collectable_t)
+		mlx_delete_texture(vars->collectable_t);
+	if (vars->player_down_t)
+		mlx_delete_texture(vars->player_down_t);
+	if (vars->player_forward_t)
+		mlx_delete_texture(vars->player_forward_t);
+	if (vars->player_left_t)
+		mlx_delete_texture(vars->player_left_t);
+	if (vars->player_right_t)
+		mlx_delete_texture(vars->player_right_t);
+	if (vars->exit_t)
+		mlx_delete_texture(vars->exit_t);
+	if (vars->grass_t)
+		mlx_delete_texture(vars->grass_t);
+	if (vars->wall_high_t)
+		mlx_delete_texture(vars->wall_high_t);
+	free_textures_s(vars);
 }
 
 void	free_images(t_vars *vars)
@@ -82,6 +84,7 @@ void	parse_map(t_vars *vars, mlx_t *mlx)
 	length = ft_strlen(vars->map[0]) - 1;
 	length_v = ft_strlen_mod(vars->map) - 1;
 	init_textures(vars);
+	init_img(vars);
 	i = 0;
 	while (vars->map[i])
 	{
