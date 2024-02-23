@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 08:55:58 by rgobet            #+#    #+#             */
-/*   Updated: 2024/02/10 12:56:49 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/02/21 13:40:49 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int	main(int ac, char *av[])
 	}
 	init_map(av[1], vars);
 	finishable(vars);
-	vars->mlx = mlx_init(ft_strlen(vars->map[0]) * 100,
-			ft_strlen_mod(vars->map) * 100, "SO_LONG", false);
+	vars->mlx = mlx_init(ft_strlen(vars->map[0]) * 64,
+			ft_strlen_mod(vars->map) * 64, "SO_LONG", false);
 	vars->player_down_t = mlx_load_png("textures/player_down.png");
 	mlx_set_icon(vars->mlx, vars->player_down_t);
 	mlx_delete_texture(vars->player_down_t);
