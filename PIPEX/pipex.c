@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 14:23:08 by rgobet            #+#    #+#             */
-/*   Updated: 2024/02/13 10:47:21 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/02/23 16:10:44 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,19 @@
 
 static void	child(t_vars *vars, char **envp)
 {
+	if (vars->cmd1[0] == NULL)
+	{
+		close(vars->fd[0]);
+		close(vars->fd[1]);
+		free_vars(vars);
+		exit(0);
+	}
 	close(vars->fd[0]);
 	vars->fd_child = open(vars->file1, O_RDONLY);
 	if (vars->fd_child == -1)
 	{
 		perror("Error : ");
-		ft_free(vars->cmd1);
-		ft_free(vars->cmd2);
-		free(vars);
+		free_vars(vars);
 		exit(1);
 	}
 	dup2(vars->fd_child, STDIN_FILENO);
@@ -29,7 +34,8 @@ static void	child(t_vars *vars, char **envp)
 	close(vars->fd[1]);
 	close(vars->fd_child);
 	execve(vars->cmd1[0], vars->cmd1, envp);
-	error(vars);
+	perror("Error : ");
+	ft_free(vars->cmd1);
 }
 
 static void	parent(t_vars *vars, char **envp)
@@ -41,7 +47,8 @@ static void	parent(t_vars *vars, char **envp)
 	{
 		wait(NULL);
 		close(vars->fd[1]);
-		dup2(vars->fd[0], STDIN_FILENO);
+		if (vars->cmd1)
+			dup2(vars->fd[0], STDIN_FILENO);
 		vars->fd_parent = open(vars->file2, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (vars->fd_parent == -1)
 			error(vars);
@@ -50,10 +57,6 @@ static void	parent(t_vars *vars, char **envp)
 		close(vars->fd_parent);
 		execve(vars->cmd2[0], vars->cmd2, envp);
 		error(vars);
-	}
-	else
-	{
-		return ;
 	}
 }
 
@@ -95,10 +98,7 @@ char	*path_verification(char **path, t_vars *vars, int opt)
 	{
 		dup2(2, 1);
 		if (opt == 0)
-		{
 			ft_printf("%s: command not found\n", vars->cmd1[0]);
-			error_g(vars, path);
-		}
 		else
 		{
 			ft_printf("%s: command not found\n", vars->cmd2[0]);
@@ -135,8 +135,8 @@ int	main(int ac, char **av, char **envp)
 		child(vars, envp);
 	else
 		parent(vars, envp);
+	free_vars(vars);
 	close(vars->fd[0]);
 	close(vars->fd[1]);
-	free_vars(vars);
 	return (0);
 }
