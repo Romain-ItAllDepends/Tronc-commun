@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:01:16 by rgobet            #+#    #+#             */
-/*   Updated: 2024/02/13 10:47:35 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/02/20 15:24:19 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,28 @@ void	error_g(t_vars *vars, char **path)
 	exit(1);
 }
 
+void	verif_cmd(t_vars *vars, char **path)
+{
+	if (vars->cmd1[0] == 0)
+		write (2, "command is empty !\n", 19);
+	if (vars->cmd1[0] == 0 && vars->cmd2[0] == 0)
+	{
+		ft_free(vars->cmd1);
+		ft_free(vars->cmd2);
+		ft_free(path);
+		free(vars);
+		exit(1);
+	}
+}
+
 void	free_vars(t_vars *vars)
 {
-	ft_free(vars->cmd1);
-	ft_free(vars->cmd2);
-	free(vars);
+	if (vars->cmd1)
+		ft_free(vars->cmd1);
+	if (vars->cmd2)
+		ft_free(vars->cmd2);
+	if (vars)
+		free(vars);
 }
 
 void	envp_path_verif(char **envp)
