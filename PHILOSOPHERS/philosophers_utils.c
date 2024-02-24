@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 15:24:25 by rgobet            #+#    #+#             */
-/*   Updated: 2024/02/18 14:50:26 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/02/24 02:29:16 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	ft_atoi(const char *str)
 	i = 0;
 	mult = 1;
 	result = 0;
+	if (!str || str == NULL)
+		return (0);
 	while (str[i] == ' ' || (str[i] >= '\t' && str[i] <= '\r'))
 		i++;
 	if (str[i] == '-')
