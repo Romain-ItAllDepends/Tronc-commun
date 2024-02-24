@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 16:09:26 by rgobet            #+#    #+#             */
-/*   Updated: 2024/02/18 14:52:37 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/02/24 02:55:26 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,6 @@ t_philosopher	*ft_lstnew_philo(void);
 t_fork			*ft_lstnew_fork(void);
 void			ft_lstclear_philo(t_philosopher **lst);
 void			ft_lstclear_fork(t_fork **lst);
+void			eat(t_vars *vars);
 
 #endif
