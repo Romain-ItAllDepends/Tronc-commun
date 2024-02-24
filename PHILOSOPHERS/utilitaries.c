@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 21:53:59 by rgobet            #+#    #+#             */
-/*   Updated: 2024/02/18 14:57:26 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/02/24 02:50:04 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	ft_lstclear_fork(t_fork **lst)
 
 void	ft_lstadd_back_fork(t_fork **lst, t_fork *new)
 {
+	t_fork	*tmp;
 	if (!new)
 		return ;
 	if (!*lst)
@@ -71,7 +72,8 @@ void	ft_lstadd_back_fork(t_fork **lst, t_fork *new)
 		*lst = new;
 		return ;
 	}
-	while (*lst && (*lst)->next != NULL)
-		*lst = (*lst)->next;
-	(*lst)->next = new;
+	tmp = *lst;
+	while (tmp && tmp->next != NULL)
+		tmp = tmp->next;
+	tmp->next = new;
 }
