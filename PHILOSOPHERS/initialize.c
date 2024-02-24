@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:38:25 by rgobet            #+#    #+#             */
-/*   Updated: 2024/02/18 15:10:56 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/02/24 02:42:09 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ static void	init_fork(t_vars *vars)
 	while (philo)
 	{
 		lst = ft_lstnew_fork();
-		lst->num_fork = philo->num_philo;
 		lst = fork_left(i, philo, philo_prev, lst);
 		lst = fork_right(vars, lst, philo);
+		lst->num_fork = i;
 		lst->start_eat = -1;
 		lst->used = 0;
 		ft_lstadd_back_fork(&(vars->fork), lst);
