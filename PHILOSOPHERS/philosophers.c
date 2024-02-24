@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 16:09:09 by rgobet            #+#    #+#             */
-/*   Updated: 2024/02/18 15:06:38 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/02/24 02:55:07 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,7 @@
 
 void	*f(void *nb)
 {
-	int	n;
-
-	n = *((int *)nb);
-	if (n == 1)
-		usleep(10000);
-	printf("Test, %i\n", n);
+	eat(vars);
 	return (NULL);
 }
 
@@ -46,15 +41,11 @@ int	main(int ac, char **av)
 		return (1);
 	init_philosophers(vars, av);
 	threads(vars);
-	while (vars->fork)
-	{
-		printf("Number of the fork : %d\n", vars->fork->num_fork);
-		printf("Start eating : %d\n", vars->fork->start_eat);
-		printf("Philosopher at left : %d\n", vars->fork->philo_l);
-		printf("Philosopher at right : %d\n", vars->fork->philo_r);
-		printf("Used ? (0 : NO ; 1 : YES) : %d\n", vars->fork->used);
-		vars->fork = vars->fork->next;
-	}
+	// while (vars->fork)
+	// {
+	// 	printf("Number of the fork : %d\n", vars->fork->num_fork);
+	// 	vars->fork = vars->fork->next;
+	// }
 	wait_threads(vars);
 	ft_lstclear_philo(&(vars->philo));
 	ft_lstclear_fork(&(vars->fork));
