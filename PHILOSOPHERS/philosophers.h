@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 16:09:26 by rgobet            #+#    #+#             */
-/*   Updated: 2024/02/24 02:55:26 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/02/25 15:33:05 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_philosopher {
 	int						num_philo;
 	int						start_eat;
 	int						start_sleep;
+	int						last_meal;
 	struct s_philosopher	*next;
 }	t_philosopher;
 
@@ -46,7 +47,7 @@ typedef struct s_fork {
 typedef struct s_vars {
 	t_philosopher	*philo;
 	t_fork			*fork;
-	t_timeval		time;
+	t_timeval		*time;
 	int				number_of_philosophers;
 	int				time_to_die;
 	int				time_to_eat;
@@ -60,7 +61,7 @@ void			ft_lstadd_back_philo(t_philosopher **lst, t_philosopher *new);
 void			ft_lstadd_back_fork(t_fork **lst, t_fork *new);
 void			init_philosophers(t_vars *vars, char **args);
 void			threads(t_vars *vars);
-void			*f(void *nb);
+void			*f(void *v);
 t_philosopher	*ft_lstlast(t_philosopher *lst);
 void			*ft_calloc(size_t nmemb, size_t size);
 t_philosopher	*ft_lstnew_philo(void);
@@ -68,5 +69,9 @@ t_fork			*ft_lstnew_fork(void);
 void			ft_lstclear_philo(t_philosopher **lst);
 void			ft_lstclear_fork(t_fork **lst);
 void			eat(t_vars *vars);
+void			set_start_eat(t_vars *vars, t_philosopher *p, t_fork *fl,
+					t_fork *fr);
+void			set_stop_eat(t_vars *vars, t_philosopher *p, t_fork *fl,
+					t_fork *fr);
 
 #endif
