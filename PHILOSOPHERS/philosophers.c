@@ -6,15 +6,19 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 16:09:09 by rgobet            #+#    #+#             */
-/*   Updated: 2024/02/24 02:55:07 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/02/25 14:07:00 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	*f(void *nb)
+void	*f(void *v)
 {
-	eat(vars);
+	t_vars	*vars;
+
+	vars = (t_vars*)v;
+	while (1)
+		eat(vars);
 	return (NULL);
 }
 
