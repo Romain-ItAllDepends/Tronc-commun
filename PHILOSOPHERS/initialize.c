@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:38:25 by rgobet            #+#    #+#             */
-/*   Updated: 2024/02/24 02:42:09 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/02/25 15:31:31 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	init_philosophers(t_vars *vars, char **args)
 		lst_philo->num_philo = i;
 		lst_philo->start_eat = -1;
 		lst_philo->start_sleep = -1;
+		lst_philo->last_meal = gettimeofday(&(vars->time->tv_usec), NULL);
 		lst_philo->next = NULL;
 		ft_lstadd_back_philo(&(vars->philo), lst_philo);
 		i++;
@@ -87,7 +88,7 @@ void	threads(t_vars *vars)
 	browse = vars->philo;
 	while (browse)
 	{
-		pthread_create(&(browse->thread), NULL, f, &browse->num_philo);
+		pthread_create(&(browse->thread), NULL, f, &(browse->num_philo));
 		pthread_mutex_init(&(browse->mutex_l), NULL);
 		pthread_mutex_init(&(browse->mutex_r), NULL);
 		browse = browse->next;
