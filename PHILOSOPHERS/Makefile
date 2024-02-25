@@ -4,6 +4,8 @@ MY_SOURCES=	philosophers.c \
 			philosophers_utils.c \
 			utilitaries.c \
 			initialize.c \
+			eat_sleep_think.c \
+			set.c
 		
 red='\033[0;31m'
 green='\033[0;32m'
