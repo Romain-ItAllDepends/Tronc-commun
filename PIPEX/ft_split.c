@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgobet <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 11:40:34 by rgobet            #+#    #+#             */
-/*   Updated: 2023/11/03 14:37:11 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/03/01 15:55:16 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char	**ft_split(char const *s, char c)
 	x = 0;
 	if (!s)
 		return (0);
-	tab = ft_calloc((ft_charcount(s, c) + 1), sizeof(char *));
+	tab = malloc((ft_charcount(s, c) + 2) * sizeof(char *));
 	if (tab == 0)
 		return (0);
 	while (s[i])
@@ -90,5 +90,6 @@ char	**ft_split(char const *s, char c)
 		while (s[i] && s[i] != c)
 			i++;
 	}
+	tab[x] = 0;
 	return (tab);
 }

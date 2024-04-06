@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   little_functions.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:30:48 by rgobet            #+#    #+#             */
-/*   Updated: 2024/02/23 16:09:22 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/04/06 12:13:49 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,31 +63,31 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (tab);
 }
 
-void	verification(int ac, char **av)
+int	verification(char **av, t_vars *vars)
 {
 	int	fd;
+	int	n;
 
-	if (ac != 5)
-	{
-		write(2, "Error : Too many or too less arguments\n", 39);
-		exit(1);
-	}
-	if (access(av[1], F_OK) != 0 || access(av[1], R_OK) != 0
-		|| access(av[1], W_OK) != 0)
-	{
-		write(2, "Error : Don't have permissions\n", 31);
-		exit(1);
-	}
+	n = 0;
 	if (access(av[4], F_OK) != 0)
 	{
 		fd = open(av[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		if (fd == -1)
-			close(fd);
 		close(fd);
 	}
+	if (access(av[1], F_OK) != 0 || access(av[1], R_OK) != 0
+		|| access(av[1], W_OK) != 0)
+		error(vars, "Error : Don't have permissions\n");
+	if (vars->cmd1[0] != NULL && access(vars->cmd1[0], X_OK) == 0)
+		n = 1;
+	if (vars->cmd2[0] != NULL && access(vars->cmd2[0], X_OK) == 0)
+		n = 2;
+	if (vars->cmd1[0] != NULL && access(vars->cmd1[0], X_OK) == 0
+		&& access(vars->cmd2[0], X_OK) == 0)
+		n = 3;
+	return (n);
 }
 
-void	init_path(char **envp, t_vars *vars)
+void	init_path(char **envp, t_vars *vars, int opt)
 {
 	int		i;
 	char	**path;
@@ -104,15 +104,13 @@ void	init_path(char **envp, t_vars *vars)
 		}
 		i++;
 	}
-	if (i > 0 && path == NULL)
+	if (i > 0 && path == NULL && opt == 0)
 	{
 		write (2, "PATH is unset !\n", 16);
 		free(vars);
 		exit(1);
 	}
-	verif_cmd(vars, path);
-	vars->cmd1[0] = path_verification(path, vars, 0);
-	vars->cmd2[0] = path_verification(path, vars, 1);
+	verif_cmd(vars, path, opt);
 	ft_free(path);
 }
 

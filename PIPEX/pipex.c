@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 14:23:08 by rgobet            #+#    #+#             */
-/*   Updated: 2024/02/23 16:10:44 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/04/06 11:44:03 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	parent(t_vars *vars, char **envp)
 {
 	vars->pid = fork();
 	if (vars->pid == -1)
-		error(vars);
+		error(vars, "Error : fork\n");
 	if (vars->pid == 0)
 	{
 		wait(NULL);
@@ -51,13 +51,14 @@ static void	parent(t_vars *vars, char **envp)
 			dup2(vars->fd[0], STDIN_FILENO);
 		vars->fd_parent = open(vars->file2, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (vars->fd_parent == -1)
-			error(vars);
+			error(vars, "Error : The file descriptor can't be opened !\n");
 		dup2(vars->fd_parent, STDOUT_FILENO);
 		close(vars->fd[0]);
 		close(vars->fd_parent);
 		execve(vars->cmd2[0], vars->cmd2, envp);
-		error(vars);
+		error(vars, "Error : execve\n");
 	}
+	wait(NULL);
 }
 
 static char	*cmd_verification(t_vars *vars, char **path, int opt)
@@ -93,12 +94,17 @@ char	*path_verification(char **path, t_vars *vars, int opt)
 {
 	char	*tab;
 
-	tab = cmd_verification(vars, path, opt);
+	tab = NULL;
+	if (vars->cmd1[0] != NULL || opt != 0)
+		tab = cmd_verification(vars, path, opt);
 	if (tab == NULL)
 	{
 		dup2(2, 1);
 		if (opt == 0)
-			ft_printf("%s: command not found\n", vars->cmd1[0]);
+		{
+			if (vars->cmd1[0] != NULL)
+				ft_printf("%s: command not found\n", vars->cmd1[0]);
+		}
 		else
 		{
 			ft_printf("%s: command not found\n", vars->cmd2[0]);
@@ -115,17 +121,14 @@ char	*path_verification(char **path, t_vars *vars, int opt)
 int	main(int ac, char **av, char **envp)
 {
 	t_vars	*vars;
+	int		opt;
 
-	verification(ac, av);
-	envp_path_verif(envp);
 	vars = ft_calloc(sizeof(t_vars), 1);
 	if (!vars)
 		exit(1);
-	vars->file1 = av[1];
-	vars->file2 = av[4];
-	vars->cmd1 = ft_split(av[2], ' ');
-	vars->cmd2 = ft_split(av[3], ' ');
-	init_path(envp, vars);
+	init(vars, ac, av);
+	opt = envp_path_verif(envp, av, vars);
+	init_path(envp, vars, opt);
 	if (pipe(vars->fd) == -1)
 		exit(1);
 	vars->pid = fork();
@@ -135,8 +138,8 @@ int	main(int ac, char **av, char **envp)
 		child(vars, envp);
 	else
 		parent(vars, envp);
-	free_vars(vars);
 	close(vars->fd[0]);
 	close(vars->fd[1]);
+	free_vars(vars);
 	return (0);
 }

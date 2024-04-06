@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 14:23:46 by rgobet            #+#    #+#             */
-/*   Updated: 2024/02/23 16:10:39 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/03/01 13:24:07 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,17 @@ typedef struct s_vars{
 	pid_t	pid;
 }	t_vars;
 
-void	envp_path_verif(char **envp);
+void	init(t_vars *vars, int ac, char **av);
+int		verification(char **av, t_vars *vars);
+int		envp_path_verif(char **envp, char **av, t_vars *vars);
 void	*ft_calloc(size_t nmemb, size_t size);
 void	ft_free(char **s);
 void	free_vars(t_vars *vars);
-void	error(t_vars *vars);
+void	error(t_vars *vars, char *s);
 void	error_g(t_vars *vars, char **path);
-void	verif_cmd(t_vars *vars, char **path);
-void	verification(int ac, char **av);
+void	verif_cmd(t_vars *vars, char **path, int opt);
 char	**ft_split(char const *s, char c);
-void	init_path(char **envp, t_vars *vars);
+void	init_path(char **envp, t_vars *vars, int opt);
 char	*ft_fill(char *s, char **path, t_vars *vars);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*path_verification(char **path, t_vars *vars, int opt);

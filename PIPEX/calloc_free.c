@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calloc_free.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgobet <rgobet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:24:10 by rgobet            #+#    #+#             */
-/*   Updated: 2024/02/23 16:10:23 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/04/06 12:20:12 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,34 @@ void	ft_free(char **s)
 	int	i;
 
 	i = 0;
-	while (s && s[i])
+	if (s)
 	{
-		free(s[i]);
-		i++;
+		while (s[i])
+		{
+			free(s[i]);
+			i++;
+		}
+		free(s);
 	}
-	free(s);
+}
+
+void	error(t_vars *vars, char *s)
+{
+	int	length;
+
+	length = ft_strlen(s);
+	write(2, s, length);
+	ft_free(vars->cmd1);
+	ft_free(vars->cmd2);
+	free(vars);
+	exit(1);
+}
+
+void	error_g(t_vars *vars, char **path)
+{
+	ft_free(vars->cmd1);
+	ft_free_tab((void **) vars->cmd2);
+	ft_free(path);
+	free(vars);
+	exit(1);
 }
