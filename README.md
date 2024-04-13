@@ -12,9 +12,9 @@ Le tronc commun est la partie durant laquelle on apprend les bases de la program
 - MINISHELL ❎
 ## Mes compétences :
 - C
-  - ![65%](https://progress-bar.dev/65)
+  - ![75%](https://progress-bar.dev/75)
 - Shell
-  - ![50%](https://progress-bar.dev/50)
+  - ![60%](https://progress-bar.dev/60)
 ## Maitise digitale : Édition, Virtualisation, Développement
 - VIM         ⭐⭐⭐⭐
 - VirtualBox         ⭐⭐⭐⭐
