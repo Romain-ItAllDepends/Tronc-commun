@@ -5,6 +5,11 @@ Le tronc commun est la partie durant laquelle on apprend les bases de la program
 - FT_PRINTF ✅
 - GET_NEXT_LINE ✅
 - BORN2BEROOT ✅
+- PUSH_SWAP ✅
+- SO_LONG ✅
+- PIPEX ✅
+- PHILOSOPHERS ❎
+- MINISHELL ❎
 ## Mes compétences :
 - C
   - ![50%](https://progress-bar.dev/50)
