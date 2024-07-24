@@ -181,7 +181,13 @@ struct timeval {
     time_t      tv_sec;     /* seconds */
     suseconds_t tv_usec;    /* microseconds */
 };
+
+save = (time.tv_sec * 1000) + (time.tv_usec / 1000); // Primordial !!
 ```
+time.tv_sec * 1000 convertit les secondes en millisecondes.
+time.tv_usec / 1000 divise les microsecondes par 1000 pour les convertir en millisecondes. Notez que cette opération peut perdre la partie fractionnaire du résultat si elle n'est pas traitée séparément.
+Enfin, les deux résultats sont additionnés pour obtenir le temps total en millisecondes depuis l'époque Unix.
+
 ### Vérification des data race
 
 - valgrind --tool=drd --read-var-info=yes programme parametres
